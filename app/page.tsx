@@ -1,0 +1,198 @@
+export default function Home() {
+  return (
+    <main className="min-h-screen bg-[#0a0a0a] text-white">
+
+      {/* Navbar */}
+      <nav className="flex items-center justify-between px-8 py-5 border-b border-white/10">
+        <span className="text-xl font-bold tracking-tight">Edge Conductor</span>
+        <div className="hidden md:flex gap-8 text-sm text-white/60">
+          <a href="#services" className="hover:text-white transition">Services</a>
+          <a href="#projects" className="hover:text-white transition">Projects</a>
+          <a href="#about" className="hover:text-white transition">About</a>
+          <a href="#contact" className="hover:text-white transition">Contact</a>
+        </div>
+        <a
+          href="#contact"
+          className="text-sm bg-white text-black px-4 py-2 rounded-full font-medium hover:bg-white/90 transition"
+        >
+          Start a Project
+        </a>
+      </nav>
+
+      {/* Hero */}
+      <section className="flex flex-col items-center justify-center text-center px-6 py-28">
+        <span className="text-xs font-semibold tracking-widest text-white/40 uppercase mb-4">
+          Edge AI · Robotics · Embedded Systems
+        </span>
+        <h1 className="text-4xl md:text-6xl font-bold leading-tight max-w-3xl">
+          Where Hardware Meets{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
+            Artificial Intelligence
+          </span>
+        </h1>
+        <p className="mt-6 text-white/50 text-lg max-w-xl">
+          We design and build real-world AI-powered embedded systems — edge AI devices,
+          autonomous robots, and industrial IoT solutions that run intelligence directly on hardware.
+        </p>
+        <div className="flex gap-4 mt-10">
+          <a
+            href="#projects"
+            className="bg-white text-black px-6 py-3 rounded-full font-medium hover:bg-white/90 transition"
+          >
+            View Projects
+          </a>
+          <a
+            href="#contact"
+            className="border border-white/20 px-6 py-3 rounded-full text-white/70 hover:text-white hover:border-white/50 transition"
+          >
+            Contact Us
+          </a>
+        </div>
+      </section>
+
+      {/* Services */}
+      <section id="services" className="px-8 py-20 max-w-6xl mx-auto">
+        <h2 className="text-2xl font-bold mb-2">What We Build</h2>
+        <p className="text-white/40 mb-12 text-sm">End-to-end embedded AI solutions for global clients</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {services.map((s) => (
+            <div key={s.title} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-white/20 transition">
+              <div className="text-3xl mb-4">{s.icon}</div>
+              <h3 className="font-semibold mb-2">{s.title}</h3>
+              <p className="text-white/40 text-sm">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Differentiator */}
+      <section className="px-8 py-16 bg-white/5 border-y border-white/10">
+        <div className="max-w-4xl mx-auto text-center">
+          <p className="text-xl md:text-2xl font-medium text-white/80">
+            We don&apos;t just write AI code —{" "}
+            <span className="text-white">we make it run on real hardware.</span>
+          </p>
+          <p className="text-white/40 mt-4 text-sm">
+            13+ years of embedded engineering. Bridging the gap between AI models and hardware that most software firms cannot.
+          </p>
+        </div>
+      </section>
+
+      {/* Projects */}
+      <section id="projects" className="px-8 py-20 max-w-6xl mx-auto">
+        <h2 className="text-2xl font-bold mb-2">Projects</h2>
+        <p className="text-white/40 mb-12 text-sm">Real-world systems built and deployed</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {projects.map((p) => (
+            <div key={p.title} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-white/20 transition">
+              <span className="text-xs text-blue-400 font-semibold uppercase tracking-wider">{p.category}</span>
+              <h3 className="font-semibold mt-2 mb-3">{p.title}</h3>
+              <p className="text-white/40 text-sm">{p.desc}</p>
+              <div className="flex flex-wrap gap-2 mt-4">
+                {p.tags.map((tag) => (
+                  <span key={tag} className="text-xs bg-white/10 px-2 py-1 rounded-full text-white/50">{tag}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* About */}
+      <section id="about" className="px-8 py-20 bg-white/5 border-y border-white/10">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl font-bold mb-6">About Edge Conductor</h2>
+          <p className="text-white/60 leading-relaxed mb-4">
+            Edge Conductor is an embedded AI and robotics engineering company specializing in edge intelligence systems.
+            Founded by engineers with 13+ years of hands-on embedded systems experience, we build real-world AI-powered
+            products that run on actual hardware — not just in the cloud.
+          </p>
+          <p className="text-white/60 leading-relaxed">
+            From edge AI devices running computer vision offline, to autonomous robots and industrial IoT systems —
+            we deliver reliable hardware, firmware, and intelligent automation solutions for global clients.
+          </p>
+        </div>
+      </section>
+
+      {/* Contact */}
+      <section id="contact" className="px-8 py-20 max-w-2xl mx-auto text-center">
+        <h2 className="text-2xl font-bold mb-4">Start a Project</h2>
+        <p className="text-white/40 mb-8 text-sm">Have a hardware or AI project in mind? Let&apos;s build it.</p>
+        <a
+          href="mailto:edgeconductor@gmail.com"
+          className="inline-block bg-white text-black px-8 py-4 rounded-full font-medium hover:bg-white/90 transition text-lg"
+        >
+          edgeconductor@gmail.com
+        </a>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-white/10 px-8 py-6 text-center text-white/30 text-sm">
+        © {new Date().getFullYear()} Edge Conductor. All rights reserved.
+      </footer>
+
+    </main>
+  );
+}
+
+const services = [
+  {
+    icon: "🤖",
+    title: "Edge AI Systems",
+    desc: "Computer vision and AI models running locally on embedded hardware — fully offline.",
+  },
+  {
+    icon: "🦾",
+    title: "Autonomous Robotics",
+    desc: "ROS2-based robots with SLAM, LiDAR navigation, and autonomous path planning.",
+  },
+  {
+    icon: "🏭",
+    title: "Industrial IoT",
+    desc: "Multi-network IoT devices with GSM, WiFi, Ethernet failover and cloud dashboards.",
+  },
+  {
+    icon: "⚙️",
+    title: "Embedded Firmware & PCB",
+    desc: "Custom firmware, PCB design, and hardware integration for product companies.",
+  },
+];
+
+const projects = [
+  {
+    category: "Edge AI · Robotics",
+    title: "Hospital Edge AI Patient Monitoring Robot",
+    desc: "YOLOv8 fall detection, ROS2 autonomous navigation, RAG-based patient data retrieval, and Telegram nurse alerts — 100% offline on Raspberry Pi.",
+    tags: ["YOLOv8", "ROS2", "Raspberry Pi", "LiDAR", "Ollama"],
+  },
+  {
+    category: "Industrial IoT",
+    title: "Multi-Network IoT Device with Failover",
+    desc: "ESP32-based device with automatic WiFi → Ethernet → 4G GSM failover for uninterrupted industrial monitoring.",
+    tags: ["ESP32", "GSM", "Ethernet", "WiFi", "MQTT"],
+  },
+  {
+    category: "Industrial IoT",
+    title: "Water Level Monitoring via GSM & MQTT",
+    desc: "Industrial IoT water level monitoring with GSM communication, MQTT dashboard, and bidirectional remote control.",
+    tags: ["ATmega", "GSM", "MQTT", "ADS1115", "EEPROM"],
+  },
+  {
+    category: "Embedded Systems",
+    title: "Truck Weighbridge Alignment & RFID System",
+    desc: "Automated weighbridge with UHF RFID vehicle detection, 6-sensor alignment checking, and RS485 communication.",
+    tags: ["ESP32", "RFID", "RS485", "Relay", "Industrial"],
+  },
+  {
+    category: "IoT · Payments",
+    title: "Smart QR-Based Water Dispenser",
+    desc: "QR code payment via Razorpay, webhook-to-MQTT pipeline, automated dispensing with pH and turbidity monitoring.",
+    tags: ["ESP32", "Razorpay", "MQTT", "pH Sensor", "Webhook"],
+  },
+  {
+    category: "Communication Systems",
+    title: "LoRa Long-Range GPS Tracking System",
+    desc: "Bidirectional LoRa messaging and GPS location sharing for no-network environments. Field-tested at 1km range.",
+    tags: ["ESP32", "LoRa", "GPS", "Bluetooth", "PCB"],
+  },
+];
