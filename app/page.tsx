@@ -98,6 +98,36 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Agentic Lab */}
+      <section id="agentic-lab" className="px-8 py-20 max-w-6xl mx-auto">
+        <div className="flex items-center gap-3 mb-2">
+          <h2 className="text-2xl font-bold">Agentic Lab</h2>
+          <span className="text-xs bg-blue-500/20 text-blue-400 border border-blue-500/30 px-2 py-1 rounded-full font-semibold">New</span>
+        </div>
+        <p className="text-white/40 mb-12 text-sm">Building infrastructure for AI agents — moving from human-centric UI to agent-native APIs</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {agenticProjects.map((p) => (
+            <div key={p.title} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-white/20 transition">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-xs text-purple-400 font-semibold uppercase tracking-wider">{p.category}</span>
+                <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${
+                  p.status === "Done" ? "bg-green-500/20 text-green-400" :
+                  p.status === "In Progress" ? "bg-yellow-500/20 text-yellow-400" :
+                  "bg-white/10 text-white/40"
+                }`}>{p.status}</span>
+              </div>
+              <h3 className="font-semibold mt-1 mb-3">{p.title}</h3>
+              <p className="text-white/40 text-sm">{p.desc}</p>
+              <div className="flex flex-wrap gap-2 mt-4">
+                {p.tags.map((tag) => (
+                  <span key={tag} className="text-xs bg-white/10 px-2 py-1 rounded-full text-white/50">{tag}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* About */}
       <section id="about" className="px-8 py-20 bg-white/5 border-y border-white/10">
         <div className="max-w-4xl mx-auto">
@@ -194,5 +224,35 @@ const projects = [
     title: "LoRa Long-Range GPS Tracking System",
     desc: "Bidirectional LoRa messaging and GPS location sharing for no-network environments. Field-tested at 1km range.",
     tags: ["ESP32", "LoRa", "GPS", "Bluetooth", "PCB"],
+  },
+];
+
+const agenticProjects: {
+  category: string;
+  title: string;
+  desc: string;
+  tags: string[];
+  status: "Done" | "In Progress" | "Planned";
+}[] = [
+  {
+    category: "Agentic API",
+    title: "Hello World — Agent-Readable FastAPI",
+    desc: "A minimal FastAPI server exposing structured JSON endpoints. Agents call /discount or /services directly — no UI, no buttons, just clean tool specs.",
+    tags: ["FastAPI", "Python", "REST API", "JSON Schema", "Pydantic"],
+    status: "Done",
+  },
+  {
+    category: "MCP · Agentic Infrastructure",
+    title: "Agent-Friendly Website Infrastructure",
+    desc: "llms.txt for LLM indexing, /api/services and /api/projects JSON endpoints, and an MCP server so AI agents can query Edge Conductor directly as a tool.",
+    tags: ["MCP", "Next.js", "llms.txt", "FastAPI", "Claude"],
+    status: "In Progress",
+  },
+  {
+    category: "Multi-Agent · IoT",
+    title: "Multi-Agent Predictive Maintenance System",
+    desc: "Sensor data → anomaly detection agent → root cause analysis agent → maintenance scheduler agent. Fully automated fault detection for industrial machines.",
+    tags: ["LangGraph", "MQTT", "ESP32", "Python", "Claude API"],
+    status: "Planned",
   },
 ];
