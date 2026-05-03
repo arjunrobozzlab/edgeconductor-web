@@ -8,6 +8,7 @@ export default function OnboardPage() {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [done, setDone] = useState(false);
+  const [apiUrl, setApiUrl] = useState("");
   const [error, setError] = useState("");
 
   const [basic, setBasic] = useState({
@@ -72,6 +73,7 @@ export default function OnboardPage() {
 
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Something went wrong");
+      setApiUrl(data.api_url || "");
       setDone(true);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : "Something went wrong");
@@ -81,17 +83,19 @@ export default function OnboardPage() {
   }
 
   if (done) {
+    const base = apiUrl || "deploying...";
     return (
       <main className="min-h-screen bg-[#0a0a0a] text-white flex items-center justify-center px-6">
         <div className="text-center max-w-md">
           <div className="text-4xl mb-4">✓</div>
           <h1 className="text-2xl font-bold mb-3">Agentic Profile Active</h1>
-          <p className="text-white/50 text-sm mb-6">Your API is live. Test it:</p>
+          <p className="text-white/50 text-sm mb-2">Your API is deploying. Check email for confirmation.</p>
+          <p className="text-white/30 text-xs mb-6">Live at: <span className="text-blue-400">{base}</span></p>
           <div className="flex flex-col gap-2 text-left">
             {["/api/services", "/api/projects", "/api/info"].map((path) => (
-              <a key={path} href={path} target="_blank"
+              <a key={path} href={`${apiUrl}${path}`} target="_blank"
                 className="bg-white/5 border border-white/10 rounded-lg px-4 py-2 font-mono text-sm text-blue-400 hover:border-white/30 transition">
-                {path}
+                {apiUrl}{path}
               </a>
             ))}
           </div>
