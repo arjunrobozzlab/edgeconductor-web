@@ -27,32 +27,69 @@ export async function POST(request: Request) {
 
   // 2 — Auto-deploy agentic-profile on Vercel for this client
   const projectName = `${slug}-agents`;
+  const VERCEL_TOKEN = process.env.VERCEL_TOKEN!;
+  const GITHUB_REPO = "arjunrobozzlab/agentic-profile";
 
-  const vercelRes = await fetch("https://api.vercel.com/v10/projects", {
+  const envVars = [
+    { key: "COMPANY_SLUG", value: slug, target: ["production", "preview", "development"], type: "plain" },
+    { key: "NEXT_PUBLIC_SUPABASE_URL", value: process.env.NEXT_PUBLIC_SUPABASE_URL!, target: ["production", "preview", "development"], type: "plain" },
+    { key: "NEXT_PUBLIC_SUPABASE_ANON_KEY", value: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, target: ["production", "preview", "development"], type: "plain" },
+    { key: "SUPABASE_SERVICE_ROLE_KEY", value: process.env.SUPABASE_SERVICE_ROLE_KEY!, target: ["production", "preview", "development"], type: "sensitive" },
+    { key: "GMAIL_USER", value: process.env.GMAIL_USER!, target: ["production", "preview", "development"], type: "plain" },
+    { key: "GMAIL_APP_PASSWORD", value: process.env.GMAIL_APP_PASSWORD!, target: ["production", "preview", "development"], type: "sensitive" },
+  ];
+
+  // Step 2a: Create Vercel project linked to GitHub repo
+  const createRes = await fetch("https://api.vercel.com/v10/projects", {
     method: "POST",
-    headers: {
-      Authorization: `Bearer ${process.env.VERCEL_TOKEN}`,
-      "Content-Type": "application/json",
-    },
+    headers: { Authorization: `Bearer ${VERCEL_TOKEN}`, "Content-Type": "application/json" },
     body: JSON.stringify({
       name: projectName,
       framework: "nextjs",
-      gitRepository: {
-        type: "github",
-        repo: "arjunrobozzlab/agentic-profile",
-      },
-      environmentVariables: [
-        { key: "COMPANY_SLUG", value: slug, target: ["production", "preview"] },
-        { key: "NEXT_PUBLIC_SUPABASE_URL", value: process.env.NEXT_PUBLIC_SUPABASE_URL, target: ["production", "preview"] },
-        { key: "NEXT_PUBLIC_SUPABASE_ANON_KEY", value: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY, target: ["production", "preview"] },
-        { key: "SUPABASE_SERVICE_ROLE_KEY", value: process.env.SUPABASE_SERVICE_ROLE_KEY, target: ["production", "preview"] },
-        { key: "GMAIL_USER", value: process.env.GMAIL_USER, target: ["production", "preview"] },
-        { key: "GMAIL_APP_PASSWORD", value: process.env.GMAIL_APP_PASSWORD, target: ["production", "preview"] },
-      ],
+      gitRepository: { type: "github", repo: GITHUB_REPO },
     }),
   });
 
-  const vercelData = await vercelRes.json();
+  const createData = await createRes.json();
+  let projectId = createData.id;
+
+  // If project already exists, fetch its ID
+  if (!projectId && createData.error?.code === "project_already_exists") {
+    const getRes = await fetch(`https://api.vercel.com/v9/projects/${projectName}`, {
+      headers: { Authorization: `Bearer ${VERCEL_TOKEN}` },
+    });
+    const getData = await getRes.json();
+    projectId = getData.id;
+  }
+
+  if (!projectId) {
+    return NextResponse.json({ error: "Failed to create Vercel project", details: createData }, { status: 500 });
+  }
+
+  // Step 2b: Add env vars to the project
+  await fetch(`https://api.vercel.com/v10/projects/${projectId}/env`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${VERCEL_TOKEN}`, "Content-Type": "application/json" },
+    body: JSON.stringify(envVars),
+  });
+
+  // Step 2c: Trigger a deployment from the main branch
+  const deployRes = await fetch("https://api.vercel.com/v13/deployments", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${VERCEL_TOKEN}`, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: projectName,
+      project: projectId,
+      gitSource: {
+        type: "github",
+        repo: GITHUB_REPO,
+        ref: "main",
+      },
+    }),
+  });
+
+  const deployData = await deployRes.json();
+  const deployUrl = deployData.url ? `https://${deployData.url}` : `https://${projectName}.vercel.app`;
   const apiUrl = `https://${projectName}.vercel.app`;
 
   // 3 — Email client with their live API URL
@@ -67,12 +104,13 @@ export async function POST(request: Request) {
     subject: `Your Agentic API is live — ${name}`,
     html: `
       <h2>Your Agentic Profile API is ready</h2>
-      <p>Your API is deploying now. It will be live at:</p>
+      <p>Your API is deploying now. It will be live in ~2 minutes at:</p>
+      <p><b>${apiUrl}/api/info</b></p>
       <p><b>${apiUrl}/api/services</b></p>
       <p><b>${apiUrl}/api/projects</b></p>
-      <p><b>${apiUrl}/api/inquire</b> (POST)</p>
+      <p><b>${apiUrl}/api/inquire</b> (POST — for AI agents to contact you)</p>
       <p>AI agents can now find and contact your business without any forms or buttons.</p>
-      <p>Want to point this to your own domain? Reply to this email and we will help you set it up.</p>
+      <p>Want to point this to your own domain (e.g. api.yourcompany.com)? Reply to this email and we will help you set it up.</p>
       <br/>
       <p>— Edge Conductor</p>
     `,
@@ -81,7 +119,8 @@ export async function POST(request: Request) {
   return NextResponse.json({
     success: true,
     api_url: apiUrl,
+    deploy_url: deployUrl,
+    vercel_project_id: projectId,
     message: `Agentic profile deploying. Email sent to ${contact?.email}`,
-    vercel_project: vercelData.id || projectName,
   });
 }
