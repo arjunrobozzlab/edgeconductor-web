@@ -40,7 +40,7 @@ export default function AgentsSection() {
     setLoading(true);
     setError("");
     try {
-      const res = await fetch("https://api.edgeconductor.com/api/inquire", {
+      const res = await fetch("/api/inquire", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
