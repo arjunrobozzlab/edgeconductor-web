@@ -243,10 +243,10 @@ const agenticProjects: {
   },
   {
     category: "MCP · Agentic Infrastructure",
-    title: "Agent-Friendly Website Infrastructure",
-    desc: "llms.txt for LLM indexing, /api/services and /api/projects JSON endpoints, and an MCP server so AI agents can query Edge Conductor directly as a tool.",
-    tags: ["MCP", "Next.js", "llms.txt", "FastAPI", "Claude"],
-    status: "In Progress",
+    title: "Agentic Business Profile API",
+    desc: "Live API — AI agents query company info, services, projects. POST /api/inquire sends email to owner instantly. No forms, no buttons. Deploy for any company in minutes.",
+    tags: ["Next.js", "llms.txt", "Nodemailer", "Vercel", "REST API"],
+    status: "Done",
   },
   {
     category: "Multi-Agent · IoT",
