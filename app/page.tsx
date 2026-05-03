@@ -1,4 +1,30 @@
-export default function Home() {
+const serviceIcons: Record<string, string> = {
+  edge_ai: "🤖",
+  robotics: "🦾",
+  iot: "🏭",
+  firmware: "⚙️",
+};
+
+async function getCompanyData() {
+  try {
+    const [servicesRes, projectsRes] = await Promise.all([
+      fetch("https://api.edgeconductor.com/api/services", { cache: "no-store" }),
+      fetch("https://api.edgeconductor.com/api/projects", { cache: "no-store" }),
+    ]);
+    const servicesData = await servicesRes.json();
+    const projectsData = await projectsRes.json();
+    return {
+      services: servicesData.services || [],
+      projects: projectsData.projects || [],
+    };
+  } catch {
+    return { services: [], projects: [] };
+  }
+}
+
+export default async function Home() {
+  const { services, projects } = await getCompanyData();
+
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-white">
 
@@ -35,16 +61,10 @@ export default function Home() {
           autonomous robots, and industrial IoT solutions that run intelligence directly on hardware.
         </p>
         <div className="flex gap-4 mt-10">
-          <a
-            href="#projects"
-            className="bg-white text-black px-6 py-3 rounded-full font-medium hover:bg-white/90 transition"
-          >
+          <a href="#projects" className="bg-white text-black px-6 py-3 rounded-full font-medium hover:bg-white/90 transition">
             View Projects
           </a>
-          <a
-            href="#contact"
-            className="border border-white/20 px-6 py-3 rounded-full text-white/70 hover:text-white hover:border-white/50 transition"
-          >
+          <a href="#contact" className="border border-white/20 px-6 py-3 rounded-full text-white/70 hover:text-white hover:border-white/50 transition">
             Contact Us
           </a>
         </div>
@@ -55,11 +75,11 @@ export default function Home() {
         <h2 className="text-2xl font-bold mb-2">What We Build</h2>
         <p className="text-white/40 mb-12 text-sm">End-to-end embedded AI solutions for global clients</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((s) => (
-            <div key={s.title} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-white/20 transition">
-              <div className="text-3xl mb-4">{s.icon}</div>
-              <h3 className="font-semibold mb-2">{s.title}</h3>
-              <p className="text-white/40 text-sm">{s.desc}</p>
+          {services.map((s: { id: string; name: string; description: string }) => (
+            <div key={s.id} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-white/20 transition">
+              <div className="text-3xl mb-4">{serviceIcons[s.id] || "🔧"}</div>
+              <h3 className="font-semibold mb-2">{s.name}</h3>
+              <p className="text-white/40 text-sm">{s.description}</p>
             </div>
           ))}
         </div>
@@ -83,13 +103,13 @@ export default function Home() {
         <h2 className="text-2xl font-bold mb-2">Projects</h2>
         <p className="text-white/40 mb-12 text-sm">Real-world systems built and deployed</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((p) => (
-            <div key={p.title} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-white/20 transition">
+          {projects.map((p: { id: string; category: string; title: string; description: string; tags: string[] }) => (
+            <div key={p.id} className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-white/20 transition">
               <span className="text-xs text-blue-400 font-semibold uppercase tracking-wider">{p.category}</span>
               <h3 className="font-semibold mt-2 mb-3">{p.title}</h3>
-              <p className="text-white/40 text-sm">{p.desc}</p>
+              <p className="text-white/40 text-sm">{p.description}</p>
               <div className="flex flex-wrap gap-2 mt-4">
-                {p.tags.map((tag) => (
+                {p.tags.map((tag: string) => (
                   <span key={tag} className="text-xs bg-white/10 px-2 py-1 rounded-full text-white/50">{tag}</span>
                 ))}
               </div>
@@ -165,74 +185,9 @@ export default function Home() {
   );
 }
 
-const services = [
-  {
-    icon: "🤖",
-    title: "Edge AI Systems",
-    desc: "Computer vision and AI models running locally on embedded hardware — fully offline.",
-  },
-  {
-    icon: "🦾",
-    title: "Autonomous Robotics",
-    desc: "ROS2-based robots with SLAM, LiDAR navigation, and autonomous path planning.",
-  },
-  {
-    icon: "🏭",
-    title: "Industrial IoT",
-    desc: "Multi-network IoT devices with GSM, WiFi, Ethernet failover and cloud dashboards.",
-  },
-  {
-    icon: "⚙️",
-    title: "Embedded Firmware & PCB",
-    desc: "Custom firmware, PCB design, and hardware integration for product companies.",
-  },
-];
-
-const projects = [
-  {
-    category: "Edge AI · Robotics",
-    title: "Hospital Edge AI Patient Monitoring Robot",
-    desc: "YOLOv8 fall detection, ROS2 autonomous navigation, RAG-based patient data retrieval, and Telegram nurse alerts — 100% offline on Raspberry Pi.",
-    tags: ["YOLOv8", "ROS2", "Raspberry Pi", "LiDAR", "Ollama"],
-  },
-  {
-    category: "Industrial IoT",
-    title: "Multi-Network IoT Device with Failover",
-    desc: "ESP32-based device with automatic WiFi → Ethernet → 4G GSM failover for uninterrupted industrial monitoring.",
-    tags: ["ESP32", "GSM", "Ethernet", "WiFi", "MQTT"],
-  },
-  {
-    category: "Industrial IoT",
-    title: "Water Level Monitoring via GSM & MQTT",
-    desc: "Industrial IoT water level monitoring with GSM communication, MQTT dashboard, and bidirectional remote control.",
-    tags: ["ATmega", "GSM", "MQTT", "ADS1115", "EEPROM"],
-  },
-  {
-    category: "Embedded Systems",
-    title: "Truck Weighbridge Alignment & RFID System",
-    desc: "Automated weighbridge with UHF RFID vehicle detection, 6-sensor alignment checking, and RS485 communication.",
-    tags: ["ESP32", "RFID", "RS485", "Relay", "Industrial"],
-  },
-  {
-    category: "IoT · Payments",
-    title: "Smart QR-Based Water Dispenser",
-    desc: "QR code payment via Razorpay, webhook-to-MQTT pipeline, automated dispensing with pH and turbidity monitoring.",
-    tags: ["ESP32", "Razorpay", "MQTT", "pH Sensor", "Webhook"],
-  },
-  {
-    category: "Communication Systems",
-    title: "LoRa Long-Range GPS Tracking System",
-    desc: "Bidirectional LoRa messaging and GPS location sharing for no-network environments. Field-tested at 1km range.",
-    tags: ["ESP32", "LoRa", "GPS", "Bluetooth", "PCB"],
-  },
-];
-
 const agenticProjects: {
-  category: string;
-  title: string;
-  desc: string;
-  tags: string[];
-  status: "Done" | "In Progress" | "Planned";
+  category: string; title: string; desc: string;
+  tags: string[]; status: "Done" | "In Progress" | "Planned";
 }[] = [
   {
     category: "Agentic API",
