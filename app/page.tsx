@@ -1,3 +1,5 @@
+import AgentsSection from "./components/AgentsSection";
+
 const serviceIcons: Record<string, string> = {
   edge_ai: "🤖",
   robotics: "🦾",
@@ -34,15 +36,20 @@ export default async function Home() {
         <div className="hidden md:flex gap-8 text-sm text-white/60">
           <a href="#services" className="hover:text-white transition">Services</a>
           <a href="#projects" className="hover:text-white transition">Projects</a>
+          <a href="#agents" className="hover:text-white transition">Agents</a>
           <a href="#about" className="hover:text-white transition">About</a>
           <a href="#contact" className="hover:text-white transition">Contact</a>
         </div>
-        <a
-          href="#contact"
-          className="text-sm bg-white text-black px-4 py-2 rounded-full font-medium hover:bg-white/90 transition"
-        >
-          Start a Project
-        </a>
+        <div className="flex items-center gap-3">
+          <a href="/onboard"
+            className="text-sm border border-blue-500/40 text-blue-400 px-4 py-2 rounded-full font-medium hover:bg-blue-500/10 transition">
+            Get Agentic API
+          </a>
+          <a href="#contact"
+            className="text-sm bg-white text-black px-4 py-2 rounded-full font-medium hover:bg-white/90 transition">
+            Start a Project
+          </a>
+        </div>
       </nav>
 
       {/* Hero */}
@@ -147,6 +154,26 @@ export default async function Home() {
           ))}
         </div>
       </section>
+
+      {/* Agentic Profile CTA */}
+      <section className="px-8 py-16 max-w-6xl mx-auto">
+        <div className="bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-500/20 rounded-2xl px-10 py-12 flex flex-col md:flex-row items-center justify-between gap-8">
+          <div>
+            <span className="text-xs font-semibold tracking-widest text-blue-400 uppercase">For Businesses</span>
+            <h2 className="text-2xl font-bold mt-2 mb-3">Add Agentic Profile to Your Website</h2>
+            <p className="text-white/50 text-sm max-w-lg">
+              Make your business AI-agent ready. Fill in your details — your API goes live in minutes.
+              AI agents will find your business, read your services, and send you inquiries automatically.
+            </p>
+          </div>
+          <a href="/onboard"
+            className="shrink-0 bg-white text-black px-8 py-3 rounded-full font-medium hover:bg-white/90 transition text-sm whitespace-nowrap">
+            Get Started →
+          </a>
+        </div>
+      </section>
+
+      <AgentsSection />
 
       {/* About */}
       <section id="about" className="px-8 py-20 bg-white/5 border-y border-white/10">
