@@ -56,12 +56,12 @@ export default function AgentsSection() {
   }
 
   return (
-    <section id="agents" className="px-8 py-20 max-w-6xl mx-auto">
+    <section id="agents" className="px-4 md:px-8 py-12 md:py-20 max-w-6xl mx-auto">
       <div className="flex items-center gap-3 mb-2">
         <h2 className="text-2xl font-bold">Try Our Agents</h2>
         <span className="text-xs bg-green-500/20 text-green-400 border border-green-500/30 px-2 py-1 rounded-full font-semibold">Live</span>
       </div>
-      <p className="text-white/40 mb-12 text-sm">AI agents that work for you — no forms, no wait, just results</p>
+      <p className="text-white/40 mb-8 md:mb-12 text-sm">AI agents that work for you — no forms, no wait, just results</p>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {agents.map((agent) => (

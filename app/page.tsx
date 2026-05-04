@@ -31,8 +31,8 @@ export default async function Home() {
     <main className="min-h-screen bg-[#0a0a0a] text-white">
 
       {/* Navbar */}
-      <nav className="flex items-center justify-between px-8 py-5 border-b border-white/10">
-        <span className="text-xl font-bold tracking-tight">Edge Conductor</span>
+      <nav className="flex items-center justify-between px-4 md:px-8 py-4 md:py-5 border-b border-white/10">
+        <span className="text-lg md:text-xl font-bold tracking-tight">Edge Conductor</span>
         <div className="hidden md:flex gap-8 text-sm text-white/60">
           <a href="#services" className="hover:text-white transition">Services</a>
           <a href="#projects" className="hover:text-white transition">Projects</a>
@@ -40,45 +40,45 @@ export default async function Home() {
           <a href="#about" className="hover:text-white transition">About</a>
           <a href="#contact" className="hover:text-white transition">Contact</a>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 md:gap-3">
           <a href="/onboard"
-            className="text-sm border border-blue-500/40 text-blue-400 px-4 py-2 rounded-full font-medium hover:bg-blue-500/10 transition">
+            className="hidden sm:block text-xs md:text-sm border border-blue-500/40 text-blue-400 px-3 md:px-4 py-1.5 md:py-2 rounded-full font-medium hover:bg-blue-500/10 transition">
             Get Agentic API
           </a>
           <a href="#contact"
-            className="text-sm bg-white text-black px-4 py-2 rounded-full font-medium hover:bg-white/90 transition">
+            className="text-xs md:text-sm bg-white text-black px-3 md:px-4 py-1.5 md:py-2 rounded-full font-medium hover:bg-white/90 transition">
             Start a Project
           </a>
         </div>
       </nav>
 
       {/* Hero */}
-      <section className="flex flex-col items-center justify-center text-center px-6 py-28">
+      <section className="flex flex-col items-center justify-center text-center px-6 py-16 md:py-28">
         <span className="text-xs font-semibold tracking-widest text-white/40 uppercase mb-4">
           Edge AI · Robotics · Embedded Systems
         </span>
-        <h1 className="text-4xl md:text-6xl font-bold leading-tight max-w-3xl">
+        <h1 className="text-3xl md:text-6xl font-bold leading-tight max-w-3xl">
           Where Hardware Meets{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
             Artificial Intelligence
           </span>
         </h1>
-        <p className="mt-6 text-white/50 text-lg max-w-xl">
+        <p className="mt-6 text-white/50 text-base md:text-lg max-w-xl">
           We design and build real-world AI-powered embedded systems — edge AI devices,
           autonomous robots, and industrial IoT solutions that run intelligence directly on hardware.
         </p>
-        <div className="flex gap-4 mt-10">
-          <a href="#projects" className="bg-white text-black px-6 py-3 rounded-full font-medium hover:bg-white/90 transition">
+        <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mt-8 md:mt-10 w-full sm:w-auto">
+          <a href="#projects" className="bg-white text-black px-6 py-3 rounded-full font-medium hover:bg-white/90 transition text-center">
             View Projects
           </a>
-          <a href="#contact" className="border border-white/20 px-6 py-3 rounded-full text-white/70 hover:text-white hover:border-white/50 transition">
+          <a href="#contact" className="border border-white/20 px-6 py-3 rounded-full text-white/70 hover:text-white hover:border-white/50 transition text-center">
             Contact Us
           </a>
         </div>
       </section>
 
       {/* Services */}
-      <section id="services" className="px-8 py-20 max-w-6xl mx-auto">
+      <section id="services" className="px-4 md:px-8 py-12 md:py-20 max-w-6xl mx-auto">
         <h2 className="text-2xl font-bold mb-2">What We Build</h2>
         <p className="text-white/40 mb-12 text-sm">End-to-end embedded AI solutions for global clients</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -93,9 +93,9 @@ export default async function Home() {
       </section>
 
       {/* Differentiator */}
-      <section className="px-8 py-16 bg-white/5 border-y border-white/10">
+      <section className="px-4 md:px-8 py-12 md:py-16 bg-white/5 border-y border-white/10">
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-xl md:text-2xl font-medium text-white/80">
+          <p className="text-lg md:text-2xl font-medium text-white/80">
             We don&apos;t just write AI code —{" "}
             <span className="text-white">we make it run on real hardware.</span>
           </p>
@@ -106,7 +106,7 @@ export default async function Home() {
       </section>
 
       {/* Projects */}
-      <section id="projects" className="px-8 py-20 max-w-6xl mx-auto">
+      <section id="projects" className="px-4 md:px-8 py-12 md:py-20 max-w-6xl mx-auto">
         <h2 className="text-2xl font-bold mb-2">Projects</h2>
         <p className="text-white/40 mb-12 text-sm">Real-world systems built and deployed</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -126,7 +126,7 @@ export default async function Home() {
       </section>
 
       {/* Agentic Lab */}
-      <section id="agentic-lab" className="px-8 py-20 max-w-6xl mx-auto">
+      <section id="agentic-lab" className="px-4 md:px-8 py-12 md:py-20 max-w-6xl mx-auto">
         <div className="flex items-center gap-3 mb-2">
           <h2 className="text-2xl font-bold">Agentic Lab</h2>
           <span className="text-xs bg-blue-500/20 text-blue-400 border border-blue-500/30 px-2 py-1 rounded-full font-semibold">New</span>
@@ -156,18 +156,18 @@ export default async function Home() {
       </section>
 
       {/* Agentic Profile CTA */}
-      <section className="px-8 py-16 max-w-6xl mx-auto">
-        <div className="bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-500/20 rounded-2xl px-10 py-12 flex flex-col md:flex-row items-center justify-between gap-8">
+      <section className="px-4 md:px-8 py-12 md:py-16 max-w-6xl mx-auto">
+        <div className="bg-gradient-to-r from-blue-500/10 to-cyan-500/10 border border-blue-500/20 rounded-2xl px-6 md:px-10 py-8 md:py-12 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 md:gap-8">
           <div>
             <span className="text-xs font-semibold tracking-widest text-blue-400 uppercase">For Businesses</span>
-            <h2 className="text-2xl font-bold mt-2 mb-3">Add Agentic Profile to Your Website</h2>
+            <h2 className="text-xl md:text-2xl font-bold mt-2 mb-3">Add Agentic Profile to Your Website</h2>
             <p className="text-white/50 text-sm max-w-lg">
               Make your business AI-agent ready. Fill in your details — your API goes live in minutes.
               AI agents will find your business, read your services, and send you inquiries automatically.
             </p>
           </div>
           <a href="/onboard"
-            className="shrink-0 bg-white text-black px-8 py-3 rounded-full font-medium hover:bg-white/90 transition text-sm whitespace-nowrap">
+            className="shrink-0 bg-white text-black px-6 md:px-8 py-3 rounded-full font-medium hover:bg-white/90 transition text-sm whitespace-nowrap">
             Get Started →
           </a>
         </div>
@@ -176,7 +176,7 @@ export default async function Home() {
       <AgentsSection />
 
       {/* About */}
-      <section id="about" className="px-8 py-20 bg-white/5 border-y border-white/10">
+      <section id="about" className="px-4 md:px-8 py-12 md:py-20 bg-white/5 border-y border-white/10">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-2xl font-bold mb-6">About Edge Conductor</h2>
           <p className="text-white/60 leading-relaxed mb-4">
@@ -192,19 +192,19 @@ export default async function Home() {
       </section>
 
       {/* Contact */}
-      <section id="contact" className="px-8 py-20 max-w-2xl mx-auto text-center">
+      <section id="contact" className="px-4 md:px-8 py-12 md:py-20 max-w-2xl mx-auto text-center">
         <h2 className="text-2xl font-bold mb-4">Start a Project</h2>
         <p className="text-white/40 mb-8 text-sm">Have a hardware or AI project in mind? Let&apos;s build it.</p>
         <a
           href="mailto:edgeconductor@gmail.com"
-          className="inline-block bg-white text-black px-8 py-4 rounded-full font-medium hover:bg-white/90 transition text-lg"
+          className="inline-block bg-white text-black px-6 md:px-8 py-3 md:py-4 rounded-full font-medium hover:bg-white/90 transition text-sm md:text-lg break-all md:break-normal"
         >
           edgeconductor@gmail.com
         </a>
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 px-8 py-6 text-center text-white/30 text-sm">
+      <footer className="border-t border-white/10 px-4 md:px-8 py-6 text-center text-white/30 text-sm">
         © {new Date().getFullYear()} Edge Conductor. All rights reserved.
       </footer>
 
