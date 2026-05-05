@@ -37,6 +37,7 @@ export default async function Home() {
           <a href="#services" className="hover:text-white transition">Services</a>
           <a href="#projects" className="hover:text-white transition">Projects</a>
           <a href="#agents" className="hover:text-white transition">Agents</a>
+          <a href="#api" className="hover:text-white transition">API</a>
           <a href="#about" className="hover:text-white transition">About</a>
           <a href="#contact" className="hover:text-white transition">Contact</a>
         </div>
@@ -152,6 +153,90 @@ export default async function Home() {
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Developer Integration */}
+      <section id="api" className="px-4 md:px-8 py-12 md:py-20 max-w-6xl mx-auto">
+        <div className="flex items-center gap-3 mb-2">
+          <h2 className="text-2xl font-bold">Developer Integration</h2>
+          <span className="text-xs bg-green-500/20 text-green-400 border border-green-500/30 px-2 py-1 rounded-full font-semibold">Live</span>
+        </div>
+        <p className="text-white/40 mb-10 text-sm">Connect your AI agent to EdgeConductor — MCP, REST, or AI crawler</p>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+          {/* MCP Card */}
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-white/20 transition">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="text-xs text-purple-400 font-semibold uppercase tracking-wider">MCP Server</span>
+              <span className="text-xs bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full">Live</span>
+            </div>
+            <h3 className="font-semibold mb-2">Claude Code &amp; Claude Desktop</h3>
+            <p className="text-white/40 text-sm mb-4">
+              Add to your <code className="text-white/60 bg-white/10 px-1 rounded">~/.mcp.json</code> — Claude can query our services, projects, and submit inquiries as native tools.
+            </p>
+            <pre className="bg-black/50 border border-white/10 rounded-xl p-4 text-xs text-green-300 overflow-x-auto leading-relaxed">{`{
+  "mcpServers": {
+    "edge-conductor": {
+      "type": "http",
+      "url": "https://api.edgeconductor.com/api/mcp"
+    }
+  }
+}`}</pre>
+            <div className="mt-4">
+              <p className="text-white/30 text-xs mb-2">Available tools</p>
+              <div className="flex flex-wrap gap-2">
+                {["get_info", "get_services", "get_projects", "submit_inquiry"].map((t) => (
+                  <span key={t} className="text-xs bg-white/10 text-white/50 px-2 py-1 rounded-full font-mono">{t}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* REST API Card */}
+          <div className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:border-white/20 transition">
+            <div className="flex items-center gap-2 mb-4">
+              <span className="text-xs text-blue-400 font-semibold uppercase tracking-wider">REST API</span>
+              <span className="text-xs bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full">Live</span>
+            </div>
+            <h3 className="font-semibold mb-2">Any Agent · ChatGPT Actions · LangChain</h3>
+            <p className="text-white/40 text-sm mb-4">
+              Standard HTTP endpoints — works with any LLM framework, ChatGPT custom action, or automated pipeline.
+            </p>
+            <div className="space-y-2 mb-4">
+              {[
+                { method: "GET", path: "/api/info", desc: "Full company profile" },
+                { method: "GET", path: "/api/services", desc: "Services + skills" },
+                { method: "GET", path: "/api/projects", desc: "Portfolio (filter: ?category=iot)" },
+                { method: "POST", path: "/api/inquire", desc: "Submit project inquiry" },
+              ].map(({ method, path, desc }) => (
+                <div key={path} className="flex items-center gap-3 bg-black/40 border border-white/10 rounded-lg px-3 py-2">
+                  <span className="text-xs font-mono text-green-400 w-10 shrink-0">{method}</span>
+                  <span className="text-xs font-mono text-white/60 flex-1">{path}</span>
+                  <span className="text-xs text-white/30 hidden sm:block">{desc}</span>
+                </div>
+              ))}
+            </div>
+            <p className="text-white/25 text-xs font-mono">Base: https://api.edgeconductor.com</p>
+          </div>
+        </div>
+
+        {/* llms.txt strip */}
+        <div className="bg-white/5 border border-white/10 rounded-2xl px-6 py-5 flex items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <span className="text-xs text-yellow-400 font-semibold uppercase tracking-wider shrink-0">llms.txt</span>
+            <p className="text-white/40 text-sm">
+              AI crawlers (Perplexity, Claude, ChatGPT Browse) automatically read this file to understand who we are and what we build.
+            </p>
+          </div>
+          <a
+            href="https://api.edgeconductor.com/llms.txt"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="shrink-0 text-xs border border-white/20 text-white/50 px-3 py-1.5 rounded-full hover:text-white hover:border-white/40 transition"
+          >
+            View →
+          </a>
         </div>
       </section>
 
