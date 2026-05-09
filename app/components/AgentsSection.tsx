@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import ProjectScoper from "./ProjectScoper";
 
 const agents = [
   {
@@ -13,8 +14,8 @@ const agents = [
     id: "scoper",
     icon: "🔧",
     title: "Project Scoper",
-    desc: "Describe your idea — get hardware recommendations + cost estimate.",
-    active: false,
+    desc: "Describe your idea — get a full technical scope + cost estimate in minutes.",
+    active: true,
   },
   {
     id: "matcher",
@@ -87,6 +88,9 @@ export default function AgentsSection() {
           </div>
         ))}
       </div>
+
+      {/* Project Scoper Chat */}
+      {active === "scoper" && <ProjectScoper />}
 
       {/* Inquiry Agent Form */}
       {active === "inquiry" && (
