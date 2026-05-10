@@ -36,6 +36,7 @@ export default async function Home() {
         <div className="hidden md:flex gap-8 text-sm text-white/60">
           <a href="#services" className="hover:text-white transition">Services</a>
           <a href="#projects" className="hover:text-white transition">Projects</a>
+          <a href="/case-studies" className="hover:text-white transition">Case Studies</a>
           <a href="#agents" className="hover:text-white transition">Agents</a>
           <a href="#api" className="hover:text-white transition">API</a>
           <a href="#about" className="hover:text-white transition">About</a>
