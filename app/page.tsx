@@ -166,7 +166,7 @@ export default async function Home() {
             </div>
 
             <a
-              href="https://quibiscribe-app.onrender.com"
+              href="https://edgescribe.onrender.com/login"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white text-sm font-semibold px-5 py-2.5 rounded-xl transition"

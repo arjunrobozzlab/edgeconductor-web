@@ -18,7 +18,7 @@ const caseStudies = [
       "Gmail SMTP", "Python", "Render", "Google Cloud Console",
     ],
     hero: false,
-    liveUrl: "https://quibiscribe-app.onrender.com",
+    liveUrl: "https://edgescribe.onrender.com/login",
   },
   {
     id: "hospital-edge-ai",
