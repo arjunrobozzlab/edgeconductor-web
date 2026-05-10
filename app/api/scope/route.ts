@@ -28,16 +28,16 @@ SCOPE FORMAT — use this exactly when ready:
 - Connectivity: [e.g., BLE 5.2, LoRaWAN, 4G LTE EC25, Wi-Fi]
 - Cloud/Backend: [if applicable — AWS IoT Core, custom MQTT broker, REST API]
 
-**Development Milestones:**
-1. [Phase 1: Hardware bring-up + core firmware — ~X weeks]
-2. [Phase 2: Feature implementation + protocol integration — ~X weeks]
-3. [Phase 3: Testing, optimization + pilot deployment — ~X weeks]
+**Milestones:**
+1. [Phase 1 — ~X weeks]
+2. [Phase 2 — ~X weeks]
+3. [Phase 3 — ~X weeks]
 
-**Estimated Timeline:** [X–Y weeks total]
+**Timeline:** [X–Y weeks]
 
-**Investment Range:** [₹X – ₹Y]
+**Investment:** [₹X – ₹Y]
 
-**Why EdgeConductor:** [1-2 sentences that directly connect EdgeConductor's 13 years of specific domain experience to this exact use case]
+**Why EdgeConductor:** [1 sentence connecting our experience to their use case]
 ---END SCOPE---
 
 After the scope block, add exactly this line (nothing else):
@@ -78,9 +78,9 @@ export async function POST(req: Request) {
       return Response.json({ error: "API key not configured" }, { status: 500 });
     }
 
-    const stream = await client.messages.stream({
+    const stream = client.messages.stream({
       model: "claude-sonnet-4-6",
-      max_tokens: 1500,
+      max_tokens: 900,
       system: SYSTEM_PROMPT,
       messages,
     });

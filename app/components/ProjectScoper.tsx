@@ -304,10 +304,6 @@ export default function ProjectScoper() {
     setProposalError("");
 
     const scopeText = getScopeText();
-    const conversation = messages
-      .slice(1)
-      .map((m) => `${m.role === "user" ? "Client" : "Scoper"}: ${m.content}`)
-      .join("\n\n");
 
     try {
       const res = await fetch("/api/inquire", {
@@ -316,7 +312,7 @@ export default function ProjectScoper() {
         body: JSON.stringify({
           name: "Project Scoper Lead",
           email,
-          project_description: `[PROJECT SCOPER LEAD]\n\n--- SCOPE ---\n${scopeText}\n\n--- FULL CONVERSATION ---\n${conversation}`,
+          project_description: `[PROJECT SCOPER LEAD]\n\n${scopeText}`,
           budget: "",
           timeline: "",
         }),
