@@ -1,5 +1,26 @@
 const caseStudies = [
   {
+    id: "edge-scribe",
+    category: "AI · SaaS · Conversation Intelligence",
+    industry: "Multi-Industry",
+    title: "EdgeScribe — AI Conversation Analysis & Coaching Platform",
+    headline: "Live product: auto-transcribe any professional conversation + AI quality scoring + Google Sheets report",
+    summary:
+      "Built a full-stack AI platform that records doctor-patient (or any professional) conversations, automatically transcribes them using speech-to-text, scores communication quality using AI, and delivers instant reports to supervisors via email and Google Sheets. Designed as a multi-industry product — the same platform works for healthcare, sales coaching, education, and HR interview feedback with zero reconfiguration.",
+    outcomes: [
+      { label: "Deployment", value: "Live" },
+      { label: "Industries", value: "4+" },
+      { label: "Report delivery", value: "Instant" },
+      { label: "Human effort post-session", value: "Zero" },
+    ],
+    stack: [
+      "Whisper STT", "Google Docs API", "Google Sheets API",
+      "Gmail SMTP", "Python", "Render", "Google Cloud Console",
+    ],
+    hero: false,
+    liveUrl: "https://quibiscribe-app.onrender.com",
+  },
+  {
     id: "hospital-edge-ai",
     category: "Edge AI · Robotics · Computer Vision",
     industry: "Healthcare",
@@ -78,6 +99,7 @@ const industryColor: Record<string, string> = {
   "Industrial Automation": "text-orange-400",
   "Water Management": "text-cyan-400",
   "Industrial IoT": "text-blue-400",
+  "Multi-Industry": "text-green-400",
 };
 
 function MetricChip({ label, value }: { label: string; value: string }) {
@@ -110,6 +132,7 @@ export default function CaseStudiesPage() {
           <a href="/#services" className="hover:text-white transition">Services</a>
           <a href="/#projects" className="hover:text-white transition">Projects</a>
           <a href="/case-studies" className="text-white font-medium">Case Studies</a>
+          <a href="/#products" className="hover:text-white transition">Products</a>
           <a href="/#agents" className="hover:text-white transition">Agents</a>
           <a href="/#api" className="hover:text-white transition">API</a>
           <a href="/#contact" className="hover:text-white transition">Contact</a>
@@ -196,7 +219,7 @@ export default function CaseStudiesPage() {
               </div>
 
               {/* Stack chips */}
-              <div>
+              <div className="mb-4">
                 <p className="text-[10px] text-white/20 uppercase tracking-widest font-semibold mb-1.5">Stack</p>
                 <div className="flex flex-wrap gap-1.5">
                   {cs.stack.map((s) => (
@@ -204,6 +227,19 @@ export default function CaseStudiesPage() {
                   ))}
                 </div>
               </div>
+
+              {/* Live demo link */}
+              {"liveUrl" in cs && cs.liveUrl && (
+                <a
+                  href={cs.liveUrl as string}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs text-green-400 border border-green-500/30 bg-green-500/5 hover:bg-green-500/10 px-3 py-1.5 rounded-lg transition mt-auto"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+                  Try Live Demo →
+                </a>
+              )}
             </div>
           ))}
         </div>
