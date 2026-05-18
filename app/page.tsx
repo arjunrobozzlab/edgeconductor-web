@@ -229,11 +229,22 @@ export default async function Home() {
               </div>
               <h3 className="font-semibold mt-1 mb-3">{p.title}</h3>
               <p className="text-white/40 text-sm">{p.desc}</p>
-              <div className="flex flex-wrap gap-2 mt-4">
+              <div className="flex flex-wrap gap-2 mt-4 mb-4">
                 {p.tags.map((tag) => (
                   <span key={tag} className="text-xs bg-white/10 px-2 py-1 rounded-full text-white/50">{tag}</span>
                 ))}
               </div>
+              {p.url && (
+                <a
+                  href={p.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs text-purple-400 border border-purple-500/30 bg-purple-500/5 hover:bg-purple-500/10 px-3 py-1.5 rounded-lg transition"
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-pulse" />
+                  Try it live →
+                </a>
+              )}
             </div>
           ))}
         </div>
@@ -382,7 +393,7 @@ export default async function Home() {
 
 const agenticProjects: {
   category: string; title: string; desc: string;
-  tags: string[]; status: "Done" | "In Progress" | "Planned";
+  tags: string[]; status: "Done" | "In Progress" | "Planned"; url?: string;
 }[] = [
   {
     category: "Agentic API",
@@ -397,6 +408,14 @@ const agenticProjects: {
     desc: "Live API — AI agents query company info, services, projects. POST /api/inquire sends email to owner instantly. No forms, no buttons. Deploy for any company in minutes.",
     tags: ["Next.js", "llms.txt", "Nodemailer", "Vercel", "REST API"],
     status: "Done",
+  },
+  {
+    category: "AI Chat · LLM Platform",
+    title: "Frontier AI — Multi-Model Chat Platform",
+    desc: "ChatGPT-style AI chat platform with Google login, per-user chat history, and a model switcher across Llama, Mistral, and Gemma — all powered by Groq for fast inference. Built from scratch as a full-stack AI product.",
+    tags: ["Next.js 15", "Groq", "Supabase", "NextAuth", "Google Auth"],
+    status: "Done",
+    url: "https://frontier-ai-ten.vercel.app",
   },
   {
     category: "Multi-Agent · IoT",
