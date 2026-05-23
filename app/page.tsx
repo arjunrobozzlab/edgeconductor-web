@@ -1,4 +1,12 @@
+import type { Metadata } from "next";
 import AgentsSection from "./components/AgentsSection";
+
+export const metadata: Metadata = {
+  title: "Edge Conductor — Embedded AI · Robotics · Industrial IoT",
+  description:
+    "Edge Conductor builds edge AI devices, autonomous robots, OTA firmware, and industrial IoT systems. 13+ years of real embedded engineering — ESP32, STM32, ROS2, TFLite Micro, LoRa, 4G GSM.",
+  alternates: { canonical: "https://edgeconductor.com" },
+};
 
 const serviceIcons: Record<string, string> = {
   edge_ai: "🤖",

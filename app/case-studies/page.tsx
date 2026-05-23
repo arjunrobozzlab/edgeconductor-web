@@ -1,3 +1,12 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Case Studies — Real Embedded AI & IoT Projects",
+  description:
+    "Real client projects by Edge Conductor — hospital edge AI robot with YOLOv8 + ROS2, industrial weighbridge RFID automation, water level IoT monitoring, multi-network failover devices, and AI conversation analysis platform.",
+  alternates: { canonical: "https://edgeconductor.com/case-studies" },
+};
+
 const caseStudies = [
   {
     id: "edge-scribe",
