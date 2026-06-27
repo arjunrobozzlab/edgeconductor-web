@@ -32,19 +32,19 @@ const pillars = [
   {
     icon: "⚡",
     title: "Rules Engine & Automation",
-    desc: "IF/THEN automations on any telemetry field. Threshold-based and schedule-based triggers. Auto-evaluates every 30s.",
+    desc: "Threshold rules (IF CO₂ > 1000 → HVAC ON) and scheduled rules (AT 22:00 Mon–Fri → relay OFF). Webhook alerts fire to any URL — Telegram, Slack, n8n, Make.com.",
     color: "yellow",
   },
   {
     icon: "◎",
     title: "Multi-Tenant B2B Architecture",
-    desc: "Org Admin → Room → Tenant hierarchy. RBAC with admin, org_admin, and customer roles. White-label ready.",
+    desc: "Org Admin → Room → Tenant hierarchy. RBAC with admin, org_admin, and customer roles. Tenant QR access per room. White-label ready.",
     color: "purple",
   },
   {
     icon: "□",
     title: "Mobile + Web Dashboards",
-    desc: "React Native mobile app and Next.js web dashboard. Role-aware interfaces for every stakeholder in your supply chain.",
+    desc: "React Native mobile app and Next.js web dashboard. Role-aware interfaces — admin sees all, org admin sees their fleet, tenant sees their room.",
     color: "rose",
   },
 ];
