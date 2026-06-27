@@ -43,6 +43,7 @@ const sections = [
       "Historical line charts: Temp, Humidity, CO₂, Battery, Signal",
       "Time range selector: 1h · 6h · 24h · 7d",
       "Metric toggles — show/hide individual sensors per device",
+      "Weekly PDF report — device summary, telemetry avg/min/max, rules activity, signal health",
     ],
     code: `// Device publishes to:
 devices/{serial}/telemetry

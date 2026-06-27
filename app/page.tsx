@@ -20,7 +20,7 @@ const pillars = [
   {
     icon: "◈",
     title: "Live Telemetry & Diagnostics",
-    desc: "Real-time sensor data, battery voltage, signal strength, heap memory, GPS fix status — every metric your ops team needs.",
+    desc: "Real-time sensor data with 1h/6h/24h/7d historical charts. Battery, signal, heap, GPS fix, reboot reason — every metric your ops team needs. Weekly PDF reports included.",
     color: "cyan",
   },
   {
