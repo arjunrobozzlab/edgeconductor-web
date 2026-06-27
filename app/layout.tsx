@@ -15,37 +15,35 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://edgeconductor.com"),
   title: {
-    default: "Edge Conductor — Embedded AI · Robotics · Industrial IoT",
-    template: "%s | Edge Conductor",
+    default: "EdgeConductor — IoT Platform for Hardware Companies",
+    template: "%s | EdgeConductor",
   },
   description:
-    "Edge Conductor builds real-world AI-powered embedded systems — edge AI devices, autonomous robots, OTA firmware updates, and industrial IoT solutions. 13+ years of embedded engineering.",
+    "The complete IoT stack for hardware teams. Device provisioning, live telemetry, OTA firmware updates, B2B multi-tenant dashboards, and rules engine — all in one platform.",
   keywords: [
-    "embedded AI", "edge AI development", "edge AI company India",
-    "IoT firmware development", "OTA firmware updates", "ESP32 development",
-    "STM32 firmware", "industrial IoT India", "ROS2 robotics development",
-    "computer vision edge AI", "FreeRTOS development", "MQTT IoT solutions",
-    "custom PCB design India", "hospital AI robotics", "edge computing solutions",
-    "autonomous robots India", "BLE IoT", "LoRa IoT", "4G GSM IoT",
-    "embedded systems company India", "AI device development", "nRF52840",
-    "TensorFlow Lite Micro", "machine learning embedded", "industrial automation India",
+    "IoT platform", "device management platform", "OTA firmware updates",
+    "ESP32 IoT cloud", "MQTT platform", "multi-tenant IoT", "IoT dashboard",
+    "fleet management IoT", "smart building IoT", "GPS tracker platform",
+    "HVAC IoT control", "device provisioning", "IoT rules engine",
+    "B2B IoT platform", "embedded IoT platform", "connected products platform",
+    "IoT telemetry", "device registry", "IoT India", "hardware IoT SaaS",
   ],
-  authors: [{ name: "Edge Conductor" }],
-  creator: "Edge Conductor",
+  authors: [{ name: "EdgeConductor" }],
+  creator: "EdgeConductor",
   openGraph: {
     type: "website",
     locale: "en_IN",
     url: "https://edgeconductor.com",
-    siteName: "Edge Conductor",
-    title: "Edge Conductor — Embedded AI · Robotics · Industrial IoT",
+    siteName: "EdgeConductor",
+    title: "EdgeConductor — IoT Platform for Hardware Companies",
     description:
-      "We build real-world AI-powered embedded systems — edge AI devices, autonomous robots, OTA firmware, and industrial IoT solutions. 13+ years of embedded engineering.",
+      "The complete IoT stack for hardware teams. Device provisioning, live telemetry, OTA firmware, B2B dashboards, and rules engine — one platform.",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Edge Conductor — Embedded AI · Robotics · Industrial IoT",
+    title: "EdgeConductor — IoT Platform for Hardware Companies",
     description:
-      "We build real-world AI-powered embedded systems — edge AI devices, autonomous robots, OTA firmware, and industrial IoT solutions.",
+      "The complete IoT stack for hardware teams. From ESP32 firmware to B2B cloud dashboards.",
   },
   robots: {
     index: true,
