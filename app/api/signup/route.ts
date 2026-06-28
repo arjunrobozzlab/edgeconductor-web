@@ -13,11 +13,10 @@ export async function POST(req: NextRequest) {
   if (password.length < 6)
     return NextResponse.json({ error: "Password must be at least 6 characters." }, { status: 400 });
 
-  // Use anon key for auth.signUp (sends Supabase confirmation email)
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
+  // Use PLATFORM Supabase credentials (separate from website's Supabase)
+  const platformUrl  = process.env.PLATFORM_SUPABASE_URL  || process.env.NEXT_PUBLIC_SUPABASE_URL!;
+  const platformAnon = process.env.PLATFORM_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+  const supabase = createClient(platformUrl, platformAnon);
 
   const { error } = await supabase.auth.signUp({
     email,
