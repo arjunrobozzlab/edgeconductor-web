@@ -2,8 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import nodemailer from "nodemailer";
 
-const PLATFORM  = "https://ec-platform-ten.vercel.app";
-const AUTH_CB   = `${PLATFORM}/auth/callback?next=/portal`;
+const PLATFORM      = "https://ec-platform-ten.vercel.app";
+const AUTH_CB       = `${PLATFORM}/auth/callback?next=/org`;
+const DEMO_ORG_ID   = "238422ba-f809-4014-ad1a-f33c0090f839";
+const DEMO_ORG_NAME = "EC Platform Demo";
 
 export async function POST(req: NextRequest) {
   const { name, email, password, company } = await req.json();
@@ -13,22 +15,47 @@ export async function POST(req: NextRequest) {
   if (password.length < 6)
     return NextResponse.json({ error: "Password must be at least 6 characters." }, { status: 400 });
 
-  // Use PLATFORM Supabase credentials (separate from website's Supabase)
-  const platformUrl  = process.env.PLATFORM_SUPABASE_URL  || process.env.NEXT_PUBLIC_SUPABASE_URL!;
-  const platformAnon = process.env.PLATFORM_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
-  const supabase = createClient(platformUrl, platformAnon);
+  // Use PLATFORM Supabase credentials
+  const platformUrl     = process.env.PLATFORM_SUPABASE_URL  || process.env.NEXT_PUBLIC_SUPABASE_URL!;
+  const platformAnon    = process.env.PLATFORM_SUPABASE_ANON_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+  const platformService = process.env.PLATFORM_SUPABASE_SERVICE_KEY || process.env.SUPABASE_SERVICE_ROLE_KEY!;
 
-  const { error } = await supabase.auth.signUp({
+  const supabase      = createClient(platformUrl, platformAnon);
+  const supabaseAdmin = createClient(platformUrl, platformService);
+
+  // Create user with demo org assigned immediately
+  const { data: signupData, error } = await supabase.auth.signUp({
     email,
     password,
     options: {
-      data: { full_name: name, role: "customer", company: company || null, source: "website" },
+      data: {
+        full_name:  name,
+        role:       "org_admin",
+        company:    company || null,
+        source:     "website",
+        org_id:     DEMO_ORG_ID,
+        org_name:   DEMO_ORG_NAME,
+      },
       emailRedirectTo: AUTH_CB,
     },
   });
 
   if (error)
     return NextResponse.json({ error: error.message }, { status: 400 });
+
+  // Update metadata via admin client to ensure org_id is set even before email confirm
+  if (signupData.user?.id) {
+    await supabaseAdmin.auth.admin.updateUserById(signupData.user.id, {
+      user_metadata: {
+        full_name:  name,
+        role:       "org_admin",
+        company:    company || null,
+        source:     "website",
+        org_id:     DEMO_ORG_ID,
+        org_name:   DEMO_ORG_NAME,
+      },
+    });
+  }
 
   // Welcome email + admin notification
   try {
