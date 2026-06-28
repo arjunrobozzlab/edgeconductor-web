@@ -88,10 +88,10 @@ async function sendEmails(name: string, email: string, company?: string) {
     `,
   });
 
-  // Admin notification
+  // Admin notification → always goes to edgeconductor@gmail.com
   await transporter.sendMail({
     from: process.env.GMAIL_USER,
-    to: process.env.GMAIL_USER,
+    to: "edgeconductor@gmail.com",
     subject: `🚀 New Signup: ${name}${company ? ` — ${company}` : ""}`,
     html: `
       <h3>New EdgeConductor Signup</h3>
