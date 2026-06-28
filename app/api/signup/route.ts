@@ -30,8 +30,13 @@ export async function POST(req: NextRequest) {
   if (error)
     return NextResponse.json({ error: error.message }, { status: 400 });
 
-  // Welcome email + admin notification (fire-and-forget)
-  sendEmails(name, email, company).catch(e => console.error("Email error:", e));
+  // Welcome email + admin notification
+  try {
+    await sendEmails(name, email, company);
+  } catch (e: any) {
+    console.error("Email error:", e.message);
+    // Don't fail signup if email fails — just log
+  }
 
   return NextResponse.json({ success: true });
 }
@@ -42,47 +47,41 @@ async function sendEmails(name: string, email: string, company?: string) {
     auth: { user: process.env.GMAIL_USER, pass: process.env.GMAIL_APP_PASSWORD },
   });
 
-  // Welcome email to user
+  // Welcome email to user — simple format (same as working /api/inquire)
   await transporter.sendMail({
-    from: `"EdgeConductor" <${process.env.GMAIL_USER}>`,
+    from: process.env.GMAIL_USER,
     to: email,
-    subject: "Welcome to EdgeConductor — Confirm your account",
+    subject: "Welcome to EdgeConductor — Your account is ready",
     html: `
-      <div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;background:#0a0a0a;color:#fff;padding:40px;border-radius:16px">
-        <div style="margin-bottom:28px">
-          <h1 style="margin:0;font-size:24px;color:#3b82f6;letter-spacing:-0.5px">EdgeConductor</h1>
-          <p style="margin:4px 0 0;color:#475569;font-size:13px">IoT Platform for Hardware Teams</p>
-        </div>
+      <div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;color:#111;padding:32px">
+        <h2 style="color:#3b82f6;margin:0 0 4px">EdgeConductor</h2>
+        <p style="color:#666;margin:0 0 24px;font-size:13px">IoT Platform for Hardware Teams</p>
 
-        <p style="color:#e2e8f0">Hi <strong>${name}</strong>,</p>
-        <p style="color:#94a3b8;line-height:1.6">
-          Your EdgeConductor account has been created. One more step — confirm your email
-          to activate it (check for an email from Supabase in your inbox).
+        <p>Hi <strong>${name}</strong>,</p>
+        <p style="color:#444;line-height:1.6">
+          Welcome to EdgeConductor! Your account has been created successfully.
+          Please confirm your email using the link from Supabase to activate it.
         </p>
 
-        <div style="background:#0f172a;border:1px solid #1e293b;border-radius:12px;padding:20px;margin:24px 0">
-          <p style="margin:0 0 12px;font-size:12px;color:#475569;text-transform:uppercase;letter-spacing:.08em">After confirming, sign in at</p>
+        <div style="background:#f0f7ff;border:1px solid #bfdbfe;border-radius:8px;padding:16px;margin:20px 0">
+          <p style="margin:0 0 12px;font-weight:600">After confirming, open your dashboard:</p>
           <a href="${PLATFORM}/portal"
-            style="display:inline-block;background:#3b82f6;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px">
+            style="display:inline-block;background:#3b82f6;color:#fff;padding:10px 24px;border-radius:6px;text-decoration:none;font-weight:600">
             Open Dashboard →
           </a>
-          <p style="margin:12px 0 0;font-size:12px;color:#334155">${PLATFORM}/portal</p>
         </div>
 
-        <div style="border-top:1px solid #1e293b;padding-top:24px;margin-top:8px">
-          <p style="color:#475569;font-size:13px;margin:0 0 8px;font-weight:600">Your Starter plan includes:</p>
-          <p style="color:#64748b;font-size:13px;margin:4px 0">✓ 5 devices · 1 organization</p>
-          <p style="color:#64748b;font-size:13px;margin:4px 0">✓ Live telemetry &amp; historical charts</p>
-          <p style="color:#64748b;font-size:13px;margin:4px 0">✓ OTA firmware updates</p>
-          <p style="color:#64748b;font-size:13px;margin:4px 0">✓ QR device claiming</p>
-          <p style="color:#64748b;font-size:13px;margin:16px 0 0">
-            Need more devices or multi-tenant access?
-            <a href="https://edgeconductor.com/contact" style="color:#3b82f6"> Upgrade to Pro →</a>
-          </p>
-        </div>
+        <p style="color:#555;font-size:14px"><strong>Your Starter plan includes:</strong></p>
+        <ul style="color:#555;font-size:14px;line-height:1.8;padding-left:20px">
+          <li>5 devices · 1 organization</li>
+          <li>Live telemetry &amp; historical charts</li>
+          <li>OTA firmware updates</li>
+          <li>QR device claiming</li>
+          <li>Rules engine (threshold + schedule)</li>
+        </ul>
 
-        <p style="color:#1e293b;font-size:11px;margin-top:32px;border-top:1px solid #0f172a;padding-top:16px">
-          EdgeConductor · edgeconductor.com · Sent to ${email}
+        <p style="color:#888;font-size:12px;margin-top:24px;border-top:1px solid #eee;padding-top:16px">
+          EdgeConductor · edgeconductor.com · ${email}
         </p>
       </div>
     `,
