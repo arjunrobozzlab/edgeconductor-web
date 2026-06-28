@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import nodemailer from "nodemailer";
 
-const PLATFORM = "https://ec-platform-ten.vercel.app";
+const PLATFORM  = "https://ec-platform-ten.vercel.app";
+const AUTH_CB   = `${PLATFORM}/auth/callback?next=/portal`;
 
 export async function POST(req: NextRequest) {
   const { name, email, password, company } = await req.json();
@@ -23,7 +24,7 @@ export async function POST(req: NextRequest) {
     password,
     options: {
       data: { full_name: name, role: "customer", company: company || null },
-      emailRedirectTo: `${PLATFORM}/portal/login`,
+      emailRedirectTo: AUTH_CB,
     },
   });
 
@@ -62,11 +63,11 @@ async function sendEmails(name: string, email: string, company?: string) {
 
         <div style="background:#0f172a;border:1px solid #1e293b;border-radius:12px;padding:20px;margin:24px 0">
           <p style="margin:0 0 12px;font-size:12px;color:#475569;text-transform:uppercase;letter-spacing:.08em">After confirming, sign in at</p>
-          <a href="${PLATFORM}/portal/login"
+          <a href="${PLATFORM}/portal"
             style="display:inline-block;background:#3b82f6;color:#fff;padding:12px 28px;border-radius:8px;text-decoration:none;font-weight:600;font-size:14px">
             Open Dashboard →
           </a>
-          <p style="margin:12px 0 0;font-size:12px;color:#334155">${PLATFORM}/portal/login</p>
+          <p style="margin:12px 0 0;font-size:12px;color:#334155">${PLATFORM}/portal</p>
         </div>
 
         <div style="border-top:1px solid #1e293b;padding-top:24px;margin-top:8px">
