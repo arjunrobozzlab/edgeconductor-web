@@ -28,14 +28,22 @@ const PRO_FEATURES = [
   "Onboarding call",
 ];
 
-type Plan = "free" | "pro";
-type Status = "idle" | "loading" | "success" | "error";
+type Plan    = "free" | "pro";
+type Product = "climate" | "tracker" | "home";
+type Status  = "idle" | "loading" | "success" | "error";
+
+const PRODUCTS: { key: Product; icon: string; label: string; desc: string; color: string }[] = [
+  { key: "climate", icon: "🌡", label: "EC Climate",  desc: "Smart Building · HVAC · CO₂ · Multi-Room",   color: "border-cyan-500/40 bg-cyan-500/8 text-cyan-400"   },
+  { key: "tracker", icon: "📍", label: "EC Tracker",  desc: "GPS Fleet · Vehicle Tracking · Remote Reboot", color: "border-blue-500/40 bg-blue-500/8 text-blue-400"   },
+  { key: "home",    icon: "🏠", label: "EC Home",     desc: "Home Automation · Relay · Energy · Scenes",    color: "border-green-500/40 bg-green-500/8 text-green-400" },
+];
 
 const inputCls =
   "w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder:text-white/25 focus:outline-none focus:border-blue-500/60 transition";
 
 export default function GetStartedPage() {
   const [plan, setPlan]       = useState<Plan>("free");
+  const [product, setProduct] = useState<Product>("climate");
   const [status, setStatus]   = useState<Status>("idle");
   const [errorMsg, setError]  = useState("");
   const [email, setEmail]     = useState("");
@@ -56,7 +64,7 @@ export default function GetStartedPage() {
       const res = await fetch("/api/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: form.name, email: form.email, company: form.company, password: form.password }),
+        body: JSON.stringify({ name: form.name, email: form.email, company: form.company, password: form.password, product_type: product }),
       });
       const data = await res.json();
       if (!res.ok) { setError(data.error || "Something went wrong."); setStatus("error"); return; }
@@ -142,6 +150,26 @@ export default function GetStartedPage() {
                 className="bg-white/3 border border-white/10 rounded-2xl p-7 space-y-4">
                 <h2 className="text-lg font-bold mb-1">Create your account</h2>
                 <p className="text-white/35 text-sm">Free forever · No credit card</p>
+
+                {/* Product type selector */}
+                <div>
+                  <label className="block text-xs text-white/40 uppercase tracking-wider mb-2">What are you building? *</label>
+                  <div className="space-y-2">
+                    {PRODUCTS.map(p => (
+                      <button key={p.key} type="button" onClick={() => setProduct(p.key)}
+                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl border text-left transition ${
+                          product === p.key ? p.color : "border-white/10 bg-white/3 text-white/50 hover:border-white/20"
+                        }`}>
+                        <span className="text-xl">{p.icon}</span>
+                        <div>
+                          <p className={`text-sm font-semibold ${product === p.key ? "" : "text-white/60"}`}>{p.label}</p>
+                          <p className="text-xs opacity-60">{p.desc}</p>
+                        </div>
+                        {product === p.key && <span className="ml-auto text-xs font-bold">✓</span>}
+                      </button>
+                    ))}
+                  </div>
+                </div>
 
                 <div className="grid grid-cols-2 gap-3">
                   <div className="col-span-2">

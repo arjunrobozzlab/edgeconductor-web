@@ -2,13 +2,18 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import nodemailer from "nodemailer";
 
-const PLATFORM      = "https://ec-platform-ten.vercel.app";
-const AUTH_CB       = `${PLATFORM}/auth/callback?next=/org`;
-const DEMO_ORG_ID   = "238422ba-f809-4014-ad1a-f33c0090f839";
-const DEMO_ORG_NAME = "EC Platform Demo";
+const PLATFORM = "https://ec-platform-ten.vercel.app";
+const AUTH_CB  = `${PLATFORM}/auth/callback?next=/org`;
+
+const DEMO_ORGS: Record<string, { id: string; name: string }> = {
+  climate: { id: "238422ba-f809-4014-ad1a-f33c0090f839", name: "EC Platform Demo"  },
+  tracker: { id: "44ba8fc2-99c8-4c9f-b53f-bfd859c5b6e6", name: "EC Tracker Demo"   },
+  home:    { id: "238422ba-f809-4014-ad1a-f33c0090f839", name: "EC Platform Demo"  }, // reuse climate for now
+};
 
 export async function POST(req: NextRequest) {
-  const { name, email, password, company } = await req.json();
+  const { name, email, password, company, product_type } = await req.json();
+  const demo = DEMO_ORGS[product_type as string] || DEMO_ORGS.climate;
 
   if (!name || !email || !password)
     return NextResponse.json({ error: "Name, email and password are required." }, { status: 400 });
@@ -29,12 +34,13 @@ export async function POST(req: NextRequest) {
     password,
     options: {
       data: {
-        full_name:  name,
-        role:       "org_admin",
-        company:    company || null,
-        source:     "website",
-        org_id:     DEMO_ORG_ID,
-        org_name:   DEMO_ORG_NAME,
+        full_name:    name,
+        role:         "org_admin",
+        company:      company || null,
+        source:       "website",
+        product_type: product_type || "climate",
+        org_id:       demo.id,
+        org_name:     demo.name,
       },
       emailRedirectTo: AUTH_CB,
     },
@@ -47,12 +53,13 @@ export async function POST(req: NextRequest) {
   if (signupData.user?.id) {
     await supabaseAdmin.auth.admin.updateUserById(signupData.user.id, {
       user_metadata: {
-        full_name:  name,
-        role:       "org_admin",
-        company:    company || null,
-        source:     "website",
-        org_id:     DEMO_ORG_ID,
-        org_name:   DEMO_ORG_NAME,
+        full_name:    name,
+        role:         "org_admin",
+        company:      company || null,
+        source:       "website",
+        product_type: product_type || "climate",
+        org_id:       demo.id,
+        org_name:     demo.name,
       },
     });
   }
