@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
     email,
     password,
     options: {
-      data: { full_name: name, role: "customer", company: company || null },
+      data: { full_name: name, role: "customer", company: company || null, source: "website" },
       emailRedirectTo: AUTH_CB,
     },
   });
