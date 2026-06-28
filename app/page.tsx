@@ -164,7 +164,7 @@ export default function Home() {
                 className="inline-flex items-center justify-center gap-2 border border-white/20 text-white/70 hover:text-white hover:border-white/40 text-sm font-medium px-6 py-3 rounded-full transition">
                 Try Live Demo
               </Link>
-              <Link href="/platform"
+              <Link href="/get-started"
                 className="inline-flex items-center justify-center gap-2 text-white/50 hover:text-white text-sm font-medium px-4 py-3 transition">
                 Get Started Free →
               </Link>
@@ -433,7 +433,7 @@ export default function Home() {
             <p className="text-white/45 text-sm leading-relaxed mb-6 flex-1">
               Create an account, register your first device, and have live telemetry flowing in under 10 minutes. Free tier — 5 devices, 1 org.
             </p>
-            <Link href="/platform"
+            <Link href="/get-started"
               className="inline-flex items-center justify-center border border-white/20 text-white/70 hover:text-white hover:border-white/40 text-sm font-medium px-5 py-3 rounded-xl transition">
               Start for free →
             </Link>

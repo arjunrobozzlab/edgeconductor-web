@@ -15,7 +15,7 @@ const plans = [
     sub: "No credit card required",
     features: ["5 devices", "1 organization", "Live telemetry", "OTA firmware updates", "QR device claiming", "7-day data history", "Community support"],
     cta: "Start for free",
-    href: "/contact",
+    href: "/get-started",
     highlight: false,
   },
   {
