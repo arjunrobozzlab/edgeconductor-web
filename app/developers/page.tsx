@@ -36,8 +36,59 @@ export default function DevelopersPage() {
           <span className="text-xs font-semibold tracking-widest text-white/30 uppercase">Developers</span>
           <h1 className="text-4xl md:text-5xl font-bold mt-3 mb-4">Build on EdgeConductor</h1>
           <p className="text-white/45 text-base max-w-xl">
-            REST API, MQTT topics, ESP32 SDK, and CLI tools — everything you need to integrate your hardware and services.
+            REST API, MQTT topics, ESP32 SDK, official JS + Python SDK — everything you need to integrate your hardware and services.
           </p>
+        </div>
+
+        {/* Official SDKs */}
+        <div className="mb-12">
+          <div className="flex items-center gap-3 mb-5">
+            <h2 className="text-xl font-bold">Official SDKs</h2>
+            <span className="text-xs text-green-400 bg-green-500/10 border border-green-500/25 px-2.5 py-1 rounded-full font-semibold">Published</span>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-5 mb-5">
+            {/* JS SDK */}
+            <div className="bg-white/3 border border-white/10 rounded-2xl p-6 hover:border-white/20 transition">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-xs font-semibold uppercase tracking-wider text-yellow-400">JavaScript / Node.js</span>
+                <a href="https://www.npmjs.com/package/@edgeconductor/sdk" target="_blank" rel="noopener noreferrer"
+                  className="text-xs text-white/30 hover:text-white/60 transition">npm ↗</a>
+              </div>
+              <pre className="bg-black/50 border border-white/10 rounded-lg p-3 text-xs text-green-300 mb-4 overflow-x-auto">{`npm install @edgeconductor/sdk`}</pre>
+              <pre className="bg-black/50 border border-white/10 rounded-lg p-3 text-xs text-white/50 overflow-x-auto leading-relaxed">{`const { EdgeConductor } = require('@edgeconductor/sdk');
+const ec = new EdgeConductor({ apiKey: 'ec_live_...' });
+
+await ec.telemetry.push('MY-001', { temp: 24.5, co2: 850 });
+await ec.rules.threshold(orgId, {
+  name: 'CO₂ Alert', field: 'co2', op: '>', value: 1000,
+  action: { key: 'relay', value: true },
+});`}</pre>
+            </div>
+
+            {/* Python SDK */}
+            <div className="bg-white/3 border border-white/10 rounded-2xl p-6 hover:border-white/20 transition">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="text-xs font-semibold uppercase tracking-wider text-blue-400">Python</span>
+                <a href="https://pypi.org/project/edgeconductor/" target="_blank" rel="noopener noreferrer"
+                  className="text-xs text-white/30 hover:text-white/60 transition">PyPI ↗</a>
+              </div>
+              <pre className="bg-black/50 border border-white/10 rounded-lg p-3 text-xs text-green-300 mb-4 overflow-x-auto">{`pip install edgeconductor`}</pre>
+              <pre className="bg-black/50 border border-white/10 rounded-lg p-3 text-xs text-white/50 overflow-x-auto leading-relaxed">{`from edgeconductor import Client
+
+ec = Client(api_key="ec_live_...")
+
+ec.telemetry.push("MY-001", temp=24.5, co2=850)
+shadow = ec.devices.get_shadow("MY-001")`}</pre>
+            </div>
+          </div>
+
+          <div className="bg-blue-500/8 border border-blue-500/20 rounded-xl px-5 py-3.5 flex items-center gap-4">
+            <span className="text-blue-400 text-sm">🔑</span>
+            <p className="text-white/50 text-sm">
+              API keys: Login → <span className="text-white/70 font-mono">/org/settings → API Keys</span> → Generate key
+            </p>
+          </div>
         </div>
 
         {/* REST API */}

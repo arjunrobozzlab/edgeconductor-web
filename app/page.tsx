@@ -43,8 +43,8 @@ const pillars = [
   },
   {
     icon: "□",
-    title: "Mobile + Web Dashboards",
-    desc: "React Native mobile app and Next.js web dashboard. Role-aware interfaces — admin sees all, org admin sees their fleet, tenant sees their room.",
+    title: "SDK + Open API",
+    desc: "Official JS (npm) and Python (pip) SDKs. REST API + MQTT. Connect any system — Raspberry Pi, Ubuntu server, n8n, Make.com, or your own app.",
     color: "rose",
   },
 ];
