@@ -24,8 +24,8 @@ const links = {
     { label: 'About', href: '/company' },
     { label: 'Case Studies', href: '/case-studies' },
     { label: 'Pricing', href: '/pricing' },
+    { label: 'Security', href: '/security' },
     { label: 'Contact', href: '/contact' },
-    { label: 'Legacy Site', href: '/legacy' },
   ],
 }
 

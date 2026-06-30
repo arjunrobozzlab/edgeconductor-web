@@ -393,6 +393,37 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── SECURITY TRUST STRIP ── */}
+      <section className="border-y border-white/8 bg-white/[0.015] px-4 md:px-8 py-12 md:py-16">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-8">
+            <p className="text-xs font-semibold uppercase tracking-widest text-white/25 mb-2">Security & Compliance</p>
+            <h2 className="text-xl md:text-2xl font-bold text-white/80">Enterprise-grade security, built in from day one</h2>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 mb-8">
+            {[
+              { icon: "🔒", label: "TLS 1.3",              sub: "All traffic encrypted" },
+              { icon: "🛡", label: "RBAC",                 sub: "Role-based access" },
+              { icon: "🏢", label: "Tenant Isolation",     sub: "Org-level data walls" },
+              { icon: "📋", label: "Audit Logs",           sub: "Immutable event trail" },
+              { icon: "✅", label: "GDPR Ready",           sub: "Data residency control" },
+              { icon: "🔑", label: "API Key Scoping",      sub: "Per-key permissions" },
+            ].map(b => (
+              <div key={b.label} className="bg-white/3 border border-white/8 rounded-xl p-4 text-center hover:border-white/15 transition">
+                <div className="text-xl mb-2">{b.icon}</div>
+                <div className="text-xs font-semibold text-white/70 mb-0.5">{b.label}</div>
+                <div className="text-xs text-white/25">{b.sub}</div>
+              </div>
+            ))}
+          </div>
+          <div className="text-center">
+            <Link href="/security" className="text-sm text-white/40 hover:text-white/70 transition underline underline-offset-4">
+              View full security overview →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ── TRIPLE CTA ── */}
       <section className="px-4 md:px-8 py-20 md:py-28 max-w-7xl mx-auto">
         <div className="grid md:grid-cols-3 gap-5">
