@@ -126,6 +126,39 @@ tenant    → /portal/room (their room)
 /claim-room?room_id=xxx → login/register → room assigned`,
   },
   {
+    id: "dashboard",
+    tag: "Dashboard Builder",
+    color: "orange",
+    title: "Drag-and-drop control dashboards — built for your hardware",
+    desc: "Build custom IoT dashboards without writing any frontend code. Add sensor widgets, relay toggles, sliders, and charts — then drag them into any layout. Fully bidirectional with your device's shadow state.",
+    features: [
+      "Live / Edit mode toggle — like Blynk's play button; widgets are interactive only in Live mode",
+      "Toggle widget: ON/OFF relay, LED, fan — sends shadow_desired, shows device-confirmed state (green dot)",
+      "Metric card: reads shadow_reported in real time (temp, hum, CO₂, battery, signal)",
+      "Line chart: plots telemetry history — 1h, 6h, or 24h time range",
+      "Slider widget: sets numeric setpoint or PWM duty — 400ms debounced send",
+      "Button widget: one-shot command press (any field → any value)",
+      "Device status widget: online/offline indicator with last-seen timestamp",
+      "Drag handle — left grip strip; resize via corner handle; layout saved to org database",
+      "Custom field names — any shadow key (relay, led, gpio5, fan_speed) — not locked to presets",
+    ],
+    code: `// Widget sends PATCH to registry:
+PATCH /devices/{serial}/shadow/desired
+{ "relay": true }
+
+// Registry saves to DB + publishes MQTT:
+devices/{serial}/shadow/desired → { "relay": true }
+
+// ESP32 firmware receives via MQTT:
+void onShadowDesired(JsonObject desired) {
+  if (desired["relay"]) hvac.setRelay(true);
+  if (desired["led"])   digitalWrite(LED_PIN, HIGH);
+}
+
+// Device confirms back via telemetry:
+shadow_reported.relay = true  ← green dot on toggle`,
+  },
+  {
     id: "diagnostics",
     tag: "Diagnostics",
     color: "rose",
@@ -160,6 +193,7 @@ const colorMap: Record<string, { tag: string; border: string; code: string }> = 
   yellow: { tag: "text-yellow-400 bg-yellow-500/10 border-yellow-500/25", border: "border-yellow-500/20", code: "border-yellow-500/15 bg-yellow-500/5" },
   purple: { tag: "text-purple-400 bg-purple-500/10 border-purple-500/25", border: "border-purple-500/20", code: "border-purple-500/15 bg-purple-500/5" },
   rose:   { tag: "text-rose-400 bg-rose-500/10 border-rose-500/25",   border: "border-rose-500/20",   code: "border-rose-500/15 bg-rose-500/5"   },
+  orange: { tag: "text-orange-400 bg-orange-500/10 border-orange-500/25", border: "border-orange-500/20", code: "border-orange-500/15 bg-orange-500/5" },
 };
 
 export default function PlatformPage() {
@@ -171,11 +205,11 @@ export default function PlatformPage() {
       <section className="px-4 md:px-8 pt-20 pb-16 max-w-7xl mx-auto text-center">
         <span className="text-xs font-semibold tracking-widest text-white/30 uppercase">Platform</span>
         <h1 className="text-4xl md:text-5xl font-bold mt-3 mb-5">
-          Six capabilities. One platform.
+          Everything. One platform.
         </h1>
         <p className="text-white/45 text-base max-w-2xl mx-auto mb-8">
           Every feature built together — not stitched from five different services.
-          Device registry, telemetry, OTA, rules engine, multi-tenant access, and full diagnostics.
+          Device registry, telemetry, OTA, rules engine, dashboard builder, multi-tenant access, and full diagnostics.
         </p>
         {/* Jump nav */}
         <div className="flex flex-wrap justify-center gap-2">

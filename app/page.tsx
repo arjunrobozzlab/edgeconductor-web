@@ -47,6 +47,18 @@ const pillars = [
     desc: "Official JS (npm) and Python (pip) SDKs. REST API + MQTT. Connect any system — Raspberry Pi, Ubuntu server, n8n, Make.com, or your own app.",
     color: "rose",
   },
+  {
+    icon: "⬡",
+    title: "Drag-and-Drop Dashboard Builder",
+    desc: "Build custom control dashboards — toggle relay, slider for setpoint, live sensor charts. Blynk-style Live/Edit modes. Bidirectional with device shadow in real time.",
+    color: "orange",
+  },
+  {
+    icon: "◈",
+    title: "White Label Ready",
+    desc: "Deploy under your own brand and domain. Custom logo, colors, and org name — your clients never see EdgeConductor. Built for system integrators and SaaS resellers.",
+    color: "violet",
+  },
 ];
 
 const colorMap: Record<string, string> = {
@@ -56,6 +68,8 @@ const colorMap: Record<string, string> = {
   yellow: "border-yellow-500/20 bg-yellow-500/5 text-yellow-400",
   purple: "border-purple-500/20 bg-purple-500/5 text-purple-400",
   rose:   "border-rose-500/20 bg-rose-500/5 text-rose-400",
+  orange: "border-orange-500/20 bg-orange-500/5 text-orange-400",
+  violet: "border-violet-500/20 bg-violet-500/5 text-violet-400",
 };
 
 const lifecycle = [
@@ -378,6 +392,181 @@ export default function Home() {
               View full hardware docs →
             </Link>
           </p>
+        </div>
+      </section>
+
+      {/* ── DASHBOARD BUILDER ── */}
+      <section className="px-4 md:px-8 py-20 md:py-28 max-w-7xl mx-auto">
+        <div className="grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+          <div>
+            <span className="text-xs font-semibold tracking-widest text-orange-400 uppercase border border-orange-500/25 bg-orange-500/8 px-3 py-1.5 rounded-full">
+              Dashboard Builder
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-5 mb-5 leading-tight">
+              Drag-and-drop control dashboards.{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">
+                Like Blynk, but yours.
+              </span>
+            </h2>
+            <p className="text-white/45 text-sm md:text-base leading-relaxed mb-8">
+              Build custom IoT dashboards visually — no code. Place relay toggles, sensor charts,
+              device status, and sliders anywhere on the canvas. Switch between Edit and Live mode.
+              Every widget talks to your real device via shadow state in real time.
+            </p>
+            <div className="space-y-3 mb-8">
+              {[
+                { icon: "⬡", label: "Drag-and-drop grid layout", sub: "Resize and reposition any widget freely" },
+                { icon: "⏻", label: "Toggle, Button, Slider", sub: "Control relay, LED, fan — bidirectional with device shadow" },
+                { icon: "◈", label: "Metric cards + live charts", sub: "Temperature, humidity, CO₂ — updates every 10s" },
+                { icon: "▶", label: "Live / Edit modes", sub: "Edit layout in Edit mode, interact with devices in Live mode" },
+              ].map(f => (
+                <div key={f.label} className="flex items-start gap-3">
+                  <span className="w-8 h-8 rounded-lg bg-orange-500/10 border border-orange-500/20 text-orange-400 text-sm flex items-center justify-center shrink-0 mt-0.5">{f.icon}</span>
+                  <div>
+                    <p className="text-sm font-medium text-white/80">{f.label}</p>
+                    <p className="text-xs text-white/35">{f.sub}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <Link href="/platform#dashboard"
+              className="inline-flex items-center gap-2 border border-orange-500/30 text-orange-400 hover:bg-orange-500/10 text-sm font-medium px-5 py-2.5 rounded-xl transition">
+              See Dashboard Builder →
+            </Link>
+          </div>
+
+          {/* Visual mockup */}
+          <div className="bg-white/3 border border-white/10 rounded-2xl p-5 space-y-3">
+            <div className="flex items-center justify-between mb-2">
+              <p className="text-xs text-white/30 font-mono uppercase tracking-widest">Dashboard</p>
+              <div className="flex gap-2">
+                <span className="text-xs border border-orange-500/30 bg-orange-500/10 text-orange-400 px-2.5 py-1 rounded-full">✏ Edit</span>
+                <span className="text-xs border border-green-500/30 bg-green-500/10 text-green-400 px-2.5 py-1 rounded-full">▶ Live</span>
+              </div>
+            </div>
+            {/* Widget grid mockup */}
+            <div className="grid grid-cols-3 gap-2">
+              {/* Temp metric */}
+              <div className="col-span-1 bg-gray-900/80 border border-white/8 rounded-xl p-3">
+                <p className="text-[9px] text-gray-500 uppercase">Temperature</p>
+                <p className="text-2xl font-bold font-mono text-green-400 mt-1">24.3<span className="text-xs text-gray-500 ml-0.5">°C</span></p>
+                <p className="text-[9px] text-gray-700 mt-1">14:22:05</p>
+              </div>
+              {/* Hum metric */}
+              <div className="col-span-1 bg-gray-900/80 border border-white/8 rounded-xl p-3">
+                <p className="text-[9px] text-gray-500 uppercase">Humidity</p>
+                <p className="text-2xl font-bold font-mono text-cyan-400 mt-1">58<span className="text-xs text-gray-500 ml-0.5">%</span></p>
+                <p className="text-[9px] text-gray-700 mt-1">14:22:05</p>
+              </div>
+              {/* Toggle */}
+              <div className="col-span-1 bg-gray-900/80 border border-white/8 rounded-xl p-3">
+                <p className="text-[9px] text-gray-500 uppercase">Relay</p>
+                <p className="text-lg font-bold text-green-400 mt-1">ON</p>
+                <div className="mt-1.5 w-full h-5 bg-green-500 rounded-full relative">
+                  <span className="absolute right-0.5 top-0.5 w-4 h-4 bg-white rounded-full shadow block" />
+                </div>
+              </div>
+            </div>
+            {/* Chart mockup */}
+            <div className="bg-gray-900/80 border border-white/8 rounded-xl p-3 col-span-3">
+              <p className="text-[9px] text-gray-500 uppercase mb-2">CO₂ — Last 1h</p>
+              <div className="flex items-end gap-0.5 h-12">
+                {[60,55,65,70,58,80,85,75,72,68,73,78,82,88,91,85,79,83,87,90].map((h, i) => (
+                  <div key={i} className="flex-1 bg-blue-500/40 rounded-sm" style={{ height: `${h}%` }} />
+                ))}
+              </div>
+            </div>
+            {/* Slider mockup */}
+            <div className="bg-gray-900/80 border border-white/8 rounded-xl p-3">
+              <p className="text-[9px] text-gray-500 uppercase">Setpoint</p>
+              <p className="text-lg font-bold font-mono text-blue-400">22<span className="text-xs text-gray-500 ml-0.5">°C</span></p>
+              <div className="mt-1.5 w-full h-1.5 bg-gray-700 rounded-full relative">
+                <div className="absolute left-0 top-0 h-full w-2/5 bg-blue-500 rounded-full" />
+                <span className="absolute top-1/2 left-[40%] -translate-y-1/2 w-3 h-3 bg-white rounded-full shadow block -ml-1.5" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── WHITE LABEL ── */}
+      <section className="border-y border-white/8 bg-gradient-to-br from-violet-500/5 to-purple-500/3 px-4 md:px-8 py-20 md:py-28">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 md:gap-16 items-center">
+
+          {/* Left — copy */}
+          <div>
+            <span className="text-xs font-semibold tracking-widest text-violet-400 uppercase border border-violet-500/25 bg-violet-500/8 px-3 py-1.5 rounded-full">
+              White Label
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-5 mb-5 leading-tight">
+              Your brand. Your domain.{" "}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-purple-400">
+                Our platform.
+              </span>
+            </h2>
+            <p className="text-white/45 text-sm md:text-base leading-relaxed mb-8">
+              Deploy EdgeConductor under your own product name. Your clients see your logo,
+              your domain, your colors — with the full IoT platform running underneath.
+              Built for system integrators, ISVs, and hardware companies that want to ship faster.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+              {[
+                { icon: "◈", title: "Custom branding", desc: "Your logo, colors, and company name across all dashboards" },
+                { icon: "▣", title: "Custom domain", desc: "dashboard.yourcompany.com — your URL, your SSL cert" },
+                { icon: "⚡", title: "Resell as your own", desc: "Charge your clients directly — we stay invisible" },
+                { icon: "□", title: "Per-org theming", desc: "Each client org can have its own branding and access rules" },
+              ].map(f => (
+                <div key={f.title} className="bg-white/3 border border-white/8 rounded-xl p-4 hover:border-violet-500/20 transition">
+                  <p className="text-violet-400 text-lg mb-2">{f.icon}</p>
+                  <p className="text-sm font-semibold text-white/80 mb-1">{f.title}</p>
+                  <p className="text-xs text-white/35 leading-relaxed">{f.desc}</p>
+                </div>
+              ))}
+            </div>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Link href="/contact"
+                className="inline-flex items-center justify-center bg-violet-600 hover:bg-violet-700 text-white text-sm font-semibold px-6 py-3 rounded-full transition">
+                Talk to us about White Label →
+              </Link>
+              <Link href="/pricing"
+                className="inline-flex items-center justify-center border border-white/20 text-white/60 hover:text-white hover:border-white/40 text-sm px-6 py-3 rounded-full transition">
+                View Pricing
+              </Link>
+            </div>
+          </div>
+
+          {/* Right — who it's for */}
+          <div className="space-y-4">
+            <p className="text-xs text-white/25 uppercase tracking-widest font-medium mb-6">Who uses White Label</p>
+            {[
+              {
+                tag: "System Integrators",
+                desc: "You build, install, and service IoT systems for clients. Deploy your own branded portal — no need to build the platform yourself.",
+                chips: ["Your brand", "Faster delivery", "Client isolation"],
+              },
+              {
+                tag: "Hardware OEMs",
+                desc: "You manufacture ESP32 boards or sensors. Bundle the cloud platform with your hardware — sell a complete product, not just a board.",
+                chips: ["Device + Cloud", "Recurring revenue", "Managed service"],
+              },
+              {
+                tag: "SaaS Resellers",
+                desc: "You already sell B2B software. Add IoT telemetry, HVAC control, and fleet tracking to your existing product suite under your name.",
+                chips: ["Expand product", "No IoT infra", "White-glove setup"],
+              },
+            ].map(w => (
+              <div key={w.tag} className="bg-white/3 border border-white/8 rounded-2xl p-5 hover:border-violet-500/20 transition">
+                <p className="font-semibold text-white/80 mb-1.5">{w.tag}</p>
+                <p className="text-sm text-white/40 leading-relaxed mb-3">{w.desc}</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {w.chips.map(c => (
+                    <span key={c} className="text-xs bg-violet-500/10 text-violet-400/70 border border-violet-500/15 px-2.5 py-1 rounded-full">{c}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
         </div>
       </section>
 
