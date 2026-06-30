@@ -126,22 +126,18 @@ export default function DevelopersPage() {
             Everything you need — no vendor lock-in, no bloat.
           </p>
           <div className="flex flex-wrap gap-3">
-            {[
-              { label: "@edgeconductor/sdk", href: "https://www.npmjs.com/package/@edgeconductor/sdk", badge: "npm" },
-              { label: "edgeconductor",      href: "https://pypi.org/project/edgeconductor/",          badge: "PyPI" },
-            ].map(p => (
-              <a key={p.label} href={p.href} target="_blank" rel="noopener noreferrer"
-                className="flex items-center gap-2 px-3.5 py-2 rounded-xl border border-white/10 bg-white/3 hover:bg-white/6 hover:border-white/20 transition text-sm text-white/60">
-                <span className="text-xs text-white/30 font-mono">{p.badge}</span>
-                <span className="text-white/15">|</span>
-                <span className="font-mono">{p.label}</span>
-                <span className="text-white/25 text-xs">↗</span>
-              </a>
-            ))}
-            <div className="flex items-center gap-2 px-3.5 py-2 rounded-xl border border-green-500/20 bg-green-500/5 text-sm text-green-400">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-              API Operational
-            </div>
+            <a href="https://www.npmjs.com/package/@edgeconductor/sdk" target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2 rounded-xl border border-white/10 bg-white/3 hover:bg-white/6 hover:border-white/20 transition text-sm">
+              <span className="text-yellow-400 font-semibold text-xs">npm</span>
+              <span className="text-white/50 font-mono">@edgeconductor/sdk</span>
+              <span className="text-white/20 text-xs">↗</span>
+            </a>
+            <a href="https://pypi.org/project/edgeconductor/" target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2 rounded-xl border border-white/10 bg-white/3 hover:bg-white/6 hover:border-white/20 transition text-sm">
+              <span className="text-blue-400 font-semibold text-xs">PyPI</span>
+              <span className="text-white/50 font-mono">edgeconductor</span>
+              <span className="text-white/20 text-xs">↗</span>
+            </a>
           </div>
         </div>
 
