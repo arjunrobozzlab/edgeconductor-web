@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useSearchParams } from "next/navigation";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
@@ -14,18 +13,18 @@ const INQUIRY_TYPES = [
 ];
 
 export default function ContactPage() {
-  const searchParams = useSearchParams();
-  const typeParam = searchParams.get("type") ?? "demo";
-  const validType = INQUIRY_TYPES.find(t => t.value === typeParam)?.value ?? "demo";
-
   const [form, setForm] = useState({
     name: "", email: "", company: "",
-    inquiry_type: validType, message: "",
+    inquiry_type: "demo", message: "",
   });
 
   useEffect(() => {
-    setForm(f => ({ ...f, inquiry_type: validType }));
-  }, [validType]);
+    const params = new URLSearchParams(window.location.search);
+    const type = params.get("type");
+    if (type && INQUIRY_TYPES.find(t => t.value === type)) {
+      setForm(f => ({ ...f, inquiry_type: type }));
+    }
+  }, []);
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
 
   function set(field: string) {
