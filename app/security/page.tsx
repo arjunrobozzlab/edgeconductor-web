@@ -18,6 +18,8 @@ const layers = [
       { label: "Bearer token auth", desc: "All API calls require a scoped Bearer token. Tokens are org-scoped — one org cannot access another's data." },
       { label: "RBAC",              desc: "Three roles: admin, org_admin, customer. Each role has a fixed permission set enforced server-side." },
       { label: "API key rotation",  desc: "Keys can be revoked and rotated from the dashboard at any time. Old keys are immediately invalidated." },
+      { label: "Password policy",   desc: "Minimum 8-character passwords enforced at signup. Passwords are hashed with bcrypt — never stored in plaintext." },
+      { label: "2FA / TOTP",        desc: "Two-factor authentication via Google Authenticator or Authy. Coming soon — will be required for org_admin and admin roles." },
     ],
   },
   {
@@ -123,6 +125,7 @@ export default function SecurityPage() {
               { label: "Audit logs",            color: "text-purple-400 bg-purple-500/8 border-purple-500/20" },
               { label: "GDPR Ready",            color: "text-yellow-400 bg-yellow-500/8 border-yellow-500/20" },
               { label: "SOC 2 In Progress",     color: "text-yellow-400 bg-yellow-500/8 border-yellow-500/20" },
+              { label: "2FA — Coming Soon",     color: "text-white/35 bg-white/4 border-white/12" },
             ].map(b => (
               <span key={b.label} className={`text-xs font-semibold px-3 py-1.5 rounded-full border ${b.color}`}>
                 {b.label}
