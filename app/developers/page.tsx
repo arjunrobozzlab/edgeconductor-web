@@ -359,7 +359,7 @@ export default function DevelopersPage() {
               className="px-5 py-2.5 rounded-xl bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium transition">
               Book a Demo
             </Link>
-            <Link href="/contact"
+            <Link href="/contact?type=support"
               className="px-5 py-2.5 rounded-xl border border-white/15 text-white/60 hover:text-white hover:border-white/30 text-sm font-medium transition">
               Contact Support
             </Link>
