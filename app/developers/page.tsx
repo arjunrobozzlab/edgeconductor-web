@@ -355,11 +355,15 @@ export default function DevelopersPage() {
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Link href="/contact"
+            <Link href="/contact?type=demo"
               className="px-5 py-2.5 rounded-xl bg-blue-500 hover:bg-blue-600 text-white text-sm font-medium transition">
-              Contact Support
+              Book a Demo
             </Link>
             <Link href="/contact"
+              className="px-5 py-2.5 rounded-xl border border-white/15 text-white/60 hover:text-white hover:border-white/30 text-sm font-medium transition">
+              Contact Support
+            </Link>
+            <Link href="/contact?type=bug"
               className="px-5 py-2.5 rounded-xl border border-white/15 text-white/60 hover:text-white hover:border-white/30 text-sm font-medium transition">
               Report a Bug
             </Link>
