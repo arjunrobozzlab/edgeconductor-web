@@ -4,59 +4,59 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
 export const metadata: Metadata = {
-  title: "EdgeConductor — IoT Platform for Hardware Companies",
+  title: "EdgeConductor — Connected Asset Platform for Hardware Companies",
   description:
-    "The complete IoT stack for hardware teams. Device provisioning, live telemetry, OTA firmware updates, B2B multi-tenant dashboards, and rules engine — all in one platform.",
+    "Turn your hardware into a connected product. EdgeConductor is the complete connected asset platform — provisioning, live telemetry, remote control, OTA updates, multi-tenant dashboards, and white-label ready.",
   alternates: { canonical: "https://edgeconductor.com" },
 };
 
 const pillars = [
   {
     icon: "▣",
-    title: "Device Registry & Provisioning",
-    desc: "Register devices, assign to organizations, QR-code claiming — zero-touch onboarding from factory to field.",
+    title: "From Factory to Field in Minutes",
+    desc: "Register assets, assign to client orgs, QR-code claiming — zero-touch onboarding. Your hardware is live and managed before it leaves the warehouse.",
     color: "blue",
   },
   {
     icon: "◈",
-    title: "Live Telemetry & Diagnostics",
-    desc: "Real-time sensor data with 1h/6h/24h/7d historical charts. Battery, signal, heap, GPS fix, reboot reason — every metric your ops team needs. Weekly PDF reports included.",
+    title: "Know What's Happening, Anywhere",
+    desc: "Live telemetry every 5 seconds. Battery, signal, GPS, sensor readings, crash history — your ops team has complete visibility. Weekly PDF reports auto-delivered.",
     color: "cyan",
   },
   {
     icon: "↑",
-    title: "OTA Firmware Updates",
-    desc: "Push firmware to devices in the field, track pending updates, automatic push on reconnect. Rollback supported.",
+    title: "Update Every Device Remotely",
+    desc: "Ship a firmware fix and push it to 1 or 1,000 devices from the dashboard. Offline devices get the update the moment they reconnect. No field visits.",
     color: "green",
   },
   {
     icon: "⚡",
-    title: "Rules Engine & Automation",
-    desc: "Threshold rules (IF CO₂ > 1000 → HVAC ON) and scheduled rules (AT 22:00 Mon–Fri → relay OFF). Webhook alerts fire to any URL — Telegram, Slack, n8n, Make.com.",
+    title: "Automate Operations at Scale",
+    desc: "IF CO₂ > 1000 → HVAC ON. AT 22:00 Mon–Fri → relay OFF. Rules fire in 30 seconds and send webhooks to Telegram, Slack, or any system you already use.",
     color: "yellow",
   },
   {
     icon: "◎",
-    title: "Multi-Tenant B2B Architecture",
-    desc: "Org Admin → Room → Tenant hierarchy. RBAC with admin, org_admin, and customer roles. Tenant QR access per room. White-label ready.",
+    title: "Deploy to Clients Without Building Infra",
+    desc: "Multi-tenant from day one. Each client gets their own org, their own devices, their own users. You manage everything from one super admin view.",
     color: "purple",
   },
   {
-    icon: "□",
-    title: "SDK + Open API",
-    desc: "Official JS (npm) and Python (pip) SDKs. REST API + MQTT. Connect any system — Raspberry Pi, Ubuntu server, n8n, Make.com, or your own app.",
-    color: "rose",
-  },
-  {
     icon: "⬡",
-    title: "Drag-and-Drop Dashboard Builder",
-    desc: "Build custom control dashboards — toggle relay, slider for setpoint, live sensor charts. Blynk-style Live/Edit modes. Bidirectional with device shadow in real time.",
+    title: "Control Dashboards in Minutes",
+    desc: "Drag-and-drop widget builder — toggle relay, set temperature, read sensors, see live charts. Your clients interact with real devices from a browser. No code.",
     color: "orange",
   },
   {
+    icon: "□",
+    title: "Integrate with Anything",
+    desc: "JS SDK (npm), Python SDK (pip), REST API, MQTT, webhooks. Connect your own backend, n8n, Make.com, or any existing system. Open and programmable.",
+    color: "rose",
+  },
+  {
     icon: "◈",
-    title: "White Label Ready",
-    desc: "Deploy under your own brand and domain. Custom logo, colors, and org name — your clients never see EdgeConductor. Built for system integrators and SaaS resellers.",
+    title: "Sell Under Your Own Brand",
+    desc: "White-label the entire platform. Your logo, your domain, your colors. Your clients see your product — not ours. Built for system integrators and hardware OEMs.",
     color: "violet",
   },
 ];
@@ -132,10 +132,10 @@ const hardware = [
 ];
 
 const stats = [
-  { value: "< 5s", label: "Telemetry latency" },
-  { value: "MQTT + HTTPS", label: "Dual connectivity" },
-  { value: "Multi-tenant", label: "B2B ready" },
-  { value: "ESP32 → Cloud", label: "Full vertical" },
+  { value: "< 5s", label: "Telemetry to dashboard" },
+  { value: "Weeks", label: "Time to ship your product" },
+  { value: "White-label", label: "Your brand, our platform" },
+  { value: "ESP32 → Cloud", label: "Full stack, one platform" },
 ];
 
 export default function Home() {
@@ -154,18 +154,18 @@ export default function Home() {
           {/* Left — copy */}
           <div>
             <span className="inline-block text-xs font-semibold tracking-widest text-blue-400 uppercase mb-5 border border-blue-500/30 bg-blue-500/8 px-3 py-1.5 rounded-full">
-              IoT Platform for Hardware Companies
+              Connected Asset Platform
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-tight mb-6">
-              The Complete IoT Stack{" "}
+              Turn your hardware{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-300">
-                for Hardware Teams.
+                into a connected product.
               </span>
             </h1>
             <p className="text-white/55 text-base md:text-lg leading-relaxed mb-8 max-w-lg">
-              From ESP32 firmware to B2B cloud dashboards — device provisioning, live telemetry,
-              OTA updates, and multi-tenant access. One platform so your team ships products,
-              not infrastructure.
+              EdgeConductor handles the entire connected product stack — provisioning, live telemetry,
+              remote control, OTA firmware, rules automation, and B2B client dashboards.
+              Ship your product in weeks. Scale to thousands of assets.
             </p>
 
             {/* 3 CTAs */}
@@ -265,10 +265,10 @@ export default function Home() {
       {/* ── PLATFORM PILLARS ── */}
       <section className="px-4 md:px-8 py-20 md:py-28 max-w-7xl mx-auto">
         <div className="text-center mb-14">
-          <span className="text-xs font-semibold tracking-widest text-white/30 uppercase">What&apos;s Inside</span>
-          <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">Everything your IoT product needs</h2>
+          <span className="text-xs font-semibold tracking-widest text-white/30 uppercase">What You Get</span>
+          <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">Everything to run your connected product business</h2>
           <p className="text-white/45 text-sm md:text-base max-w-xl mx-auto">
-            Six production-grade capabilities — built together, tested on real hardware, deployed in live products.
+            Eight production-grade capabilities — built together, tested on real hardware, deployed with real clients.
           </p>
         </div>
 

@@ -5,10 +5,11 @@ import Link from 'next/link'
 const navLinks = [
   { label: 'Platform', href: '/platform' },
   { label: 'Solutions', href: '/solutions' },
+  { label: 'Industries', href: '/industries' },
   { label: 'Hardware', href: '/hardware' },
-  { label: 'Security', href: '/security' },
-  { label: 'Pricing', href: '/pricing' },
+  { label: 'Partners', href: '/partners' },
   { label: 'Developers', href: '/developers' },
+  { label: 'Pricing', href: '/pricing' },
 ]
 
 export default function Navbar() {
