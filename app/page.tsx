@@ -405,7 +405,7 @@ export default function Home() {
             <h2 className="text-3xl md:text-4xl font-bold mt-5 mb-5 leading-tight">
               Drag-and-drop control dashboards.{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-yellow-400">
-                Like Blynk, but yours.
+                Built for your hardware, branded as yours.
               </span>
             </h2>
             <p className="text-white/45 text-sm md:text-base leading-relaxed mb-8">

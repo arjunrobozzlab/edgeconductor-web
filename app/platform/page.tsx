@@ -132,7 +132,7 @@ tenant    → /portal/room (their room)
     title: "Drag-and-drop control dashboards — built for your hardware",
     desc: "Build custom IoT dashboards without writing any frontend code. Add sensor widgets, relay toggles, sliders, and charts — then drag them into any layout. Fully bidirectional with your device's shadow state.",
     features: [
-      "Live / Edit mode toggle — like Blynk's play button; widgets are interactive only in Live mode",
+      "Live / Edit mode toggle — widgets are interactive only in Live mode; layout is locked",
       "Toggle widget: ON/OFF relay, LED, fan — sends shadow_desired, shows device-confirmed state (green dot)",
       "Metric card: reads shadow_reported in real time (temp, hum, CO₂, battery, signal)",
       "Line chart: plots telemetry history — 1h, 6h, or 24h time range",
