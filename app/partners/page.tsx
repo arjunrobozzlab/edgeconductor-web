@@ -31,9 +31,9 @@ const partnerTypes = [
     color: "cyan",
     title: "Hardware OEMs",
     subtitle: "You manufacture connected hardware products",
-    desc: "You build ESP32 boards, sensors, gateways, or industrial controllers. Bundle EdgeConductor with your hardware and sell a complete connected product — not just a board. Your customers get provisioning, live telemetry, OTA updates, and a control dashboard. Charge recurring platform fees.",
+    desc: "You manufacture connected hardware — sensors, gateways, industrial controllers, or IoT devices. Bundle EdgeConductor with your hardware and sell a complete connected product — not just a device. Your customers get provisioning, live telemetry, OTA updates, and a control dashboard. Charge recurring platform fees.",
     benefits: [
-      "Pre-built firmware SDK for ESP32 and Linux hardware",
+      "Embedded C/C++ SDK for microcontrollers + Linux/Python SDK for gateways",
       "OTA update campaigns across your entire device fleet",
       "Per-device diagnostics — battery, signal, crash, uptime",
       "White-label portal for your end customers",

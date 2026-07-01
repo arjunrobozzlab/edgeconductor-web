@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "EdgeConductor — IoT Platform for Hardware Companies",
     description:
-      "The complete IoT stack for hardware teams. From ESP32 firmware to B2B cloud dashboards.",
+      "The complete connected asset platform. From device firmware to B2B cloud dashboards.",
   },
   robots: {
     index: true,

@@ -5,7 +5,7 @@ import Footer from "../../components/Footer";
 
 export const metadata: Metadata = {
   title: "EC Home — Smart Home Automation | EdgeConductor",
-  description: "Whole-home automation with smart switches, energy monitoring, scheduled rules, and family access via QR. Built on ESP32 with WiFi + cloud sync.",
+  description: "Whole-home automation with smart switches, energy monitoring, scheduled rules, and family access via QR. Cloud-connected, hardware-agnostic.",
 };
 
 const features = [

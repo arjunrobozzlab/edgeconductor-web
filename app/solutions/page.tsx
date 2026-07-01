@@ -30,7 +30,7 @@ const solutions = [
   {
     tag: "Residential",
     name: "EC Home",
-    desc: "Smart home relay control, energy monitoring, and scene automation. Works with ESP32 and Raspberry Pi.",
+    desc: "Smart home relay control, energy monitoring, and scene automation. Works with any WiFi-connected microcontroller or Linux hardware.",
     href: "/solutions/home",
     color: "text-green-400 border-green-500/25 bg-green-500/8",
     status: "Coming Soon",
