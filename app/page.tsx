@@ -336,8 +336,8 @@ export default function Home() {
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {[
-                "Device Registry", "Live Telemetry", "OTA Updates", "Remote Control",
-                "Rules Engine", "Multi-Tenant B2B", "White-Label", "SDK + REST API + CLI",
+                "Device Registry", "Live Telemetry", "OTA Updates", "Anomaly Detection",
+                "Rules Engine", "Multi-Tenant B2B", "Partner Portal", "SDK + REST API + CLI",
               ].map(s => (
                 <div key={s} className="bg-blue-500/10 border border-blue-500/15 rounded-lg px-3 py-2 text-center">
                   <p className="text-xs text-blue-300/65 font-medium">{s}</p>

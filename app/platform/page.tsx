@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 
 export const metadata: Metadata = {
   title: "Platform — EdgeConductor",
-  description: "Production-grade capabilities: device registry, live telemetry, OTA firmware, rules engine, dashboard builder, multi-tenant B2B access, and a full CLI tool.",
+  description: "Production-grade capabilities: device registry, telemetry, OTA, rules engine, anomaly detection, partner portal, dashboard builder, and CLI — one platform.",
 };
 
 const sections = [
@@ -185,6 +185,70 @@ shadow_reported.relay = true  ← green dot on toggle`,
 }`,
   },
   {
+    id: "anomaly",
+    tag: "Anomaly Detection",
+    color: "red",
+    title: "Detect problems before they become failures",
+    desc: "Rolling-average anomaly detection watches every active device's telemetry stream. When a reading spikes beyond its learned baseline, EdgeConductor fires an in-app alert and email — before a human-set threshold rule would even catch it.",
+    features: [
+      "Rolling mean over last 29 readings — learns what normal looks like for each device",
+      "Monitors Temperature, Humidity, CO₂, and Battery on every active device",
+      "Warning at 20–40% deviation · Critical at 40–100% deviation",
+      "Battery absolute floor: alert fires when voltage drops below 3.5V regardless of trend",
+      "30-minute cooldown per device+field — no duplicate alert spam",
+      "In-app notification bell + email with current value, baseline average, and % deviation",
+    ],
+    code: `// Anomaly fires automatically — no configuration needed.
+// Example alerts sent to org admin:
+
+⚠️  Warning: CO₂ on EC-CLM-GERMANY01
+    CO₂ is 67% above baseline
+    current: 1840 ppm  ·  avg: 1103 ppm
+
+🔴  Critical: Temperature on EC-CLM-ROOM02
+    Temperature is 82% above baseline
+    current: 41.2°C  ·  avg: 22.6°C
+
+// Query unacknowledged anomalies via SDK:
+const anomalies = await ec.anomalies.list(orgId, { unacked: true });
+await ec.anomalies.acknowledge(anomaly.id);
+
+// Or via API:
+GET /orgs/:id/anomalies?unacked=true
+PATCH /anomalies/:id/acknowledge`,
+  },
+  {
+    id: "partner",
+    tag: "Partner Portal",
+    color: "violet",
+    title: "Manage all your customer orgs from one portal",
+    desc: "System integrators and hardware OEMs get a dedicated Partner Portal. Create customer orgs, register fleets, invite org admins, and monitor every deployment — all from a single multi-org view under your brand.",
+    features: [
+      "Partner role — dedicated /partner portal, separate from admin and org_admin",
+      "Create and manage unlimited customer orgs from one dashboard",
+      "Per-org stats: device count, online count, anomalies, last activity",
+      "Invite org admin to any customer org via email",
+      "White-label each org independently — logo, color, domain per customer",
+      "API and SDK access scoped per org — customers only see their own data",
+    ],
+    code: `// Create a partner account (super admin):
+POST /partners  { name, slug, contact_email, plan }
+
+// Create a customer org under this partner:
+POST /partners/:id/orgs
+{
+  "name":    "Acme Manufacturing",
+  "slug":    "acme-manufacturing",
+  "product": "EC-CLIMATE-V1",
+  "plan":    "pro"
+}
+
+// Aggregate stats across all customer orgs:
+GET /partners/:id/stats
+← { orgs: 12, total_devices: 847,
+    online_devices: 821, active_devices: 834 }`,
+  },
+  {
     id: "cli",
     tag: "CLI Tool",
     color: "indigo",
@@ -224,6 +288,8 @@ const colorMap: Record<string, { tag: string; border: string; code: string }> = 
   rose:   { tag: "text-rose-400 bg-rose-500/10 border-rose-500/25",   border: "border-rose-500/20",   code: "border-rose-500/15 bg-rose-500/5"   },
   orange: { tag: "text-orange-400 bg-orange-500/10 border-orange-500/25", border: "border-orange-500/20", code: "border-orange-500/15 bg-orange-500/5" },
   indigo: { tag: "text-indigo-400 bg-indigo-500/10 border-indigo-500/25", border: "border-indigo-500/20", code: "border-indigo-500/15 bg-indigo-500/5" },
+  red:    { tag: "text-red-400 bg-red-500/10 border-red-500/25",          border: "border-red-500/20",    code: "border-red-500/15 bg-red-500/5"     },
+  violet: { tag: "text-violet-400 bg-violet-500/10 border-violet-500/25", border: "border-violet-500/20", code: "border-violet-500/15 bg-violet-500/5" },
 };
 
 export default function PlatformPage() {
@@ -239,7 +305,7 @@ export default function PlatformPage() {
         </h1>
         <p className="text-white/45 text-base max-w-2xl mx-auto mb-8">
           Every feature built together — not stitched from five different services.
-          Device registry, telemetry, OTA, rules engine, dashboard builder, multi-tenant access, diagnostics, and a full CLI.
+          Device registry, telemetry, OTA, rules engine, anomaly detection, partner portal, dashboard builder, diagnostics, and CLI.
         </p>
         {/* Jump nav */}
         <div className="flex flex-wrap justify-center gap-2">

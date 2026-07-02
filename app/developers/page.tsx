@@ -55,9 +55,10 @@ const sdkMethods = [
     group: "telemetry",
     color: "green",
     methods: [
-      { name: "telemetry.push(serial, payload)",         ret: "Promise<{ok}>",     desc: "Push telemetry. Keys: temp, hum, co2, bat, signal, lat, lng, speed — any numeric field accepted." },
-      { name: "telemetry.history(serial, { hours, limit })", ret: "Promise<[]>",   desc: "Historical records oldest-first. hours: 1 | 6 | 24 | 168." },
-      { name: "telemetry.recent(serial, limit?)",        ret: "Promise<[]>",       desc: "Last N records newest-first. Default limit: 20." },
+      { name: "telemetry.push(serial, payload)",              ret: "Promise<{ok}>",    desc: "Push telemetry. Keys: temp, hum, co2, bat, signal, lat, lng, speed — any numeric field accepted." },
+      { name: "telemetry.history(serial, { hours, limit })",  ret: "Promise<[]>",      desc: "Historical records oldest-first. hours: 1 | 6 | 24 | 168." },
+      { name: "telemetry.recent(serial, limit?)",             ret: "Promise<[]>",      desc: "Last N records newest-first. Default limit: 20." },
+      { name: "telemetry.stream(serial, callback, { intervalMs })", ret: "{ stop() }", desc: "Live stream — polls every intervalMs, calls callback only when payload changes. Returns stop handle." },
     ],
   },
   {
@@ -86,6 +87,40 @@ const sdkMethods = [
     color: "gray",
     methods: [
       { name: "audit.list(orgId, { limit? })",  ret: "Promise<Event[]>",  desc: "Last N audit events. Actions: rule_fired, device_offline, ota_pushed, config_pushed." },
+    ],
+  },
+  {
+    group: "notifications",
+    color: "blue",
+    methods: [
+      { name: "notifications.list(orgId)",            ret: "Promise<Notification[]>", desc: "In-app notifications for an org — device offline, anomalies, firmware updates." },
+      { name: "notifications.markRead(id)",           ret: "Promise<Notification>",   desc: "Mark a single notification as read." },
+      { name: "notifications.markAllRead(orgId)",     ret: "Promise<object>",         desc: "Mark all notifications as read for the org." },
+    ],
+  },
+  {
+    group: "anomalies",
+    color: "purple",
+    methods: [
+      { name: "anomalies.list(orgId, { limit?, unacked? })", ret: "Promise<Anomaly[]>", desc: "List anomaly events. Pass unacked: true to get only unacknowledged alerts." },
+      { name: "anomalies.acknowledge(anomalyId)",            ret: "Promise<Anomaly>",   desc: "Acknowledge (dismiss) an anomaly event from the panel." },
+    ],
+  },
+  {
+    group: "firmware",
+    color: "green",
+    methods: [
+      { name: "firmware.list()",               ret: "Promise<Release[]>", desc: "List all firmware releases uploaded to the platform." },
+      { name: "firmware.push(serial, firmwareId)", ret: "Promise<object>", desc: "Push a specific firmware release to a device. Device must be registered." },
+    ],
+  },
+  {
+    group: "apiKeys",
+    color: "yellow",
+    methods: [
+      { name: "apiKeys.generate(orgId, name)", ret: "Promise<{ key }>",    desc: "Generate a new API key. Raw key returned once — store it securely." },
+      { name: "apiKeys.list(orgId)",           ret: "Promise<Key[]>",      desc: "List API keys (prefix + metadata — raw key never returned after creation)." },
+      { name: "apiKeys.revoke(keyId)",         ret: "Promise<object>",     desc: "Revoke a key permanently. Any SDK requests using it will return 401." },
     ],
   },
 ];
@@ -296,7 +331,7 @@ export default function DevelopersPage() {
       <section className="px-4 md:px-8 pb-20 max-w-6xl mx-auto">
         <div className="flex items-center gap-3 mb-7">
           <h2 className="text-2xl font-bold">SDK Reference</h2>
-          <span className="text-xs text-white/30 font-mono border border-white/10 px-2.5 py-1 rounded-full">v0.1.0</span>
+          <span className="text-xs text-white/30 font-mono border border-white/10 px-2.5 py-1 rounded-full">v0.2.0</span>
         </div>
         <div className="space-y-5">
           {sdkMethods.map(group => (

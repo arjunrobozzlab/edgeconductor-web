@@ -73,14 +73,14 @@ const howItWorks = [
 ];
 
 const included = [
-  { icon: "◈", label: "White-label branding", desc: "Logo, colors, org name" },
-  { icon: "▣", label: "Multi-client management", desc: "One super admin, all orgs" },
-  { icon: "□", label: "REST API + SDK", desc: "JS and Python, open" },
-  { icon: "↑", label: "OTA campaigns", desc: "Push firmware to fleet" },
-  { icon: "⚡", label: "Rules engine", desc: "Threshold + schedule automation" },
-  { icon: "◎", label: "Diagnostics", desc: "Battery, signal, crash, uptime" },
-  { icon: "⬡", label: "Dashboard builder", desc: "Drag-drop control widgets" },
-  { icon: "✦", label: "Audit logs", desc: "Full event trail per org" },
+  { icon: "◈", label: "White-label branding",    desc: "Logo, colors, org name" },
+  { icon: "▣", label: "Partner Portal",          desc: "Manage all customer orgs in one view", highlight: true },
+  { icon: "□", label: "REST API + SDK + CLI",    desc: "JS, Python, and ec CLI" },
+  { icon: "↑", label: "OTA campaigns",           desc: "Push firmware to fleet" },
+  { icon: "⚡", label: "Rules engine",            desc: "Threshold + schedule automation" },
+  { icon: "◎", label: "Anomaly Detection",       desc: "Auto-detects spikes before thresholds fire", highlight: true },
+  { icon: "⬡", label: "Dashboard builder",       desc: "Drag-drop control widgets" },
+  { icon: "✦", label: "Diagnostics + Audit",     desc: "Battery, signal, crash, full event trail" },
 ];
 
 export default function PartnersPage() {
@@ -157,12 +157,75 @@ export default function PartnersPage() {
           </div>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
             {included.map(f => (
-              <div key={f.label} className="bg-white/3 border border-white/8 rounded-xl p-4 hover:border-white/15 transition">
+              <div key={f.label} className={`border rounded-xl p-4 hover:border-white/20 transition ${
+                (f as any).highlight
+                  ? "bg-violet-500/8 border-violet-500/25"
+                  : "bg-white/3 border-white/8"
+              }`}>
                 <span className="text-xl text-white/40 block mb-2">{f.icon}</span>
-                <p className="text-sm font-semibold text-white/75 mb-0.5">{f.label}</p>
+                <p className={`text-sm font-semibold mb-0.5 ${(f as any).highlight ? "text-violet-300" : "text-white/75"}`}>{f.label}</p>
                 <p className="text-xs text-white/30">{f.desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Partner Portal callout */}
+      <section className="px-4 md:px-8 py-16 max-w-7xl mx-auto">
+        <div className="bg-gradient-to-br from-violet-500/10 to-purple-500/6 border border-violet-500/20 rounded-2xl p-8 md:p-10 grid md:grid-cols-2 gap-8 items-center">
+          <div>
+            <span className="text-xs font-semibold tracking-widest text-violet-400 uppercase border border-violet-500/30 px-3 py-1 rounded-full">New</span>
+            <h2 className="text-2xl md:text-3xl font-bold mt-4 mb-3">Partner Portal — one dashboard for all your customers</h2>
+            <p className="text-white/50 text-sm leading-relaxed mb-5">
+              Partners get a dedicated multi-org portal. See all your customer deployments, device counts, and live anomalies at a glance. Create new customer orgs in seconds, invite their admins, and drill into any deployment without switching accounts.
+            </p>
+            <ul className="space-y-2.5">
+              {[
+                "Aggregate view: total devices, online %, active anomalies across all customers",
+                "Create customer orgs + invite org admins — full white-labeled onboarding",
+                "Drill into any customer org — live devices, anomaly alerts, last seen",
+                "All under your brand — customers see your logo and colors, not ours",
+              ].map(f => (
+                <li key={f} className="flex items-start gap-2 text-sm text-white/55">
+                  <span className="text-violet-400 mt-0.5 shrink-0">✓</span>
+                  {f}
+                </li>
+              ))}
+            </ul>
+          </div>
+          {/* Terminal mockup */}
+          <div className="bg-black/50 border border-violet-500/20 rounded-2xl overflow-hidden">
+            <div className="flex items-center gap-1.5 px-4 py-3 border-b border-violet-500/15 bg-violet-500/5">
+              <span className="w-2.5 h-2.5 rounded-full bg-white/10" />
+              <span className="w-2.5 h-2.5 rounded-full bg-white/10" />
+              <span className="w-2.5 h-2.5 rounded-full bg-white/10" />
+              <span className="text-xs text-white/25 ml-2 font-mono">Partner Portal — /partner</span>
+            </div>
+            <div className="p-5 space-y-3 text-xs font-mono">
+              <div className="flex justify-between text-white/40 pb-2 border-b border-white/8">
+                <span>Customer Orgs</span><span className="text-violet-300 font-semibold">12</span>
+              </div>
+              {[
+                { name: "Germany Climate GmbH",    devices: 24, online: 23, status: "green" },
+                { name: "DPS Schools Network",     devices: 8,  online: 8,  status: "green" },
+                { name: "Acme Manufacturing Ltd",  devices: 52, online: 49, status: "yellow" },
+                { name: "Nordic Cold Chain Co.",   devices: 16, online: 16, status: "green" },
+              ].map(c => (
+                <div key={c.name} className="flex items-center justify-between">
+                  <span className="text-white/60 truncate mr-4">{c.name}</span>
+                  <div className="flex items-center gap-3 shrink-0">
+                    <span className="text-white/35">{c.devices} dev</span>
+                    <span className={c.status === "green" ? "text-green-400" : "text-yellow-400"}>
+                      {c.online} online
+                    </span>
+                  </div>
+                </div>
+              ))}
+              <div className="pt-2 border-t border-white/8 text-white/25">
+                ⚠ 2 anomalies across fleet
+              </div>
+            </div>
           </div>
         </div>
       </section>
