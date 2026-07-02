@@ -50,7 +50,7 @@ const capabilities = [
   {
     icon: "□",
     title: "Integrate with Anything",
-    desc: "JS SDK (npm), Python SDK (pip), REST API, MQTT, webhooks. Connect your own backend, n8n, Make.com, or any existing system. Open and programmable.",
+    desc: "JS SDK (npm), Python SDK (pip), REST API, MQTT, webhooks, and a full CLI (ec). Automate OTA from CI/CD, run factory provisioning from the terminal, or connect any backend. Open and programmable.",
     color: "rose",
   },
   {
@@ -337,7 +337,7 @@ export default function Home() {
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
               {[
                 "Device Registry", "Live Telemetry", "OTA Updates", "Remote Control",
-                "Rules Engine", "Multi-Tenant B2B", "White-Label", "SDK + REST API",
+                "Rules Engine", "Multi-Tenant B2B", "White-Label", "SDK + REST API + CLI",
               ].map(s => (
                 <div key={s} className="bg-blue-500/10 border border-blue-500/15 rounded-lg px-3 py-2 text-center">
                   <p className="text-xs text-blue-300/65 font-medium">{s}</p>

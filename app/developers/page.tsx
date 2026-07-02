@@ -6,7 +6,7 @@ import LangSwitcher from "./LangSwitcher";
 
 export const metadata: Metadata = {
   title: "Developers — EdgeConductor",
-  description: "Official JS + Python SDKs, REST API reference, MQTT topics, and ESP32 libraries for the EdgeConductor IoT platform.",
+  description: "Official JS + Python SDKs, REST API reference, MQTT topics, ESP32 libraries, and ec CLI for the EdgeConductor IoT platform.",
 };
 
 const methodColor: Record<string, string> = {
@@ -108,6 +108,82 @@ const errors = [
   { code: "500", title: "Server Error",  desc: "Internal error — contact support if persistent." },
 ];
 
+const cliGroups = [
+  {
+    group: "auth",
+    label: "ec login / whoami / logout",
+    colorClass: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
+    desc: "Authentication",
+    commands:
+`ec login          # save API key + registry URL → ~/.ec/config.json
+ec whoami         # show current login
+ec logout         # remove saved credentials`,
+  },
+  {
+    group: "device",
+    label: "ec device",
+    colorClass: "text-blue-400 bg-blue-500/8 border-blue-500/20",
+    desc: "Fleet management",
+    commands:
+`ec device list                              # list all devices
+ec device list --org <org_id>              # filter by org
+ec device create EC-TRACK-001 tracker      # register a device
+ec device get EC-TRACK-001                 # device info + shadow state
+ec device shadow EC-TRACK-001 relay true   # push to shadow_desired via MQTT
+ec device reboot EC-TRACK-001              # remote reboot
+ec device delete EC-TRACK-001              # delete (--force if active)`,
+  },
+  {
+    group: "telemetry",
+    label: "ec telemetry",
+    colorClass: "text-cyan-400 bg-cyan-500/8 border-cyan-500/20",
+    desc: "Live + historical data",
+    commands:
+`ec telemetry watch EC-TRACK-001            # stream live telemetry (every 5s)
+ec telemetry watch EC-TRACK-001 -i 10     # custom poll interval (seconds)
+ec telemetry get EC-TRACK-001 -n 20       # last 20 records
+ec telemetry get EC-TRACK-001 --hours 2   # last 2 hours`,
+  },
+  {
+    group: "ota",
+    label: "ec ota",
+    colorClass: "text-yellow-400 bg-yellow-500/8 border-yellow-500/20",
+    desc: "Firmware updates",
+    commands:
+`ec ota upload ./firmware.bin --version 2.1.4 --type tracker
+# → uploads binary, caches to ~/.ec/last_upload.json
+
+ec ota push --serial EC-TRACK-001         # push to one device
+ec ota push --type tracker                # push to all trackers
+
+ec ota jobs                               # list recent OTA jobs
+ec ota job 12                             # status + progress of job #12`,
+  },
+  {
+    group: "manufacture",
+    label: "ec manufacture",
+    colorClass: "text-purple-400 bg-purple-500/8 border-purple-500/20",
+    desc: "Factory provisioning",
+    commands:
+`ec manufacture 50 --prefix EC-TRACK --type tracker
+# → registers EC-TRACK-00001 to EC-TRACK-00050
+# → manufacture_output/manufacture_EC-TRACK_<ts>.csv
+# → manufacture_output/qr_EC-TRACK_<ts>/EC-TRACK-00001.png  (per device)
+
+ec manufacture 10 --prefix EC-TRACK --type tracker --start 100   # continue batch
+ec manufacture 20 --prefix EC-CLIM --type climate --claim-url https://portal.co/claim`,
+  },
+  {
+    group: "org",
+    label: "ec org",
+    colorClass: "text-white/50 bg-white/5 border-white/15",
+    desc: "Organizations",
+    commands:
+`ec org list
+ec org create "Acme Corp"`,
+  },
+];
+
 export default function DevelopersPage() {
   return (
     <main className="min-h-screen bg-[#0a0a0a] text-white">
@@ -138,11 +214,54 @@ export default function DevelopersPage() {
               <span className="text-white/50 font-mono">edgeconductor</span>
               <span className="text-white/20 text-xs">↗</span>
             </a>
+            <div className="flex items-center gap-2 px-4 py-2 rounded-xl border border-emerald-500/20 bg-emerald-500/5 text-sm">
+              <span className="text-emerald-400 font-semibold text-xs">CLI</span>
+              <span className="text-white/50 font-mono">@edgeconductor/cli</span>
+            </div>
           </div>
         </div>
 
         {/* Language switcher */}
         <LangSwitcher />
+      </section>
+
+      {/* ── CLI ───────────────────────────────────────────────── */}
+      <section className="px-4 md:px-8 pb-20 max-w-6xl mx-auto">
+        <div className="flex items-center gap-3 mb-2">
+          <h2 className="text-2xl font-bold">CLI — <code className="font-mono text-white/35 text-xl">ec</code></h2>
+          <span className="text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/25 px-2.5 py-1 rounded-full font-semibold">v0.1.0</span>
+        </div>
+        <p className="text-white/35 text-sm mb-7 max-w-2xl">
+          Manage devices, push OTA firmware, stream live telemetry, and provision factory batches — all from the terminal.
+          Designed for CI/CD pipelines, factory floors, and engineers who prefer the command line.
+        </p>
+
+        {/* Install strip */}
+        <div className="grid sm:grid-cols-2 gap-4 mb-7">
+          <div className="bg-black/50 border border-white/10 rounded-xl px-5 py-4">
+            <p className="text-xs text-white/20 uppercase tracking-wider mb-3">Install</p>
+            <pre className="text-sm font-mono text-emerald-400">npm install -g @edgeconductor/cli</pre>
+          </div>
+          <div className="bg-black/50 border border-white/10 rounded-xl px-5 py-4">
+            <p className="text-xs text-white/20 uppercase tracking-wider mb-3">Authenticate</p>
+            <pre className="text-sm font-mono"><span className="text-white/60">ec login</span><span className="text-white/25">   # saves ~/.ec/config.json</span></pre>
+          </div>
+        </div>
+
+        {/* Command groups */}
+        <div className="space-y-3">
+          {cliGroups.map(grp => (
+            <div key={grp.group} className="bg-white/2 border border-white/8 rounded-2xl overflow-hidden">
+              <div className="px-5 py-3 border-b border-white/8 flex items-center gap-3">
+                <span className={`text-xs font-mono font-semibold px-2.5 py-1 rounded-full border ${grp.colorClass}`}>
+                  {grp.label}
+                </span>
+                <span className="text-xs text-white/25">{grp.desc}</span>
+              </div>
+              <pre className="px-5 py-4 text-xs font-mono text-white/50 leading-6 overflow-x-auto">{grp.commands}</pre>
+            </div>
+          ))}
+        </div>
       </section>
 
       {/* ── Authentication ─────────────────────────────────────── */}

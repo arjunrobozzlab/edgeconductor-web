@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 
 export const metadata: Metadata = {
   title: "Platform — EdgeConductor",
-  description: "Six production-grade capabilities: device registry, live telemetry, OTA firmware, scheduled rules, webhook alerts, and multi-tenant B2B access.",
+  description: "Production-grade capabilities: device registry, live telemetry, OTA firmware, rules engine, dashboard builder, multi-tenant B2B access, and a full CLI tool.",
 };
 
 const sections = [
@@ -184,6 +184,35 @@ shadow_reported.relay = true  ← green dot on toggle`,
   "ttff":          17.4
 }`,
   },
+  {
+    id: "cli",
+    tag: "CLI Tool",
+    color: "indigo",
+    title: "Manage your entire fleet from the terminal",
+    desc: "The ec CLI brings device management, OTA firmware pushes, live telemetry streaming, and factory provisioning to your command line. Fully scriptable — works in CI/CD, factory floors, and headless environments.",
+    features: [
+      "ec device list / create / shadow / reboot — complete fleet control without opening a browser",
+      "ec telemetry watch — stream live sensor data in terminal, updated every 5 seconds",
+      "ec ota upload + push — upload .bin, then push to one device or entire product type fleet",
+      "ec manufacture 500 — bulk-register up to 500 devices, generates QR PNGs and CSV in one command",
+      "ec login stores credentials in ~/.ec/config.json — works cleanly in CI/CD via env vars",
+      "Chain commands: upload on merge → push on release tag — fully automated OTA pipeline",
+    ],
+    code: `# Factory floor: register 50 tracker devices
+$ ec manufacture 50 --prefix EC-TRACK --type tracker
+  ✓ EC-TRACK-00001   QR saved
+  ✓ EC-TRACK-00002   QR saved
+  ...
+  50 device(s) registered
+  CSV: manufacture_output/manufacture_EC-TRACK_2026-07-02.csv
+  QR:  manufacture_output/qr_EC-TRACK_2026-07-02/ (50 files)
+
+# CI/CD: push new firmware to all trackers on release
+$ ec ota upload ./tracker_v2.1.4.bin --version 2.1.4 --type tracker
+$ ec ota push --type tracker
+  ✓ OTA triggered — Job #12
+  Devices : 50 targeted`,
+  },
 ];
 
 const colorMap: Record<string, { tag: string; border: string; code: string }> = {
@@ -194,6 +223,7 @@ const colorMap: Record<string, { tag: string; border: string; code: string }> = 
   purple: { tag: "text-purple-400 bg-purple-500/10 border-purple-500/25", border: "border-purple-500/20", code: "border-purple-500/15 bg-purple-500/5" },
   rose:   { tag: "text-rose-400 bg-rose-500/10 border-rose-500/25",   border: "border-rose-500/20",   code: "border-rose-500/15 bg-rose-500/5"   },
   orange: { tag: "text-orange-400 bg-orange-500/10 border-orange-500/25", border: "border-orange-500/20", code: "border-orange-500/15 bg-orange-500/5" },
+  indigo: { tag: "text-indigo-400 bg-indigo-500/10 border-indigo-500/25", border: "border-indigo-500/20", code: "border-indigo-500/15 bg-indigo-500/5" },
 };
 
 export default function PlatformPage() {
@@ -209,7 +239,7 @@ export default function PlatformPage() {
         </h1>
         <p className="text-white/45 text-base max-w-2xl mx-auto mb-8">
           Every feature built together — not stitched from five different services.
-          Device registry, telemetry, OTA, rules engine, dashboard builder, multi-tenant access, and full diagnostics.
+          Device registry, telemetry, OTA, rules engine, dashboard builder, multi-tenant access, diagnostics, and a full CLI.
         </p>
         {/* Jump nav */}
         <div className="flex flex-wrap justify-center gap-2">
