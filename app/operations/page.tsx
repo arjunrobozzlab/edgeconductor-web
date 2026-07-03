@@ -350,30 +350,35 @@ export default function OperationsPage() {
               id: "fleet",
               label: "Fleet Operations",
               color: "amber",
+              sentence: "Manage vehicles, drivers and compliance from a single platform.",
               entities: ["Vehicles", "Drivers", "Trips", "Maintenance", "Compliance"],
             },
             {
               id: "building",
               label: "Building Operations",
               color: "cyan",
+              sentence: "Operate buildings, HVAC and tenant environments remotely.",
               entities: ["Buildings", "Rooms", "Tenants", "HVAC", "Energy", "Maintenance"],
             },
             {
               id: "device",
               label: "Device Operations",
               color: "blue",
+              sentence: "Deploy and maintain thousands of connected devices remotely.",
               entities: ["Manufacture", "Deploy", "Operate", "Maintain", "Upgrade", "Retire"],
             },
             {
               id: "asset",
               label: "Asset Operations",
               color: "orange",
+              sentence: "Track, monitor and optimize physical assets throughout their lifecycle.",
               entities: ["Asset", "Location", "Health", "Configuration", "Lifecycle", "Optimization"],
             },
             {
               id: "customer",
               label: "Customer Operations",
               color: "violet",
+              sentence: "Operate customers, partners and white-label businesses at scale.",
               entities: ["Organizations", "Partners", "White Label", "Users", "Permissions", "Support", "Billing"],
             },
           ].map(card => {
@@ -381,9 +386,10 @@ export default function OperationsPage() {
             return (
               <a key={card.id} href={`#${card.id}`}
                 className={`group bg-white/2 border ${c.border} hover:bg-white/4 hover:border-opacity-50 rounded-2xl p-5 transition flex flex-col`}>
-                <span className={`text-xs font-semibold uppercase tracking-wider border px-2.5 py-1 rounded-full w-fit mb-4 ${c.tag}`}>
+                <span className={`text-xs font-semibold uppercase tracking-wider border px-2.5 py-1 rounded-full w-fit mb-3 ${c.tag}`}>
                   {card.label}
                 </span>
+                <p className="text-xs text-white/40 leading-relaxed mb-4">{card.sentence}</p>
                 <ul className="space-y-1.5 flex-1">
                   {card.entities.map(e => (
                     <li key={e} className="flex items-center gap-2 text-sm text-white/45 group-hover:text-white/55 transition">
