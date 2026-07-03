@@ -530,13 +530,11 @@ export default function Home() {
             <div>
               <span className="text-xs font-semibold tracking-widest text-white/30 uppercase">Operations</span>
               <h2 className="text-2xl md:text-3xl font-bold mt-3 mb-3">
-                Capabilities are the engine.<br />
-                <span className="text-white/40">Operations are what it runs.</span>
+                Running a fleet?<br />
+                <span className="text-white/40">Buildings? Assets? Clients?</span>
               </h2>
               <p className="text-white/40 text-sm leading-relaxed mb-6">
-                Enterprise customers don&apos;t buy &ldquo;MQTT&rdquo; or &ldquo;OTA&rdquo;.
-                They buy Fleet Operations, Building Operations, and Asset Operations.
-                See how EdgeConductor powers each.
+                Pick your operation. EdgeConductor connects your vehicles, buildings, machines, and client orgs — and manages them from one platform, under your brand.
               </p>
               <Link href="/operations"
                 className="inline-flex items-center gap-2 border border-white/20 text-white/60 hover:text-white hover:border-white/40 text-sm px-5 py-2.5 rounded-full transition">

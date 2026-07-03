@@ -39,7 +39,7 @@ const operations: Operation[] = [
     color: "blue",
     number: "01",
     headline: "Manage your product lifecycle from factory floor to retirement",
-    sub: "Every product you ship goes through the same lifecycle. Device Operations gives you one system to manage every stage — so nothing falls through the cracks between manufacture and the field.",
+    sub: "Every product your team manufactures goes through the same stages. Device Operations manages each one — so nothing falls through the cracks between the factory floor and the customer's hands.",
     flow: ["Manufacture", "Deploy", "Operate", "Maintain", "Upgrade", "Retire"],
     outcomes: [
       {
@@ -69,7 +69,7 @@ const operations: Operation[] = [
     color: "amber",
     number: "02",
     headline: "Manage your entire transport operation from one view",
-    sub: "Fleet managers don't think in GPS pings. They think in vehicles, drivers, trips, and compliance. Fleet Operations is built around how your operations team actually works.",
+    sub: "You manage vehicles. Your drivers need to be on route. Your maintenance can't fall behind. Your compliance needs to be documented. Fleet Operations puts all of that in one connected view — without switching between five different tools.",
     entities: ["Vehicles", "Drivers", "Trips", "Maintenance", "Compliance"],
     outcomes: [
       {
@@ -99,7 +99,7 @@ const operations: Operation[] = [
     color: "cyan",
     number: "03",
     headline: "Manage every building, room, and tenant from one platform",
-    sub: "Facilities managers don't think in sensor protocols. They think in buildings, rooms, tenants, and energy bills. Building Operations organizes your data the way your team actually manages properties.",
+    sub: "You manage buildings and the people inside them. HVAC needs to respond before tenants complain. Energy needs to be tracked before the bill arrives. Building Operations connects your spaces, automates the routine, and lets tenants self-serve — without you managing it manually.",
     entities: ["Buildings", "Rooms", "Tenants", "HVAC", "Energy", "Maintenance"],
     outcomes: [
       {
@@ -129,7 +129,7 @@ const operations: Operation[] = [
     color: "orange",
     number: "04",
     headline: "One complete record per asset — from first power-on to last shutdown",
-    sub: "Any physical thing that has a location, a health state, a configuration, and a lifecycle is an asset. Asset Operations gives every asset a full operational record — and connects them all in one system.",
+    sub: "If it has a location, a health state, and a maintenance history — it is an asset you are responsible for. Asset Operations gives every physical asset a live record, alerts you before something breaks, and logs every event for compliance.",
     chain: ["Asset", "Location", "Health", "Configuration", "Lifecycle", "Optimization"],
     assetTypes: ["Vehicle", "HVAC System", "Shipment", "Room", "Machine", "Sensor Node", "Gateway"],
     outcomes: [
@@ -160,7 +160,7 @@ const operations: Operation[] = [
     color: "violet",
     number: "05",
     headline: "Run your client business on this platform",
-    sub: "If you deploy to multiple clients, you're not just running IoT — you're running a business on top of IoT. Customer Operations gives you the tools to manage organizations, partners, users, permissions, and billing, all under your brand.",
+    sub: "You have clients. Each one has their own devices, users, and expectations. Customer Operations lets you manage every client from one place — their devices, their org, their permissions — all under your brand, with their data completely separate from everyone else's.",
     entities: ["Organizations", "Partners", "White Label", "Users", "Permissions", "Support", "Billing"],
     outcomes: [
       {
@@ -262,78 +262,93 @@ export default function OperationsPage() {
         <div className="max-w-3xl">
           <span className="text-xs font-semibold tracking-widest text-white/30 uppercase">Operations</span>
           <h1 className="text-4xl md:text-5xl font-bold mt-3 mb-5 leading-[1.1]">
-            Your customers don&apos;t buy<br />
-            <span className="text-white/30">connected devices.</span><br />
-            They buy connected operations.
+            Manage your fleet, your buildings,<br />
+            <span className="text-white/35">or your assets —</span><br />
+            from one platform.
           </h1>
           <p className="text-white/45 text-base leading-relaxed mb-8 max-w-2xl">
-            Every business that deploys hardware is running an operation —
-            fleet operations, building operations, asset operations, customer operations.
-            EdgeConductor is built to run those operations, not just store the telemetry.
+            Whether you run school buses, commercial buildings, cold chain shipments, or industrial equipment —
+            EdgeConductor gives your team live visibility, remote control, and automated alerts.
+            No infrastructure to build. No five tools to stitch together.
           </p>
           <div className="flex flex-wrap gap-3">
-            <Link href="/demo"
+            <Link href="/contact"
               className="inline-flex items-center gap-2 bg-white text-black text-sm font-semibold px-6 py-3 rounded-full hover:bg-white/90 transition">
-              See It Running →
+              Book a Demo →
             </Link>
-            <Link href="/platform"
+            <Link href="/demo"
               className="inline-flex items-center border border-white/20 text-white/60 hover:text-white hover:border-white/40 text-sm px-6 py-3 rounded-full transition">
-              Platform Capabilities
+              Try Live Demo
             </Link>
           </div>
         </div>
       </section>
 
-      {/* ── The Shift ─────────────────────────────────────────────────────── */}
+      {/* ── Does this sound like you? ─────────────────────────────────────── */}
       <section className="border-y border-white/8 bg-white/[0.015] px-4 md:px-8 py-16">
         <div className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12 items-start">
-
-            <div className="bg-white/3 border border-white/8 rounded-2xl p-7">
-              <p className="text-xs font-semibold text-white/25 uppercase tracking-widest mb-5">
-                What most IoT platforms sell
-              </p>
-              <div className="space-y-3">
-                {["Device Registry", "MQTT Telemetry", "OTA Firmware", "Rules Engine", "Dashboard Builder"].map(f => (
-                  <div key={f} className="flex items-center gap-3 text-white/35 text-sm">
-                    <span className="text-white/15">—</span>
-                    <span>{f}</span>
-                  </div>
-                ))}
-              </div>
-              <p className="text-white/20 text-xs mt-6 italic">
-                &ldquo;Interesting technology stack.&rdquo;
-                <br />
-                — every enterprise buyer who didn&apos;t convert
-              </p>
-            </div>
-
-            <div className="bg-white/3 border border-white/10 rounded-2xl p-7">
-              <p className="text-xs font-semibold text-white/50 uppercase tracking-widest mb-5">
-                What your customer actually buys
-              </p>
-              <div className="space-y-3">
-                {[
-                  { label: "Device Operations",   color: "text-blue-400",   sub: "Manufacture · Deploy · Operate · Upgrade · Retire" },
-                  { label: "Fleet Operations",    color: "text-amber-400",  sub: "Vehicles · Drivers · Trips · Maintenance · Compliance" },
-                  { label: "Building Operations", color: "text-cyan-400",   sub: "Buildings · Rooms · Tenants · HVAC · Energy · Maintenance" },
-                  { label: "Asset Operations",    color: "text-orange-400", sub: "Asset · Location · Health · Configuration · Lifecycle" },
-                  { label: "Customer Operations", color: "text-violet-400", sub: "Organizations · Partners · White Label · Users · Billing" },
-                ].map(o => (
-                  <div key={o.label} className="flex items-start gap-3">
-                    <span className={`text-base mt-0.5 shrink-0 ${o.color}`}>✓</span>
-                    <div>
-                      <span className={`text-sm font-medium ${o.color}`}>{o.label}</span>
-                      <span className="text-white/20 text-xs ml-2">{o.sub}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <p className="text-white/40 text-xs mt-6">
-                These are not features. They are what your customers pay for.
-                The platform capabilities are the engine. Operations are what it runs.
-              </p>
-            </div>
+          <p className="text-xs font-semibold text-white/30 uppercase tracking-widest mb-8">Does this sound like you?</p>
+          <div className="grid md:grid-cols-3 gap-5">
+            {[
+              {
+                color: "amber",
+                who: "You run a vehicle fleet",
+                pain: [
+                  "You don't know exactly where every vehicle is right now",
+                  "Maintenance is reactive — you fix it after it breaks",
+                  "Compliance documentation is done manually after the fact",
+                ],
+                fix: "Live location for every vehicle. Maintenance alerts before breakdowns. Compliance logs that write themselves.",
+                href: "#fleet",
+              },
+              {
+                color: "cyan",
+                who: "You manage buildings and tenants",
+                pain: [
+                  "Tenants call when HVAC fails — you find out last",
+                  "Energy bills arrive before you understand what caused them",
+                  "Maintenance requests fall through the cracks",
+                ],
+                fix: "Automated HVAC. Room-by-room environmental monitoring. Tenants self-serve via QR code.",
+                href: "#building",
+              },
+              {
+                color: "orange",
+                who: "You operate physical assets",
+                pain: [
+                  "Machines and equipment break without warning",
+                  "Configuration changes require someone on-site",
+                  "Health data lives in a spreadsheet no one updates",
+                ],
+                fix: "Anomaly detection catches issues early. Remote configuration. Every asset's health live on one screen.",
+                href: "#asset",
+              },
+            ].map(s => {
+              const cc: Record<string, string> = {
+                amber:  "border-amber-500/20 bg-amber-500/5 text-amber-400",
+                cyan:   "border-cyan-500/20 bg-cyan-500/5 text-cyan-400",
+                orange: "border-orange-500/20 bg-orange-500/5 text-orange-400",
+              };
+              return (
+                <a key={s.who} href={s.href}
+                  className="group bg-white/2 border border-white/8 hover:border-white/18 hover:bg-white/3 rounded-2xl p-6 transition flex flex-col">
+                  <span className={`text-xs font-semibold uppercase tracking-wider border px-2.5 py-1 rounded-full w-fit mb-4 ${cc[s.color]}`}>
+                    {s.who}
+                  </span>
+                  <ul className="space-y-2 mb-5 flex-1">
+                    {s.pain.map(p => (
+                      <li key={p} className="flex items-start gap-2 text-xs text-white/35">
+                        <span className="text-white/20 mt-0.5 shrink-0">✕</span>
+                        {p}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="text-xs text-white/55 leading-relaxed border-t border-white/8 pt-4">
+                    <span className="text-green-400">✓ </span>{s.fix}
+                  </p>
+                </a>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -341,8 +356,8 @@ export default function OperationsPage() {
       {/* ── Operation Cards — portfolio overview ─────────────────────────── */}
       <section className="px-4 md:px-8 py-16 max-w-7xl mx-auto">
         <div className="text-center mb-10">
-          <span className="text-xs font-semibold tracking-widest text-white/30 uppercase">Five operations. One platform.</span>
-          <h2 className="text-2xl font-bold mt-3">What EdgeConductor manages</h2>
+          <span className="text-xs font-semibold tracking-widest text-white/30 uppercase">Choose your operation</span>
+          <h2 className="text-2xl font-bold mt-3">What will you run?</h2>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
           {[
