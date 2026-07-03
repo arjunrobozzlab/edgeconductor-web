@@ -208,7 +208,7 @@ export default function PartnersPage() {
               </div>
               {[
                 { name: "Germany Climate GmbH",    devices: 24, online: 23, status: "green" },
-                { name: "DPS Schools Network",     devices: 8,  online: 8,  status: "green" },
+                { name: "City Schools Network",     devices: 8,  online: 8,  status: "green" },
                 { name: "Acme Manufacturing Ltd",  devices: 52, online: 49, status: "yellow" },
                 { name: "Nordic Cold Chain Co.",   devices: 16, online: 16, status: "green" },
               ].map(c => (

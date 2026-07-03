@@ -284,7 +284,7 @@ export default function Home() {
             Powering connected products at
           </p>
           <div className="flex flex-wrap items-center gap-6">
-            {["DPS School", "Germany Climate GmbH"].map(c => (
+            {["City Schools Network", "Nordic Climate GmbH"].map(c => (
               <span key={c} className="text-white/45 text-sm font-medium">{c}</span>
             ))}
             <span className="text-white/18 text-xs border border-white/8 px-3 py-1 rounded-full">
@@ -457,6 +457,46 @@ export default function Home() {
               <p className="text-white/38 text-xs leading-relaxed">{p.desc}</p>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* ── OPERATIONS TEASER ── */}
+      <section className="border-y border-white/8 bg-white/[0.015] px-4 md:px-8 py-16">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-10 items-center">
+            <div>
+              <span className="text-xs font-semibold tracking-widest text-white/30 uppercase">Operations</span>
+              <h2 className="text-2xl md:text-3xl font-bold mt-3 mb-3">
+                Capabilities are the engine.<br />
+                <span className="text-white/40">Operations are what it runs.</span>
+              </h2>
+              <p className="text-white/40 text-sm leading-relaxed mb-6">
+                Enterprise customers don&apos;t buy &ldquo;MQTT&rdquo; or &ldquo;OTA&rdquo;.
+                They buy Fleet Operations, Building Operations, and Asset Operations.
+                See how EdgeConductor powers each.
+              </p>
+              <Link href="/operations"
+                className="inline-flex items-center gap-2 border border-white/20 text-white/60 hover:text-white hover:border-white/40 text-sm px-5 py-2.5 rounded-full transition">
+                Explore Operations →
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 gap-2">
+              {[
+                { label: "Device Operations",   color: "text-blue-400",   desc: "Register · Provision · OTA · Diagnose · Retire" },
+                { label: "Fleet Operations",    color: "text-amber-400",  desc: "Track · Alert · Dispatch · Maintain" },
+                { label: "Building Operations", color: "text-cyan-400",   desc: "Monitor · Automate · Tenant Access · Report" },
+                { label: "Asset Operations",    color: "text-orange-400", desc: "Health · Config · Anomaly · Lifecycle" },
+                { label: "Customer Operations", color: "text-violet-400", desc: "Partner Portal · Multi-Org · White-Label" },
+              ].map(op => (
+                <Link key={op.label} href="/operations"
+                  className="flex items-center gap-4 bg-white/2 border border-white/8 hover:border-white/18 hover:bg-white/4 rounded-xl px-4 py-3 transition group">
+                  <span className={`text-sm font-semibold ${op.color} w-44 shrink-0`}>{op.label}</span>
+                  <span className="text-xs text-white/25 group-hover:text-white/40 transition hidden sm:block">{op.desc}</span>
+                  <span className={`ml-auto ${op.color} opacity-40 group-hover:opacity-80 transition text-sm`}>→</span>
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
