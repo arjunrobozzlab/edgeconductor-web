@@ -32,9 +32,8 @@ export default function IndustriesPage() {
           One platform. Every connected asset industry.
         </h1>
         <p className="text-white/45 text-base md:text-lg max-w-2xl mx-auto mb-8">
-          EdgeConductor&apos;s platform core — device registry, live telemetry, OTA, rules engine, multi-tenant B2B — is
-          industry-agnostic. The same infrastructure powers fleet management, cold chain pharma, industrial monitoring,
-          healthcare assets, and energy utilities.
+          The same platform powers fleet operators, building managers, cold chain teams, industrial facilities, and healthcare assets.
+          Pick your industry — your operation runs on the same core.
         </p>
         <div className="flex flex-wrap justify-center gap-2">
           {industries.map((ind) => (

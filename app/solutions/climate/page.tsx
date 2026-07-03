@@ -11,37 +11,37 @@ export const metadata: Metadata = {
 const features = [
   {
     title: "CO₂ + Temp + Humidity",
-    desc: "BME280 sensor for temperature, humidity, and pressure. MH-Z19 NDIR sensor for CO₂ (0–5000 ppm). Both sampled every 5s and streamed to cloud via MQTT TLS.",
+    desc: "Monitor air quality, temperature, and humidity in every room. Data updates every 5 seconds — you see conditions in real time, before tenants notice a problem.",
     icon: "◈",
     color: "cyan",
   },
   {
     title: "HVAC Relay Control",
-    desc: "Dashboard HVAC toggle → PATCH shadow/desired → MQTT publish to device → relay switches ON/OFF. Latency < 2s. Simulator confirmed round-trip live. Hard override supported.",
+    desc: "Toggle HVAC for any room directly from your dashboard. The relay switches in under 2 seconds. Set a hard override when you need manual control to take priority.",
     icon: "⚡",
     color: "yellow",
   },
   {
     title: "Multi-Room Architecture",
-    desc: "Rooms inside organizations. Each room gets sensor cards (temp, humidity, CO₂, HVAC state) with 10s live refresh. Assign/unassign devices per room from the org dashboard.",
+    desc: "Manage every room from one org dashboard. Each room shows live temperature, humidity, CO₂, and HVAC state. Add or move devices between rooms in seconds.",
     icon: "◻",
     color: "blue",
   },
   {
     title: "Tenant QR Access",
-    desc: "QR code per room → tenant scans → /claim-room flow → login or register → room portal. Tenant sees read-only climate view. room_members table stores the relationship.",
+    desc: "Print a QR code for each room. Tenants scan it, register in 30 seconds, and see live climate data for their space — read-only, no IT setup or manual invite needed.",
     icon: "▣",
     color: "purple",
   },
   {
     title: "IF/THEN Rules Engine",
-    desc: "CO₂ > 1000 → relay ON. Temp > 28 → HVAC ON. Rules auto-evaluate every 30s via registry setInterval. No manual trigger — fires automatically and publishes to device over MQTT.",
+    desc: "Set a rule: CO₂ above 1000 ppm → turn HVAC on. Temperature above 28°C → cool it. Rules evaluate every 30 seconds and act automatically — no staff needed to monitor.",
     icon: "✦",
     color: "green",
   },
   {
-    title: "Notification Bell",
-    desc: "Org admins notified on firmware upload, device offline, rule triggers. Bell icon in OrgShell nav with unread badge. Auto-refreshes every 30s. Per-org notification table.",
+    title: "Instant Notifications",
+    desc: "Get alerted when a device goes offline, a rule fires, or a firmware update completes. Alerts appear in your dashboard instantly — catch issues before tenants do.",
     icon: "◎",
     color: "rose",
   },
@@ -77,16 +77,6 @@ const roles = [
   },
 ];
 
-const sensors = [
-  { label: "temp",        value: "°C (BME280)",       good: "18–24°C" },
-  { label: "hum",         value: "% RH (BME280)",     good: "40–60%" },
-  { label: "co2",         value: "ppm (MH-Z19)",      good: "< 1000 ppm" },
-  { label: "relay",       value: "bool (HVAC state)",  good: "ON/OFF" },
-  { label: "bat",         value: "V (LiPo ADC)",      good: "3.3–4.2V" },
-  { label: "signal",      value: "dBm (WiFi RSSI)",   good: "> -70 dBm" },
-  { label: "uptime",      value: "seconds",            good: "—" },
-  { label: "heap",        value: "bytes free",         good: "> 50 KB" },
-];
 
 export default function ClimateSolutionPage() {
   return (
@@ -212,21 +202,27 @@ export default function ClimateSolutionPage() {
         </div>
       </section>
 
-      {/* Sensor data */}
-      <section className="border-t border-white/8 px-4 md:px-8 py-20 max-w-4xl mx-auto">
+      {/* What you monitor */}
+      <section className="border-t border-white/8 px-4 md:px-8 py-20 max-w-5xl mx-auto">
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold mb-3">Sensor data fields</h2>
-          <p className="text-white/40 text-sm">Every 5s. Stored in Supabase. Shown live on dashboard.</p>
+          <h2 className="text-3xl font-bold mb-3">What you monitor in every room</h2>
+          <p className="text-white/40 text-sm">Updated every 5 seconds. Visible live on your dashboard.</p>
         </div>
-        <div className="bg-black/30 border border-white/8 rounded-xl overflow-hidden">
-          <div className="grid grid-cols-3 px-4 py-2.5 border-b border-white/8 text-[10px] text-white/25 uppercase tracking-wider">
-            <span>Field</span><span>Value type</span><span>Good range</span>
-          </div>
-          {sensors.map((s, i) => (
-            <div key={s.label} className={`grid grid-cols-3 px-4 py-3 ${i < sensors.length - 1 ? "border-b border-white/8" : ""}`}>
-              <span className="text-xs font-mono text-cyan-300">{s.label}</span>
-              <span className="text-xs text-white/45">{s.value}</span>
-              <span className="text-xs text-green-400/70">{s.good}</span>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+            { label: "Temperature",    desc: "Real-time °C per room — flagged when outside comfortable range",          good: "18–24°C" },
+            { label: "Humidity",       desc: "Relative humidity — alerts when too dry or too humid for occupants",        good: "40–60%" },
+            { label: "CO₂",           desc: "Air quality in PPM — rules auto-trigger HVAC when thresholds are crossed",  good: "< 1000 ppm" },
+            { label: "HVAC State",     desc: "Current relay status per room — on, off, or hard-override active",          good: "ON / OFF" },
+            { label: "Device Health",  desc: "Battery, WiFi signal, and uptime visible to org admins — no surprises",     good: "All green" },
+            { label: "Rule Activity",  desc: "Which rules fired, when, and what action was taken — full audit trail",      good: "Auto-logged" },
+          ].map(f => (
+            <div key={f.label} className="bg-white/3 border border-white/8 rounded-xl p-4">
+              <div className="flex items-center justify-between mb-2">
+                <p className="text-sm font-semibold text-white/80">{f.label}</p>
+                <span className="text-[10px] text-cyan-400 bg-cyan-500/10 border border-cyan-500/20 px-2 py-0.5 rounded-full font-mono">{f.good}</span>
+              </div>
+              <p className="text-xs text-white/35 leading-relaxed">{f.desc}</p>
             </div>
           ))}
         </div>

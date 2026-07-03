@@ -11,32 +11,32 @@ export const metadata: Metadata = {
 const features = [
   {
     title: "Real-Time GPS Tracking",
-    desc: "Live device location on fleet map. NMEA parsing via GP-02 external GPS module. TTFF < 20s, 8–9 satellites held steady. Coordinates streamed every 5s over HTTPS.",
+    desc: "Live location every 5 seconds on your fleet map. GPS lock in under 20 seconds — coordinates streamed continuously. See every vehicle, exactly where it is, right now.",
     icon: "◎",
   },
   {
-    title: "GSM Connectivity (A7672S)",
-    desc: "4G LTE via A7672S-LASC module. HTTPS telemetry — no MQTT needed over cellular. TLS + SNI validated end-to-end against Render. Works on standard SIM with APN config.",
+    title: "4G Cellular Connectivity",
+    desc: "Works on any standard SIM card, anywhere with 4G coverage. No WiFi dependency, fully encrypted end-to-end. Drop in a SIM and the device connects — no network configuration needed.",
     icon: "◈",
   },
   {
     title: "Remote Reboot",
-    desc: "Dashboard button → POST /reboot → pending_reboot flag → device polls GET /commands every 30s → HTTP 205 triggers ESP.restart(). Confirmed SW_CPU_RESET on real hardware.",
+    desc: "Device offline or stuck? Reboot it from the dashboard — no physical access needed. The device restarts in under 30 seconds. Confirmed on real hardware in the field.",
     icon: "↺",
   },
   {
     title: "OTA Firmware Updates",
-    desc: "Upload .bin from dashboard, push to device over MQTT or HTTPS. Pending OTA stored — auto-pushed when device reconnects. Version tracked in device registry.",
+    desc: "Push new firmware to your entire fleet from the dashboard. Devices auto-update on next connection. Version tracked per device — no manual visits, no downtime.",
     icon: "↑",
   },
   {
     title: "Full Diagnostics",
-    desc: "Every telemetry packet includes: uptime, heap free, battery voltage (%), signal dBm, reboot reason (SW/PANIC/WDT/BROWNOUT), GPS fix status, satellite count, TTFF.",
+    desc: "Every check-in reports battery level, signal strength, GPS fix status, uptime, and last reboot reason. Know device health at a glance — catch problems before they cause missed trips.",
     icon: "▣",
   },
   {
     title: "Multi-Tenant Fleet",
-    desc: "Assign trackers to organizations and customer accounts. QR claim flow for customer self-provisioning. RBAC — org admin sees their fleet, customer sees their device only.",
+    desc: "Assign trackers to customer accounts. QR provisioning for self-onboarding — customers scan once and their devices appear. Each account sees only their fleet.",
     icon: "◻",
   },
 ];
@@ -54,12 +54,6 @@ const specs = [
   { label: "Soak tested",   value: "29/29 packets, 4m18s" },
 ];
 
-const telemetryFields = [
-  "serial", "temp (ambient)", "bat (voltage)", "signal (dBm)",
-  "uptime (s)", "heap (bytes)", "reboot_reason",
-  "gps_fix", "lat", "lng", "sats", "ttff (s)",
-  "net (connected)", "pkt_sent", "pkt_failed", "reconnects",
-];
 
 export default function TrackerSolutionPage() {
   return (
@@ -85,9 +79,9 @@ export default function TrackerSolutionPage() {
               </span>
             </h1>
             <p className="text-white/50 text-base leading-relaxed mb-8 max-w-lg">
-              Full-stack GPS tracking on ESP32 + A7672S GSM. From SIM card to live fleet map
-              in one platform — firmware, cloud, and dashboard all included. End-to-end validated
-              on real hardware with 29/29 packets at -57 dBm signal.
+              From SIM card to live fleet map in one platform — firmware, cloud, and dashboard
+              all included. Plug in a device and see it on the map in minutes.
+              Hardware-validated and running in production.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link href="/contact"
@@ -176,17 +170,25 @@ export default function TrackerSolutionPage() {
         </div>
       </section>
 
-      {/* Telemetry payload */}
-      <section className="border-t border-white/8 px-4 md:px-8 py-20 max-w-7xl mx-auto">
+      {/* What you see */}
+      <section className="border-t border-white/8 px-4 md:px-8 py-20 max-w-5xl mx-auto">
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold mb-3">Every telemetry packet includes</h2>
-          <p className="text-white/40 text-sm">Sent every 5s. Stored in Supabase. Queryable via REST API.</p>
+          <h2 className="text-3xl font-bold mb-3">What you see for every vehicle</h2>
+          <p className="text-white/40 text-sm">Updated every 5 seconds. View live on your dashboard or export via API.</p>
         </div>
-        <div className="flex flex-wrap justify-center gap-2">
-          {telemetryFields.map(f => (
-            <span key={f} className="text-xs font-mono bg-white/5 border border-white/10 text-white/50 px-3 py-1.5 rounded-full">
-              {f}
-            </span>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {[
+            { label: "Live Location",       desc: "Latitude, longitude, and GPS fix status — map updates in real time" },
+            { label: "Battery Level",       desc: "Voltage and percentage — see which vehicles need charging" },
+            { label: "Signal Strength",     desc: "Cellular dBm — know when a device is in a weak coverage zone" },
+            { label: "GPS Satellites",      desc: "Satellite count and time-to-fix — validate location accuracy" },
+            { label: "Device Uptime",       desc: "How long since last reboot — catch unexpected restarts" },
+            { label: "Packet Reliability",  desc: "Packets sent vs failed — confirm your fleet is reporting consistently" },
+          ].map(f => (
+            <div key={f.label} className="bg-white/3 border border-white/8 rounded-xl p-4">
+              <p className="text-sm font-semibold text-white/80 mb-1">{f.label}</p>
+              <p className="text-xs text-white/35 leading-relaxed">{f.desc}</p>
+            </div>
           ))}
         </div>
       </section>

@@ -35,7 +35,7 @@ export const industries: Industry[] = [
       "Real-time GPS tracking, remote diagnostics, and OTA firmware — managed from one cloud dashboard. Built for school fleets, logistics operators, and hardware OEMs shipping fleet tracking products.",
     problemTitle: "The visibility gap that's costing you clients",
     problemSub:
-      "Most fleet operators discover problems after they happen — a missed delivery, a vehicle offline, a firmware bug discovered in the field. EdgeConductor closes the gap between your hardware and your operations team.",
+      "Most fleet operators discover problems after they happen — a missed delivery, a vehicle offline, a firmware bug found in the field. You shouldn't be the last to know.",
     painPoints: [
       {
         problem: "You don't know where your vehicles are right now",

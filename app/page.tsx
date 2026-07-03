@@ -472,8 +472,8 @@ export default function Home() {
                 The Connected Product Lifecycle
               </h2>
               <p className="text-white/45 text-sm leading-relaxed mb-4">
-                Most platforms cover one phase of this. A dashboard. An OTA service. A device registry.
                 EdgeConductor connects all ten stages — from the factory floor to scaled operations — in a single system.
+                Manufacture, register, ship, claim, operate, monitor, configure, update, diagnose, and scale.
               </p>
               <p className="text-white/28 text-sm leading-relaxed mb-8">
                 This lifecycle is the core of what EdgeConductor is. One platform. One API. One dashboard.
@@ -618,7 +618,7 @@ export default function Home() {
           <span className="text-xs font-semibold tracking-widest text-white/30 uppercase">Vertical Solutions</span>
           <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">Complete solutions for real product categories</h2>
           <p className="text-white/45 text-sm md:text-base max-w-xl mx-auto">
-            Not generic IoT infrastructure — complete, vertical solutions your team can deploy as-is or customize for your industry.
+            Complete, vertical solutions your team deploys as-is — or customizes for your specific operation.
           </p>
         </div>
 
