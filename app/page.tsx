@@ -460,6 +460,69 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── CONNECTED PRODUCT LIFECYCLE ── */}
+      <section className="border-y border-white/8 bg-white/[0.015] px-4 md:px-8 py-20 md:py-28">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-5 gap-12 md:gap-16 items-center">
+
+            {/* Left — context */}
+            <div className="md:col-span-2">
+              <span className="text-xs font-semibold tracking-widest text-white/30 uppercase">Core IP</span>
+              <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-5 leading-tight">
+                The Connected Product Lifecycle
+              </h2>
+              <p className="text-white/45 text-sm leading-relaxed mb-4">
+                Most platforms cover one phase of this. A dashboard. An OTA service. A device registry.
+                EdgeConductor connects all ten stages — from the factory floor to scaled operations — in a single system.
+              </p>
+              <p className="text-white/28 text-sm leading-relaxed mb-8">
+                This lifecycle is the core of what EdgeConductor is. One platform. One API. One dashboard.
+                Nothing falls between the cracks.
+              </p>
+              <Link href="/operations"
+                className="inline-flex items-center gap-2 border border-white/20 text-white/55 hover:text-white hover:border-white/40 text-sm px-5 py-2.5 rounded-full transition">
+                See Operations →
+              </Link>
+            </div>
+
+            {/* Right — lifecycle chain */}
+            <div className="md:col-span-3 flex justify-center md:justify-end">
+              <div className="inline-flex flex-col items-start">
+                {[
+                  { name: "Manufacture", note: "Register serial, assign product type" },
+                  { name: "Register",    note: "Cloud entry, QR code generated" },
+                  { name: "Ship",        note: "Dispatch to distributor or customer" },
+                  { name: "Claim",       note: "Customer scans QR — org auto-assigned" },
+                  { name: "Operate",     note: "Live telemetry, remote control" },
+                  { name: "Monitor",     note: "Anomaly detection, offline alerts" },
+                  { name: "Configure",   note: "Shadow state, remote config push" },
+                  { name: "OTA",         note: "Firmware update campaign, fleet-wide" },
+                  { name: "Diagnose",    note: "Battery, signal, crash, uptime logs" },
+                  { name: "Scale",       note: "Add orgs, partners, white-label tiers" },
+                ].map((stage, i) => (
+                  <div key={stage.name} className="flex flex-col items-start">
+                    <div className="flex items-center gap-4">
+                      <div className="bg-white/4 border border-white/10 hover:border-white/22 hover:bg-white/6 transition rounded-xl px-5 py-2.5 text-sm font-semibold text-white/65 w-36 text-center">
+                        {stage.name}
+                      </div>
+                      <span className="text-white/18 text-xs hidden lg:block w-52 leading-snug">{stage.note}</span>
+                    </div>
+                    {i < 9 && (
+                      <div className="flex flex-col items-center ml-[68px] my-0.5">
+                        <div className="w-px h-2.5 bg-white/10" />
+                        <span className="text-white/15 text-[10px] leading-none">↓</span>
+                        <div className="w-px h-2.5 bg-white/10" />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
       {/* ── OPERATIONS TEASER ── */}
       <section className="border-y border-white/8 bg-white/[0.015] px-4 md:px-8 py-16">
         <div className="max-w-7xl mx-auto">
