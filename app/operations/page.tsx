@@ -9,227 +9,246 @@ export const metadata: Metadata = {
   alternates: { canonical: "https://edgeconductor.com/operations" },
 };
 
-const operations = [
+// type = "lifecycle" → horizontal arrow flow (Device)
+// type = "entities"  → domain pill grid, no arrows (Fleet, Building, Customer)
+// type = "chain"     → special vertical chain + asset type grid (Asset)
+
+type OpOutcome = { title: string; desc: string };
+
+type BaseOp = {
+  id: string;
+  label: string;
+  color: string;
+  number: string;
+  headline: string;
+  sub: string;
+  outcomes: OpOutcome[];
+  capabilities: string[];
+  link: { label: string; href: string };
+};
+type LifecycleOp = BaseOp & { type: "lifecycle"; flow: string[] };
+type EntitiesOp  = BaseOp & { type: "entities";  entities: string[] };
+type ChainOp     = BaseOp & { type: "chain"; chain: string[]; assetTypes: string[] };
+type Operation   = LifecycleOp | EntitiesOp | ChainOp;
+
+const operations: Operation[] = [
   {
     id: "device",
+    type: "lifecycle",
     label: "Device Operations",
     color: "blue",
     number: "01",
-    headline: "Manufacture, deploy, and maintain every device in your fleet",
-    sub: "Every connected product follows the same lifecycle — from factory floor to field deployment to retirement. Device Operations is the foundation that every other operation runs on.",
-    flow: ["Manufacture", "Register", "Provision", "Ship", "Claim", "Operate", "OTA", "Diagnose", "Retire"],
+    headline: "Manage your product lifecycle from factory floor to retirement",
+    sub: "Every product you ship goes through the same lifecycle. Device Operations gives you one system to manage every stage — so nothing falls through the cracks between manufacture and the field.",
+    flow: ["Manufacture", "Provision", "Deploy", "Operate", "Update", "Maintain", "Retire"],
     outcomes: [
       {
-        icon: "◎",
-        title: "Factory-ready in one command",
-        desc: "Register 500 devices, generate QR code PNGs, and produce a claim CSV — in a single terminal command. No web UI required at the factory floor.",
+        title: "Every unit tracked from day one",
+        desc: "The moment a unit comes off the production line, it exists in your system — serial, product type, firmware version, manufacture date. Not after shipping. Day one.",
       },
       {
-        icon: "□",
-        title: "Zero-touch customer onboarding",
-        desc: "End customers scan a QR code. Device is claimed, org is assigned, and dashboard access is granted automatically. Zero manual steps on your side.",
+        title: "First power-on is automatic onboarding",
+        desc: "Customer scans a QR code. Device is provisioned, org is assigned, dashboard access is created — automatically. No manual steps. No helpdesk tickets.",
       },
       {
-        icon: "↑",
-        title: "Fleet-wide firmware campaigns",
-        desc: "Push firmware to every device of a product type in one action. Offline devices receive the update on their next connection — no missed devices.",
+        title: "Update any device without a site visit",
+        desc: "Push a firmware fix to one device or 10,000. Offline devices receive it on next connection. Your field team never touches a device for software issues.",
       },
       {
-        icon: "◈",
-        title: "Remote diagnostics, no site visit",
-        desc: "Battery, signal strength, heap memory, uptime, reboot reason — all visible from the dashboard. Reboot any device remotely if needed.",
+        title: "Retire cleanly, not just abandon",
+        desc: "When a device reaches end of life, decommission it properly — remove from org, archive history, invalidate credentials. A full lifecycle, not just a deployment.",
       },
     ],
-    capabilities: ["CLI Provisioning", "QR Claim Flow", "OTA Campaigns", "Remote Reboot", "Diagnostics Panel"],
+    capabilities: ["Device Registry", "CLI Provisioning", "QR Claim Flow", "OTA Campaigns", "Remote Diagnostics"],
     link: { label: "Device Registry →", href: "/platform#registry" },
   },
   {
     id: "fleet",
+    type: "entities",
     label: "Fleet Operations",
     color: "amber",
     number: "02",
-    headline: "Track, dispatch, and maintain every moving asset in real time",
-    sub: "Whether you operate delivery vehicles, field service equipment, construction machinery, or any mobile asset — Fleet Operations gives you live location, health monitoring, and exception alerts in one view.",
-    flow: ["Asset", "Route", "Live Location", "Geofence", "Exception Alert", "Dispatch", "Maintenance Log"],
+    headline: "Manage your entire transport operation from one view",
+    sub: "Fleet managers don't think in GPS pings. They think in vehicles, drivers, routes, and maintenance schedules. Fleet Operations is built around how your operations team actually works.",
+    entities: ["Vehicles", "Drivers", "Routes", "Geofences", "Maintenance", "Alerts", "Compliance"],
     outcomes: [
       {
-        icon: "◎",
-        title: "Live location, updated every 5 seconds",
-        desc: "GPS coordinates, signal quality, and battery health streamed continuously. Know where every asset is and whether it is healthy — right now.",
+        title: "Know where every vehicle is right now",
+        desc: "Not just a GPS ping — vehicle health, driver, last stop, battery, signal quality. A complete picture of every asset in your fleet, live.",
       },
       {
-        icon: "⚡",
-        title: "Exception alerts, not just status updates",
-        desc: "Asset goes offline for 15 minutes, battery drops below threshold, or signal degrades — your operations team is notified before customers are impacted.",
+        title: "Know when something is wrong before you're called",
+        desc: "Vehicle offline. Battery dropping fast. Unusual route deviation. Your ops team gets an alert before a driver or customer notices — not after.",
       },
       {
-        icon: "✦",
-        title: "Anomaly detection, not just thresholds",
-        desc: "Rolling-average intelligence surfaces unusual battery drain, GPS drift, or signal degradation before a static threshold would ever fire.",
+        title: "Know when maintenance is due, not overdue",
+        desc: "Anomaly detection watches usage patterns. Maintenance rules fire on schedule or on event. Your team works proactively, not reactively.",
       },
       {
-        icon: "▣",
-        title: "7-day history, not just live state",
-        desc: "Replay where any asset was at any point in the last week. Know exactly when it went offline, when signal degraded, and what state it reported.",
+        title: "Know when a compliance event needs documenting",
+        desc: "Every geofence event, alert, and route deviation is logged with timestamp and vehicle state. Compliance documentation is automatic.",
       },
     ],
-    capabilities: ["GPS Telemetry", "Offline Alerts", "Anomaly Detection", "7-Day History", "Fleet Map"],
+    capabilities: ["Live GPS Tracking", "Offline Alerts", "Anomaly Detection", "Geofencing", "Maintenance Rules"],
     link: { label: "Fleet Solution →", href: "/solutions/tracker" },
   },
   {
     id: "building",
+    type: "entities",
     label: "Building Operations",
     color: "cyan",
     number: "03",
-    headline: "Monitor and automate every space across your property portfolio",
-    sub: "From a single floor to a multi-building campus — Building Operations gives facilities teams, property managers, and tenants real-time environmental data, automated HVAC control, and compliance-ready records.",
-    flow: ["Property", "Building", "Floor", "Room", "Sensors", "HVAC Control", "Tenant Access", "Reports"],
+    headline: "Manage every building, floor, room, and tenant from one platform",
+    sub: "Facilities managers don't think in HVAC protocols. They think in buildings, floors, rooms, and tenants. Building Operations organizes your data the way your team actually manages properties.",
+    entities: ["Buildings", "Floors", "Rooms", "Tenants", "HVAC", "Energy", "Maintenance"],
     outcomes: [
       {
-        icon: "◎",
-        title: "Room-by-room environmental visibility",
-        desc: "Temperature, humidity, and CO₂ per room — live. Identify comfort issues before tenants file complaints. Know which spaces need attention right now.",
+        title: "See your entire property portfolio in one view",
+        desc: "Every building, every floor, every room — environmental status at a glance. Know which properties need attention without logging into a dozen systems.",
       },
       {
-        icon: "⚡",
-        title: "Automated HVAC, no BMS vendor required",
-        desc: "IF CO₂ exceeds 1000 ppm THEN activate ventilation. Schedule rules. Threshold rules. No building management system integration needed.",
+        title: "Know which rooms need attention right now",
+        desc: "CO₂ spiking in Room 3B. Temperature drifting on Floor 2. Your team sees the room, the reading, and the action needed — all in one place.",
       },
       {
-        icon: "□",
-        title: "Tenant self-service via QR code",
-        desc: "Tenants scan a code, register, and get read-only access to their space's climate data. No helpdesk tickets. No manual provisioning on your side.",
+        title: "Tenants manage their own spaces",
+        desc: "Tenants scan a QR code, register, and see their space's live data. They can log maintenance issues. No helpdesk. No manual provisioning on your side.",
       },
       {
-        icon: "◈",
-        title: "White-labeled per property",
-        desc: "Each property owner sees their building under your brand — your logo, your colors. No EdgeConductor branding visible to your clients or their tenants.",
+        title: "Every building runs under your brand",
+        desc: "Each property owner or client gets a white-labeled portal — your logo, your colors. They never see a generic IoT dashboard.",
       },
     ],
-    capabilities: ["Room Hierarchy", "Threshold Rules", "Schedule Automation", "QR Tenant Access", "White-Label"],
+    capabilities: ["Property Hierarchy", "Room-Level Monitoring", "Threshold + Schedule Rules", "Tenant QR Access", "White-Label"],
     link: { label: "Climate Solution →", href: "/solutions/climate" },
   },
   {
     id: "asset",
+    type: "chain",
     label: "Asset Operations",
     color: "orange",
     number: "04",
-    headline: "Monitor health, track location, and automate maintenance for every critical asset",
-    sub: "Industrial equipment, refrigerated containers, medical devices, energy infrastructure — Asset Operations gives you a single view of every asset's health, configuration history, and operational status.",
-    flow: ["Asset Registry", "Live Health", "Location Tracking", "Anomaly Alert", "Remote Config", "OTA Update", "Lifecycle Log"],
+    headline: "One complete record per asset — from first power-on to last shutdown",
+    sub: "Any physical thing that has a location, a health state, a configuration, and a lifecycle is an asset. Asset Operations gives every asset a full operational record — and connects them all in one system.",
+    chain: ["Asset", "Location", "Health", "Configuration", "Lifecycle", "Optimization"],
+    assetTypes: ["Vehicle", "HVAC System", "Shipment", "Room", "Machine", "Sensor Node", "Gateway"],
     outcomes: [
       {
-        icon: "✦",
-        title: "Know before it breaks",
-        desc: "Anomaly detection watches every metric against a learned baseline for that specific asset. Unusual readings surface before a static threshold would fire.",
+        title: "Know where every asset is",
+        desc: "Fixed or mobile, every asset has a location record — GPS, site assignment, room mapping, or zone. Know where it is now and where it has been.",
       },
       {
-        icon: "□",
-        title: "Push configuration without a site visit",
-        desc: "Update setpoints, alert thresholds, sampling intervals — all delivered to the asset via secure MQTT shadow state. Applied on next connection if offline.",
+        title: "Know the health of every asset in real time",
+        desc: "Temperature, battery, signal, uptime, vibration — every metric for that specific asset type. Live and historically, per individual unit.",
       },
       {
-        icon: "▣",
-        title: "Compliance-ready audit trail",
-        desc: "Every configuration change, rule fire, OTA event, and offline alert is logged with timestamp, actor, and before/after state. Exportable on demand.",
+        title: "Change configuration without a site visit",
+        desc: "Update alert thresholds, sampling rates, or operational setpoints remotely — delivered via shadow state on next connection.",
       },
       {
-        icon: "◈",
-        title: "Full asset lifecycle in one record",
-        desc: "From manufacture serial through retirement — firmware version history, configuration changes, health trends, and anomaly events on a single timeline.",
+        title: "Optimize from actual usage patterns",
+        desc: "Anomaly detection learns the baseline for every asset individually. When behavior deviates, you know before any static threshold would fire.",
       },
     ],
-    capabilities: ["Anomaly Detection", "Shadow Config", "Audit Logs", "OTA History", "Rules Engine"],
-    link: { label: "Industry Use Cases →", href: "/industries" },
+    capabilities: ["Asset Registry", "Anomaly Detection", "Shadow Config", "Audit Trail", "Lifecycle Log"],
+    link: { label: "Industries →", href: "/industries" },
   },
   {
     id: "customer",
+    type: "entities",
     label: "Customer Operations",
     color: "violet",
     number: "05",
-    headline: "Operate all your clients' deployments under your own brand",
-    sub: "System integrators and hardware OEMs who deploy to multiple enterprise clients need more than a dashboard — they need a Partner Portal. Create orgs, onboard clients, and monitor every deployment from one multi-tenant view.",
-    flow: ["Your Brand", "Partner Portal", "Create Org", "Invite Admin", "White-Label", "Devices Live", "Client Ops"],
+    headline: "Run your client business on this platform",
+    sub: "If you deploy to multiple clients, you're not just running IoT — you're running a business on top of IoT. Customer Operations gives you the tools to manage organizations, partners, permissions, and billing, all under your brand.",
+    entities: ["Organizations", "Partners", "White Label", "Permissions", "Support", "Billing"],
     outcomes: [
       {
-        icon: "▣",
-        title: "One portal for every client",
-        desc: "Create a new customer org in seconds, assign devices, invite their org admin — and let them operate independently under your brand from day one.",
+        title: "Your org structure mirrors your business",
+        desc: "Every client is an organization. Every org has its own devices, users, and settings. Your portal shows all of them — isolated from each other, visible to you.",
       },
       {
-        icon: "◈",
+        title: "Partners manage their clients independently",
+        desc: "System integrators create and manage client orgs from a partner portal. They provision devices, invite admins, and monitor deployments — under their own brand.",
+      },
+      {
         title: "Every client sees your brand, not ours",
-        desc: "Custom logo, colors, and org name per client. Your clients experience your connected product — EdgeConductor stays invisible underneath.",
+        desc: "Custom logo, colors, and org name per client. Your clients experience your product. EdgeConductor stays invisible. You own the relationship.",
       },
       {
-        icon: "□",
-        title: "Complete isolation, aggregate visibility",
-        desc: "Each client sees only their own devices and data. You see aggregate stats across all clients — total devices, online count, anomalies — from your Partner Portal.",
-      },
-      {
-        icon: "✦",
-        title: "Your margins, your client relationship",
-        desc: "Sell a white-labeled connected operations platform at your price. Your client pays you. EdgeConductor is a cost of goods, not a competitor.",
+        title: "Permissions follow your org hierarchy",
+        desc: "Super admin. Partner. Org admin. User. Read-only. Every role maps to how your business works — not a generic model that needs bending to fit.",
       },
     ],
-    capabilities: ["Partner Portal", "Multi-Tenant RBAC", "White-Label Branding", "Org Management", "API Key Scoping"],
+    capabilities: ["Partner Portal", "Multi-Tenant RBAC", "White-Label Branding", "API Key Scoping", "Audit Logs"],
     link: { label: "Partner Program →", href: "/partners" },
   },
 ];
 
 const colorMap: Record<string, {
-  tag: string; dot: string; arrow: string; cap: string;
-  flowBg: string; flowText: string; border: string; glow: string;
+  tag: string; arrow: string; cap: string;
+  entityBg: string; entityText: string; border: string; glow: string;
+  chainLine: string; chainDot: string; chainNode: string;
 }> = {
   blue:   {
-    tag:      "text-blue-400 bg-blue-500/10 border-blue-500/25",
-    dot:      "bg-blue-400",
-    arrow:    "text-blue-400/30",
-    cap:      "text-blue-300/80 bg-blue-500/8 border-blue-500/20",
-    flowBg:   "bg-blue-500/8 border-blue-500/20",
-    flowText: "text-blue-200/70",
-    border:   "border-blue-500/15",
-    glow:     "from-blue-500/6",
+    tag:       "text-blue-400 bg-blue-500/10 border-blue-500/25",
+    arrow:     "text-blue-400/25",
+    cap:       "text-blue-300/80 bg-blue-500/8 border-blue-500/20",
+    entityBg:  "bg-blue-500/8 border-blue-500/18 text-blue-200/75",
+    entityText:"text-blue-200/75",
+    border:    "border-blue-500/15",
+    glow:      "from-blue-500/5",
+    chainLine: "bg-blue-500/20",
+    chainDot:  "bg-blue-400",
+    chainNode: "bg-blue-500/10 border-blue-500/25 text-blue-300",
   },
   amber:  {
-    tag:      "text-amber-400 bg-amber-500/10 border-amber-500/25",
-    dot:      "bg-amber-400",
-    arrow:    "text-amber-400/30",
-    cap:      "text-amber-300/80 bg-amber-500/8 border-amber-500/20",
-    flowBg:   "bg-amber-500/8 border-amber-500/20",
-    flowText: "text-amber-200/70",
-    border:   "border-amber-500/15",
-    glow:     "from-amber-500/6",
+    tag:       "text-amber-400 bg-amber-500/10 border-amber-500/25",
+    arrow:     "text-amber-400/25",
+    cap:       "text-amber-300/80 bg-amber-500/8 border-amber-500/20",
+    entityBg:  "bg-amber-500/8 border-amber-500/18 text-amber-200/75",
+    entityText:"text-amber-200/75",
+    border:    "border-amber-500/15",
+    glow:      "from-amber-500/5",
+    chainLine: "bg-amber-500/20",
+    chainDot:  "bg-amber-400",
+    chainNode: "bg-amber-500/10 border-amber-500/25 text-amber-300",
   },
   cyan:   {
-    tag:      "text-cyan-400 bg-cyan-500/10 border-cyan-500/25",
-    dot:      "bg-cyan-400",
-    arrow:    "text-cyan-400/30",
-    cap:      "text-cyan-300/80 bg-cyan-500/8 border-cyan-500/20",
-    flowBg:   "bg-cyan-500/8 border-cyan-500/20",
-    flowText: "text-cyan-200/70",
-    border:   "border-cyan-500/15",
-    glow:     "from-cyan-500/6",
+    tag:       "text-cyan-400 bg-cyan-500/10 border-cyan-500/25",
+    arrow:     "text-cyan-400/25",
+    cap:       "text-cyan-300/80 bg-cyan-500/8 border-cyan-500/20",
+    entityBg:  "bg-cyan-500/8 border-cyan-500/18 text-cyan-200/75",
+    entityText:"text-cyan-200/75",
+    border:    "border-cyan-500/15",
+    glow:      "from-cyan-500/5",
+    chainLine: "bg-cyan-500/20",
+    chainDot:  "bg-cyan-400",
+    chainNode: "bg-cyan-500/10 border-cyan-500/25 text-cyan-300",
   },
   orange: {
-    tag:      "text-orange-400 bg-orange-500/10 border-orange-500/25",
-    dot:      "bg-orange-400",
-    arrow:    "text-orange-400/30",
-    cap:      "text-orange-300/80 bg-orange-500/8 border-orange-500/20",
-    flowBg:   "bg-orange-500/8 border-orange-500/20",
-    flowText: "text-orange-200/70",
-    border:   "border-orange-500/15",
-    glow:     "from-orange-500/6",
+    tag:       "text-orange-400 bg-orange-500/10 border-orange-500/25",
+    arrow:     "text-orange-400/25",
+    cap:       "text-orange-300/80 bg-orange-500/8 border-orange-500/20",
+    entityBg:  "bg-orange-500/8 border-orange-500/18 text-orange-200/75",
+    entityText:"text-orange-200/75",
+    border:    "border-orange-500/15",
+    glow:      "from-orange-500/5",
+    chainLine: "bg-orange-500/20",
+    chainDot:  "bg-orange-400",
+    chainNode: "bg-orange-500/10 border-orange-500/25 text-orange-300",
   },
   violet: {
-    tag:      "text-violet-400 bg-violet-500/10 border-violet-500/25",
-    dot:      "bg-violet-400",
-    arrow:    "text-violet-400/30",
-    cap:      "text-violet-300/80 bg-violet-500/8 border-violet-500/20",
-    flowBg:   "bg-violet-500/8 border-violet-500/20",
-    flowText: "text-violet-200/70",
-    border:   "border-violet-500/15",
-    glow:     "from-violet-500/6",
+    tag:       "text-violet-400 bg-violet-500/10 border-violet-500/25",
+    arrow:     "text-violet-400/25",
+    cap:       "text-violet-300/80 bg-violet-500/8 border-violet-500/20",
+    entityBg:  "bg-violet-500/8 border-violet-500/18 text-violet-200/75",
+    entityText:"text-violet-200/75",
+    border:    "border-violet-500/15",
+    glow:      "from-violet-500/5",
+    chainLine: "bg-violet-500/20",
+    chainDot:  "bg-violet-400",
+    chainNode: "bg-violet-500/10 border-violet-500/25 text-violet-300",
   },
 };
 
@@ -270,19 +289,12 @@ export default function OperationsPage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-start">
 
-            {/* Left — what platforms sell */}
             <div className="bg-white/3 border border-white/8 rounded-2xl p-7">
               <p className="text-xs font-semibold text-white/25 uppercase tracking-widest mb-5">
                 What most IoT platforms sell
               </p>
               <div className="space-y-3">
-                {[
-                  "Device Registry",
-                  "MQTT Telemetry",
-                  "OTA Firmware",
-                  "Rules Engine",
-                  "Dashboard Builder",
-                ].map(f => (
+                {["Device Registry", "MQTT Telemetry", "OTA Firmware", "Rules Engine", "Dashboard Builder"].map(f => (
                   <div key={f} className="flex items-center gap-3 text-white/35 text-sm">
                     <span className="text-white/15">—</span>
                     <span>{f}</span>
@@ -296,28 +308,30 @@ export default function OperationsPage() {
               </p>
             </div>
 
-            {/* Right — what customers buy */}
             <div className="bg-white/3 border border-white/10 rounded-2xl p-7">
               <p className="text-xs font-semibold text-white/50 uppercase tracking-widest mb-5">
                 What your customer actually buys
               </p>
               <div className="space-y-3">
                 {[
-                  { label: "Device Operations",   color: "text-blue-400"   },
-                  { label: "Fleet Operations",    color: "text-amber-400"  },
-                  { label: "Building Operations", color: "text-cyan-400"   },
-                  { label: "Asset Operations",    color: "text-orange-400" },
-                  { label: "Customer Operations", color: "text-violet-400" },
+                  { label: "Device Operations",   color: "text-blue-400",   sub: "Manufacture · Provision · Update · Retire" },
+                  { label: "Fleet Operations",    color: "text-amber-400",  sub: "Vehicles · Drivers · Routes · Maintenance" },
+                  { label: "Building Operations", color: "text-cyan-400",   sub: "Buildings · Floors · Rooms · Tenants" },
+                  { label: "Asset Operations",    color: "text-orange-400", sub: "Location · Health · Config · Lifecycle" },
+                  { label: "Customer Operations", color: "text-violet-400", sub: "Organizations · Partners · Billing" },
                 ].map(o => (
-                  <div key={o.label} className="flex items-center gap-3 text-sm">
-                    <span className={`text-base ${o.color}`}>✓</span>
-                    <span className={`font-medium ${o.color}`}>{o.label}</span>
+                  <div key={o.label} className="flex items-start gap-3">
+                    <span className={`text-base mt-0.5 shrink-0 ${o.color}`}>✓</span>
+                    <div>
+                      <span className={`text-sm font-medium ${o.color}`}>{o.label}</span>
+                      <span className="text-white/20 text-xs ml-2">{o.sub}</span>
+                    </div>
                   </div>
                 ))}
               </div>
-              <p className="text-white/45 text-xs mt-6">
-                These are not features. They are the outcomes your customers pay for.
-                The platform features are the engine. Operations are what it runs.
+              <p className="text-white/40 text-xs mt-6">
+                These are not features. They are what your customers pay for.
+                The platform capabilities are the engine. Operations are what it runs.
               </p>
             </div>
           </div>
@@ -325,7 +339,7 @@ export default function OperationsPage() {
       </section>
 
       {/* ── Operations Sections ────────────────────────────────────────────── */}
-      {operations.map((op, idx) => {
+      {operations.map((op) => {
         const c = colorMap[op.color];
         return (
           <section
@@ -337,35 +351,91 @@ export default function OperationsPage() {
 
               {/* Header */}
               <div className="flex items-center gap-3 mb-5">
-                <span className={`text-xs font-mono text-white/20`}>{op.number}</span>
+                <span className="text-xs font-mono text-white/20">{op.number}</span>
                 <span className={`text-xs font-semibold uppercase tracking-wider border px-2.5 py-1 rounded-full ${c.tag}`}>
                   {op.label}
                 </span>
               </div>
               <h2 className="text-2xl md:text-3xl font-bold mb-3 max-w-3xl">{op.headline}</h2>
-              <p className="text-white/40 text-sm leading-relaxed mb-8 max-w-2xl">{op.sub}</p>
+              <p className="text-white/40 text-sm leading-relaxed mb-10 max-w-2xl">{op.sub}</p>
 
-              {/* Operational flow */}
-              <div className="overflow-x-auto mb-10">
-                <div className="flex items-center gap-0 min-w-max">
-                  {op.flow.map((step, i) => (
-                    <div key={step} className="flex items-center gap-0">
-                      <div className={`border rounded-lg px-3 py-1.5 text-xs font-medium whitespace-nowrap ${c.flowBg} ${c.flowText}`}>
-                        {step}
+              {/* ── Lifecycle: horizontal arrow flow ── */}
+              {op.type === "lifecycle" && (
+                <div className="overflow-x-auto mb-10">
+                  <div className="flex items-center gap-0 min-w-max">
+                    {op.flow.map((step, i) => (
+                      <div key={step} className="flex items-center gap-0">
+                        <div className={`border rounded-lg px-3 py-1.5 text-xs font-medium whitespace-nowrap ${c.entityBg}`}>
+                          {step}
+                        </div>
+                        {i < op.flow.length - 1 && (
+                          <span className={`text-base mx-1.5 ${c.arrow}`}>→</span>
+                        )}
                       </div>
-                      {i < op.flow.length - 1 && (
-                        <span className={`text-base mx-1 ${c.arrow}`}>→</span>
-                      )}
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
 
-              {/* Outcome cards */}
+              {/* ── Entities: domain pill grid ── */}
+              {op.type === "entities" && (
+                <div className="mb-10">
+                  <p className="text-xs text-white/25 uppercase tracking-widest mb-3">What you manage</p>
+                  <div className="flex flex-wrap gap-2">
+                    {op.entities.map(e => (
+                      <span key={e} className={`border rounded-full px-4 py-2 text-sm font-medium ${c.entityBg}`}>
+                        {e}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* ── Chain: special Asset Operations layout ── */}
+              {op.type === "chain" && (
+                <div className="mb-10 grid md:grid-cols-2 gap-8 items-start">
+                  {/* Vertical chain */}
+                  <div>
+                    <p className="text-xs text-white/25 uppercase tracking-widest mb-4">Asset operational chain</p>
+                    <div className="flex flex-col gap-0">
+                      {op.chain.map((step, i) => (
+                        <div key={step} className="flex flex-col items-start">
+                          <div className={`border rounded-xl px-5 py-3 text-sm font-semibold w-full ${c.chainNode}`}>
+                            {step}
+                          </div>
+                          {i < op.chain.length - 1 && (
+                            <div className="flex flex-col items-start ml-5 gap-0">
+                              <div className={`w-px h-3 ${c.chainLine}`} />
+                              <span className={`text-xs ${c.arrow} font-mono`}>↓</span>
+                              <div className={`w-px h-3 ${c.chainLine}`} />
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  {/* Asset type examples */}
+                  <div>
+                    <p className="text-xs text-white/25 uppercase tracking-widest mb-4">Works for any asset type</p>
+                    <div className="grid grid-cols-2 gap-2">
+                      {op.assetTypes.map(at => (
+                        <div key={at} className={`border rounded-xl px-4 py-3 text-sm font-medium ${c.entityBg}`}>
+                          {at}
+                        </div>
+                      ))}
+                    </div>
+                    <p className="text-xs text-white/25 mt-4 leading-relaxed">
+                      Any physical asset that has a sensor, a location, a health state, and
+                      a lifecycle can be an asset in EdgeConductor.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Outcome cards — same for all types */}
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
                 {op.outcomes.map(o => (
                   <div key={o.title} className={`bg-white/2 border ${c.border} rounded-xl p-5 hover:bg-white/3 transition`}>
-                    <span className="text-lg text-white/30 block mb-3">{o.icon}</span>
                     <h3 className="text-sm font-semibold text-white/80 mb-2">{o.title}</h3>
                     <p className="text-xs text-white/35 leading-relaxed">{o.desc}</p>
                   </div>
@@ -381,8 +451,7 @@ export default function OperationsPage() {
                   </span>
                 ))}
                 <div className="ml-auto">
-                  <Link href={op.link.href}
-                    className="text-sm text-white/50 hover:text-white transition">
+                  <Link href={op.link.href} className="text-sm text-white/45 hover:text-white transition">
                     {op.link.label}
                   </Link>
                 </div>
@@ -396,17 +465,18 @@ export default function OperationsPage() {
       {/* ── Platform Powers Operations ──────────────────────────────────────── */}
       <section className="px-4 md:px-8 py-20 max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <span className="text-xs font-semibold tracking-widest text-white/30 uppercase">Under the hood</span>
-          <h2 className="text-3xl font-bold mt-3 mb-3">Every operation runs on the same platform</h2>
+          <span className="text-xs font-semibold tracking-widest text-white/30 uppercase">One platform, every operation</span>
+          <h2 className="text-3xl font-bold mt-3 mb-3">Every operation runs on the same core</h2>
           <p className="text-white/40 text-sm max-w-xl mx-auto">
-            The platform capabilities are not the product. They are what makes the operations possible.
+            One core platform — device registry, telemetry, rules, OTA, RBAC — running five different operations.
+            Add a new product type without rebuilding anything.
           </p>
         </div>
         <div className="overflow-x-auto">
           <table className="w-full min-w-[700px]">
             <thead>
               <tr className="border-b border-white/10">
-                <th className="text-left text-xs text-white/25 uppercase tracking-wider pb-3 font-normal w-40">Operation</th>
+                <th className="text-left text-xs text-white/25 uppercase tracking-wider pb-3 font-normal w-44">Operation</th>
                 <th className="text-left text-xs text-white/25 uppercase tracking-wider pb-3 font-normal">Platform capabilities that power it</th>
               </tr>
             </thead>
@@ -414,12 +484,12 @@ export default function OperationsPage() {
               {[
                 { label: "Device Operations",   color: "text-blue-400",   caps: ["Device Registry", "CLI Provisioning", "OTA Campaigns", "Remote Reboot", "Diagnostics"] },
                 { label: "Fleet Operations",    color: "text-amber-400",  caps: ["GPS Telemetry", "7-Day History", "Anomaly Detection", "Offline Alerts", "Fleet Map"] },
-                { label: "Building Operations", color: "text-cyan-400",   caps: ["Room Hierarchy", "Live Sensors", "Rules Engine", "Tenant QR Access", "White-Label"] },
-                { label: "Asset Operations",    color: "text-orange-400", caps: ["Anomaly Detection", "Shadow Config", "Rules Engine", "Audit Logs", "OTA History"] },
+                { label: "Building Operations", color: "text-cyan-400",   caps: ["Property Hierarchy", "Live Sensors", "Rules Engine", "Tenant QR Access", "White-Label"] },
+                { label: "Asset Operations",    color: "text-orange-400", caps: ["Asset Registry", "Anomaly Detection", "Shadow Config", "Audit Logs", "Lifecycle Log"] },
                 { label: "Customer Operations", color: "text-violet-400", caps: ["Partner Portal", "Multi-Tenant RBAC", "White-Label Branding", "API Keys", "Org Management"] },
               ].map(row => (
                 <tr key={row.label}>
-                  <td className={`py-4 text-sm font-medium ${row.color} w-40`}>{row.label}</td>
+                  <td className={`py-4 text-sm font-medium ${row.color} w-44`}>{row.label}</td>
                   <td className="py-4">
                     <div className="flex flex-wrap gap-2">
                       {row.caps.map(cap => (
@@ -435,8 +505,7 @@ export default function OperationsPage() {
           </table>
         </div>
         <div className="mt-8 text-center">
-          <Link href="/platform"
-            className="text-sm text-white/40 hover:text-white transition">
+          <Link href="/platform" className="text-sm text-white/40 hover:text-white transition">
             See all platform capabilities →
           </Link>
         </div>
