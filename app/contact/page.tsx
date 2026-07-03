@@ -119,11 +119,11 @@ export default function ContactPage() {
                   <label className="block text-xs text-white/40 uppercase tracking-wider mb-1.5">Message *</label>
                   <textarea required value={form.message} onChange={set("message")} rows={5}
                     className={inputCls + " resize-none"}
-                    placeholder="Tell us about your IoT product — device type, connectivity, number of devices, use case..." />
+                    placeholder="Tell us about your operation — fleet, buildings, product, number of devices, use case..." />
                 </div>
 
                 {status === "error" && (
-                  <p className="text-red-400 text-sm">Something went wrong. Please email us directly at edgeconductor@gmail.com</p>
+                  <p className="text-red-400 text-sm">Something went wrong. Please email us directly at info@edgeconductor.com</p>
                 )}
 
                 <button type="submit" disabled={status === "sending"}
@@ -171,9 +171,9 @@ export default function ContactPage() {
 
             <div className="bg-white/3 border border-white/10 rounded-xl p-5">
               <p className="text-xs text-white/30 uppercase tracking-wider mb-2">Direct email</p>
-              <a href="mailto:edgeconductor@gmail.com"
+              <a href="mailto:info@edgeconductor.com"
                 className="text-blue-400 hover:text-blue-300 transition text-sm font-medium">
-                edgeconductor@gmail.com
+                info@edgeconductor.com
               </a>
             </div>
           </div>

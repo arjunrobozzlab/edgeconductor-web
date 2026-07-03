@@ -104,7 +104,7 @@ const solutions = [
 
 const stats = [
   { value: "10 min", label: "First device sending live telemetry" },
-  { value: "6 weeks", label: "Typical time to first client deployment" },
+  { value: "6 weeks", label: "Typical time to first live deployment" },
   { value: "Zero", label: "Cloud infrastructure to build or maintain" },
   { value: "10,000+", label: "Assets supported per deployment" },
 ];
@@ -175,21 +175,20 @@ export default function Home() {
               Connected Product &amp; Asset Operations Platform
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.08] tracking-tight mb-6">
-              Don&apos;t build{" "}
+              Run your{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-300">
-                IoT infrastructure.
+                operations.
               </span>
               <br />
-              Build your product.
+              Ship your product.
             </h1>
             <p className="text-white/55 text-base md:text-lg leading-relaxed mb-3 max-w-lg">
-              Most hardware companies burn <strong className="text-white/70">12–18 months</strong> and <strong className="text-white/70">$300K+</strong> building
-              cloud infrastructure before shipping a single connected product.
+              Managing a fleet of vehicles, a network of buildings, or shipping connected hardware?
+              Skip the infrastructure — EdgeConductor gives you the entire stack, ready to go.
             </p>
             <p className="text-white/45 text-base leading-relaxed mb-8 max-w-lg">
-              EdgeConductor gives you the entire stack — device registry, live telemetry, remote control,
-              OTA firmware, rules automation, and B2B dashboards — out of the box.
-              First device live in 10 minutes.
+              Device registry, live telemetry, remote control, OTA firmware, automated rules,
+              and B2B dashboards — out of the box. First device live in 10 minutes.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 mb-6">
@@ -281,7 +280,7 @@ export default function Home() {
       <section className="border-y border-white/8 bg-white/[0.015] px-4 md:px-8 py-5">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
           <p className="text-white/25 text-xs font-semibold uppercase tracking-widest shrink-0">
-            Powering connected products at
+            Live deployments at
           </p>
           <div className="flex flex-wrap items-center gap-6">
             {["City Schools Network", "Nordic Climate Group"].map(c => (
@@ -299,11 +298,11 @@ export default function Home() {
         <div className="text-center mb-12">
           <span className="text-xs font-semibold tracking-widest text-white/30 uppercase">What EdgeConductor Is</span>
           <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">
-            The platform between your hardware and your business
+            The platform between your devices and your operations
           </h2>
           <p className="text-white/45 text-sm md:text-base max-w-2xl mx-auto">
-            You own the hardware. Your clients run the business. EdgeConductor is the
-            production-grade infrastructure layer that connects them — securely, scalably, and under your brand.
+            Whether you manage assets in the field or ship hardware to clients — EdgeConductor is the
+            production-grade infrastructure layer that connects your devices to your operations, securely and at scale.
           </p>
         </div>
 

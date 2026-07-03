@@ -186,12 +186,12 @@ export const industries: Industry[] = [
           "Threshold rules evaluate temperature every 30 seconds. IF temp > 8°C → immediate alert via webhook, SMS gateway, or email. Your team can intervene while the shipment is still in transit.",
       },
       {
-        problem: "Manual logbooks are error-prone and fail compliance audits",
+        problem: "Manual logbooks fail compliance audits — CDSCO, WHO-GMP, and GDP inspectors flag them immediately",
         detail:
-          "Paper-based or spreadsheet temperature logs are incomplete, tampered-with, and hours behind. Auditors flag them immediately.",
+          "Paper-based or spreadsheet temperature logs are incomplete, hours behind, and easy to question. GDP audits and CDSCO Schedule M inspections require continuous, verifiable records — not manual entries.",
         solution: "Automated, tamper-proof telemetry history",
         capability:
-          "Every temperature reading is timestamped and stored in immutable telemetry history. Auto-generated PDF reports cover any date range. No manual data entry. Always audit-ready.",
+          "Every temperature reading is timestamped and stored in immutable telemetry history. Auto-generated PDF reports cover any date range — exactly the format GDP and WHO-GMP auditors require. No manual data entry.",
       },
       {
         problem: "No visibility into what's happening in cold storage right now",
@@ -224,7 +224,7 @@ export const industries: Industry[] = [
       { title: "Chemical transport", desc: "Monitor hazardous goods that require controlled temperature and humidity conditions during transit." },
       { title: "Frozen food logistics", desc: "Multi-stop delivery monitoring. Detect door-open events and temperature spikes at each stop." },
     ],
-    capabilities: ["Temperature & Humidity Telemetry", "Breach Threshold Alerts", "Immutable Telemetry History", "Auto PDF Compliance Reports", "Multi-Tenant Client Orgs", "Cellular / GSM Connectivity", "GPS + Temperature Combined", "Webhook & Email Alerts"],
+    capabilities: ["Temperature & Humidity Telemetry", "Breach Threshold Alerts", "Immutable Telemetry History", "Auto PDF Compliance Reports", "GDP / WHO-GMP Audit Documentation", "Multi-Tenant Client Orgs", "Cellular / GSM Connectivity", "GPS + Temperature Combined", "Webhook & Email Alerts"],
   },
 
   {
@@ -357,6 +357,75 @@ export const industries: Industry[] = [
       { title: "Clinic multi-site operations", desc: "Manage assets and environment monitoring across multiple clinic locations from one admin view." },
     ],
     capabilities: ["Asset Location Tracking", "Temperature & Environment Monitoring", "Medication Fridge Alerts", "Immutable Compliance Logs", "Auto Audit Report Generation", "RBAC per Role & Ward", "Multi-Department Org Hierarchy", "Webhook & Email Alerts"],
+  },
+
+  {
+    slug: "education",
+    name: "Schools & Education",
+    category: "Education & Campus Management",
+    color: "green",
+    icon: "◉",
+    heroHeadline: "Every campus. Every classroom. Full control.",
+    heroSub:
+      "Live bus tracking for your school fleet, automated HVAC across classrooms, and real-time air quality monitoring — managed from one dashboard for your entire school network.",
+    problemTitle: "Managing a school network without real-time visibility",
+    problemSub:
+      "Running 10+ campuses means managing buildings, vehicles, and safety simultaneously — with a small ops team that cannot be everywhere at once. Problems get reported by staff, not caught before they happen.",
+    painPoints: [
+      {
+        problem: "You don't know if a classroom has poor air quality until a teacher complains",
+        detail:
+          "CO₂ buildup in crowded classrooms reduces student focus and triggers health concerns. Facilities teams react to complaints rather than preventing the condition.",
+        solution: "Live CO₂, temperature, and humidity per classroom",
+        capability:
+          "Sensors in every classroom report air quality every 30 seconds. Rules automatically trigger HVAC when CO₂ exceeds safe levels. Your team sees every room before the teacher has to call.",
+      },
+      {
+        problem: "Your school buses are on the road and you have no idea where they are",
+        detail:
+          "Parents call when buses are late. Staff have no real-time position. Incidents are only discovered after they happen.",
+        solution: "Live GPS for every bus via cellular",
+        capability:
+          "Every bus sends live GPS coordinates every 5 seconds via 4G. Your operations team sees the full fleet on one map. Bus running late? You know before a parent calls.",
+      },
+      {
+        problem: "Managing HVAC across 10 campuses means 10 different schedules and no central control",
+        detail:
+          "Night shutoff relies on staff remembering. Weekend HVAC runs when buildings are empty. Emergency override from off-site is impossible.",
+        solution: "All campuses on one dashboard, one automated rule set",
+        capability:
+          "Schedule HVAC to shut off at end of school day automatically across every campus. Override any room remotely from your admin panel. Add a new campus to the same system the day it opens.",
+      },
+      {
+        problem: "A firmware bug on bus trackers means sending a technician to every vehicle",
+        detail:
+          "A GPS firmware bug across 40 buses means 40 site visits. Each one takes the bus off service and costs staff time.",
+        solution: "OTA firmware updates pushed remotely from the dashboard",
+        capability:
+          "Update all 40 trackers simultaneously from the cloud dashboard. Devices apply the update on next connection. No field visits, no buses off the road.",
+      },
+    ],
+    outcomes: [
+      { value: "5s", label: "Bus location update interval", sub: "via 4G cellular" },
+      { value: "30s", label: "Classroom air quality check", sub: "auto-triggers HVAC" },
+      { value: "Zero", label: "Field visits for firmware updates", sub: "OTA from dashboard" },
+      { value: "Multi-campus", label: "All schools, one dashboard", sub: "one admin, full control" },
+    ],
+    useCases: [
+      { title: "School bus fleet tracking", desc: "Live GPS for every bus. Staff and parents see real-time location. Offline alerts when a bus goes silent." },
+      { title: "Classroom air quality monitoring", desc: "CO₂, temperature, and humidity per classroom. Auto-ventilation rules prevent poor learning conditions before anyone notices." },
+      { title: "Multi-campus HVAC management", desc: "Schedule and automate HVAC across all campuses from one admin dashboard. Night and weekend shutoff never misses." },
+      { title: "Campus energy management", desc: "Track energy use per building. Automated shutoff schedules cut bills without manual oversight." },
+      { title: "Staff QR access", desc: "Staff scan a QR code to see live room climate data — read-only, no IT setup, no app install." },
+      { title: "Network operations for large chains", desc: "One admin managing 50 campuses, 200 classrooms, and a 100-bus fleet — from a single dashboard view." },
+    ],
+    capabilities: ["Live Bus GPS Tracking", "CO₂ / Temp / Humidity per Classroom", "HVAC Automation Rules", "Multi-Campus Dashboard", "QR Staff Room Access", "OTA Firmware Updates", "Offline & Breach Alerts", "Energy Shutoff Scheduling"],
+    caseStudy: {
+      client: "Regional School Network",
+      headline: "40+ buses tracked live. Classrooms monitored 24/7.",
+      outcome: "School network moved from manual driver check-ins to live GPS for every bus and automated HVAC across 12 campuses. Bus location visible to all staff in real time.",
+      href: "/case-studies#school-fleet",
+    },
   },
 
   {
