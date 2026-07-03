@@ -45,9 +45,9 @@ export default function CompanyPage() {
         <div className="bg-white/3 border border-white/10 rounded-2xl p-7 mb-8">
           <h2 className="text-xl font-bold mb-3">Contact</h2>
           <p className="text-white/45 text-sm mb-4">For platform inquiries, partnerships, or enterprise pricing:</p>
-          <a href="mailto:info@edgeconductor.com"
+          <a href="mailto:edgeconductor@gmail.com"
             className="text-blue-400 hover:text-blue-300 transition text-sm font-medium">
-            info@edgeconductor.com
+            edgeconductor@gmail.com
           </a>
         </div>
 

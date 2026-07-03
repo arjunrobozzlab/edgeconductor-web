@@ -123,7 +123,7 @@ export default function ContactPage() {
                 </div>
 
                 {status === "error" && (
-                  <p className="text-red-400 text-sm">Something went wrong. Please email us directly at info@edgeconductor.com</p>
+                  <p className="text-red-400 text-sm">Something went wrong. Please email us directly at edgeconductor@gmail.com</p>
                 )}
 
                 <button type="submit" disabled={status === "sending"}
@@ -171,9 +171,9 @@ export default function ContactPage() {
 
             <div className="bg-white/3 border border-white/10 rounded-xl p-5">
               <p className="text-xs text-white/30 uppercase tracking-wider mb-2">Direct email</p>
-              <a href="mailto:info@edgeconductor.com"
+              <a href="mailto:edgeconductor@gmail.com"
                 className="text-blue-400 hover:text-blue-300 transition text-sm font-medium">
-                info@edgeconductor.com
+                edgeconductor@gmail.com
               </a>
             </div>
           </div>

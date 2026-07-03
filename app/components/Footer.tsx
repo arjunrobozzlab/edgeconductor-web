@@ -50,7 +50,7 @@ export default function Footer() {
               <a href="https://github.com/EdgeConductor" target="_blank" rel="noopener noreferrer"
                 className="text-white/30 hover:text-white/60 transition text-xs">GitHub</a>
               <span className="text-white/10">·</span>
-              <a href="mailto:info@edgeconductor.com"
+              <a href="mailto:edgeconductor@gmail.com"
                 className="text-white/30 hover:text-white/60 transition text-xs">Email</a>
             </div>
           </div>

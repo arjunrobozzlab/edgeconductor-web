@@ -191,9 +191,9 @@ export default function SecurityPage() {
               Email us directly — we respond within 48 hours and will credit you
               in our security changelog.
             </p>
-            <a href="mailto:info@edgeconductor.com?subject=Security Vulnerability Report"
+            <a href="mailto:edgeconductor@gmail.com?subject=Security Vulnerability Report"
               className="text-sm text-blue-400 hover:text-blue-300 transition font-medium">
-              info@edgeconductor.com →
+              edgeconductor@gmail.com →
             </a>
           </div>
           <div className="bg-gradient-to-br from-blue-500/10 to-cyan-500/6 border border-blue-500/20 rounded-2xl p-7">
