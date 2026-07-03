@@ -100,7 +100,7 @@ const operations: Operation[] = [
     number: "03",
     headline: "Manage every building, room, and tenant from one platform",
     sub: "Facilities managers don't think in sensor protocols. They think in buildings, rooms, tenants, and energy bills. Building Operations organizes your data the way your team actually manages properties.",
-    entities: ["Buildings", "Rooms", "Tenants", "Energy", "Maintenance"],
+    entities: ["Buildings", "Rooms", "Tenants", "HVAC", "Energy", "Maintenance"],
     outcomes: [
       {
         title: "See your entire property portfolio in one view",
@@ -316,7 +316,7 @@ export default function OperationsPage() {
                 {[
                   { label: "Device Operations",   color: "text-blue-400",   sub: "Manufacture · Deploy · Operate · Upgrade · Retire" },
                   { label: "Fleet Operations",    color: "text-amber-400",  sub: "Vehicles · Drivers · Trips · Maintenance · Compliance" },
-                  { label: "Building Operations", color: "text-cyan-400",   sub: "Buildings · Rooms · Tenants · Energy · Maintenance" },
+                  { label: "Building Operations", color: "text-cyan-400",   sub: "Buildings · Rooms · Tenants · HVAC · Energy · Maintenance" },
                   { label: "Asset Operations",    color: "text-orange-400", sub: "Asset · Location · Health · Configuration · Lifecycle" },
                   { label: "Customer Operations", color: "text-violet-400", sub: "Organizations · Partners · White Label · Users · Billing" },
                 ].map(o => (
@@ -356,7 +356,7 @@ export default function OperationsPage() {
               id: "building",
               label: "Building Operations",
               color: "cyan",
-              entities: ["Buildings", "Rooms", "Tenants", "Energy", "Maintenance"],
+              entities: ["Buildings", "Rooms", "Tenants", "HVAC", "Energy", "Maintenance"],
             },
             {
               id: "device",

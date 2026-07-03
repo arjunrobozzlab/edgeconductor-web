@@ -484,7 +484,7 @@ export default function Home() {
               {[
                 { label: "Device Operations",   color: "text-blue-400",   desc: "Manufacture · Deploy · Operate · Upgrade · Retire" },
                 { label: "Fleet Operations",    color: "text-amber-400",  desc: "Vehicles · Drivers · Trips · Maintenance · Compliance" },
-                { label: "Building Operations", color: "text-cyan-400",   desc: "Buildings · Rooms · Tenants · Energy · Maintenance" },
+                { label: "Building Operations", color: "text-cyan-400",   desc: "Buildings · Rooms · Tenants · HVAC · Energy · Maintenance" },
                 { label: "Asset Operations",    color: "text-orange-400", desc: "Asset · Location · Health · Configuration · Lifecycle" },
                 { label: "Customer Operations", color: "text-violet-400", desc: "Organizations · Partners · White Label · Users · Billing" },
               ].map(op => (
