@@ -114,7 +114,7 @@ export default function ClimateSolutionPage() {
             <p className="text-white/50 text-base leading-relaxed mb-8 max-w-lg">
               Multi-room HVAC automation with CO₂, temperature, and humidity monitoring.
               Tenant QR access, IF/THEN rule automation, and live org dashboard.
-              Running live at Germany Climate GmbH — office monitored 24/7.
+              Deployed in production — commercial offices monitored 24/7.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link href="/contact"
@@ -132,7 +132,7 @@ export default function ClimateSolutionPage() {
           <div className="bg-white/3 border border-white/10 rounded-2xl p-5 space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-white/30 text-[10px] uppercase tracking-widest font-mono">Germany Climate GmbH</p>
+                <p className="text-white/30 text-[10px] uppercase tracking-widest font-mono">Commercial Office Group</p>
                 <p className="text-white font-semibold text-sm mt-0.5">Office — Main Building, 1F</p>
               </div>
               <span className="flex items-center gap-1.5 text-green-400 text-xs">
@@ -236,7 +236,7 @@ export default function ClimateSolutionPage() {
       <section className="border-t border-white/8 px-4 md:px-8 py-20 max-w-3xl mx-auto text-center">
         <h2 className="text-3xl font-bold mb-4">Automate your building climate</h2>
         <p className="text-white/40 text-sm mb-8">
-          See how Germany Climate GmbH uses EC Climate to monitor and control HVAC across multiple rooms automatically.
+          See how EC Climate monitors and controls HVAC across multiple rooms automatically — deployed in production across commercial office buildings.
         </p>
         <div className="flex flex-col sm:flex-row gap-3 justify-center">
           <Link href="/contact"

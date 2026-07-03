@@ -284,7 +284,7 @@ export default function Home() {
             Powering connected products at
           </p>
           <div className="flex flex-wrap items-center gap-6">
-            {["City Schools Network", "Nordic Climate GmbH"].map(c => (
+            {["City Schools Network", "Nordic Climate Group"].map(c => (
               <span key={c} className="text-white/45 text-sm font-medium">{c}</span>
             ))}
             <span className="text-white/18 text-xs border border-white/8 px-3 py-1 rounded-full">

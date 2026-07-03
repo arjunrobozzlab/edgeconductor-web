@@ -255,7 +255,7 @@ export default function GetStartedPage() {
               {[
                 { icon: "◎", text: "Hardware-validated on real ESP32 + GSM devices" },
                 { icon: "◈", text: "Live telemetry in < 5 seconds end-to-end" },
-                { icon: "▣", text: "Used by DPS School and Germany Climate GmbH" },
+                { icon: "▣", text: "Deployed in schools, commercial buildings, and fleet operations" },
                 { icon: "↑", text: "OTA firmware push from dashboard" },
               ].map(t => (
                 <div key={t.text} className="flex items-start gap-3">

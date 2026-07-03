@@ -12,15 +12,15 @@ export const metadata: Metadata = {
 
 const caseStudies = [
   {
-    id: "dps-school",
+    id: "school-fleet",
     featured: true,
     category: "Fleet Management",
     industry: "Education",
     color: "blue",
-    title: "DPS School — Student Bus Fleet Tracking",
+    title: "Regional School Network — Student Bus Fleet Tracking",
     headline: "Real-time GPS visibility for 40+ school buses. Zero missed locations.",
     summary:
-      "Deployed EdgeConductor's EC Tracker solution for a school fleet. Each bus carries an ESP32 + GSM module sending location every 5 seconds. Parents and operations staff track buses live on a map dashboard. Remote reboot and OTA firmware updates eliminate field visits. The school org admin manages all devices and receives offline alerts if a tracker goes silent.",
+      "Deployed EdgeConductor's EC Tracker solution for a school bus fleet. Each bus carries a GSM module sending location every 5 seconds. Parents and operations staff track buses live on a map dashboard. Remote reboot and OTA firmware updates eliminate field visits. The org admin manages all devices and receives offline alerts if a tracker goes silent.",
     outcomes: [
       { label: "Location update", value: "Every 5s" },
       { label: "Field visits for updates", value: "Zero" },
@@ -33,15 +33,15 @@ const caseStudies = [
     solution: { label: "EC Tracker", href: "/solutions/tracker" },
   },
   {
-    id: "germany-climate",
+    id: "office-climate",
     featured: false,
     category: "Smart Buildings",
     industry: "Commercial Real Estate",
     color: "cyan",
-    title: "Germany Climate GmbH — Multi-Room HVAC Automation",
+    title: "Commercial Office Group — Multi-Room HVAC Automation",
     headline: "3 commercial buildings automated. HVAC runs on rules, not manual switches.",
     summary:
-      "Deployed EC Climate across 3 office buildings in Germany. Each room has an ESP32 with BME280 and MH-Z19 CO₂ sensors, connected via MQTT to EdgeConductor cloud. Automated rules fire HVAC relay when CO₂ exceeds 1000 ppm. Night shutoff schedule runs at 22:00 Mon–Fri. Each floor tenant gets QR-code access to view their room climate. The org admin manages all buildings from one dashboard.",
+      "Deployed EC Climate across 3 commercial office buildings. Each room has a sensor node with CO₂, temperature, and humidity sensors, connected via MQTT to EdgeConductor cloud. Automated rules fire HVAC relay when CO₂ exceeds 1000 ppm. Night shutoff schedule runs at 22:00 Mon–Fri. Each floor tenant gets QR-code access to view their room climate. The org admin manages all buildings from one dashboard.",
     outcomes: [
       { label: "CO₂ rule latency", value: "< 30s" },
       { label: "Buildings", value: "3" },

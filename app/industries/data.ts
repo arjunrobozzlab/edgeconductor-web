@@ -87,10 +87,10 @@ export const industries: Industry[] = [
     capabilities: ["Live GPS Telemetry", "Cellular GSM / 4G Connectivity", "OTA Firmware Updates", "Geofence Rules Engine", "Multi-Tenant Fleet Orgs", "Offline & Alert Webhooks", "Device Diagnostics", "White-Label Portal"],
     solution: { name: "EC Tracker", href: "/solutions/tracker" },
     caseStudy: {
-      client: "DPS School",
+      client: "Regional School Network",
       headline: "40+ buses tracked live. Zero field visits for firmware updates.",
       outcome: "School fleet went from manual driver check-ins to real-time GPS visibility for every bus. Firmware updated remotely. Zero downtime in 3 months of production.",
-      href: "/case-studies#dps-school",
+      href: "/case-studies#school-fleet",
     },
   },
 
@@ -157,10 +157,10 @@ export const industries: Industry[] = [
     capabilities: ["CO₂ / Temp / Humidity Telemetry", "HVAC Relay Control", "Threshold + Schedule Rules", "QR Tenant Access", "Multi-Building Org Hierarchy", "Energy Shutoff Automation", "Alert Webhooks & Email", "OTA Firmware"],
     solution: { name: "EC Climate", href: "/solutions/climate" },
     caseStudy: {
-      client: "Germany Climate GmbH",
+      client: "Commercial Office Group",
       headline: "3 buildings automated. HVAC interventions reduced to near-zero.",
       outcome: "CO₂-triggered HVAC automation across 3 office buildings. Night shutoff runs automatically. Tenants self-onboard via QR. Energy waste eliminated.",
-      href: "/case-studies#germany-climate",
+      href: "/case-studies#office-climate",
     },
   },
 
