@@ -482,11 +482,11 @@ export default function Home() {
             </div>
             <div className="grid grid-cols-1 gap-2">
               {[
-                { label: "Device Operations",   color: "text-blue-400",   desc: "Register · Provision · OTA · Diagnose · Retire" },
-                { label: "Fleet Operations",    color: "text-amber-400",  desc: "Track · Alert · Dispatch · Maintain" },
-                { label: "Building Operations", color: "text-cyan-400",   desc: "Monitor · Automate · Tenant Access · Report" },
-                { label: "Asset Operations",    color: "text-orange-400", desc: "Health · Config · Anomaly · Lifecycle" },
-                { label: "Customer Operations", color: "text-violet-400", desc: "Partner Portal · Multi-Org · White-Label" },
+                { label: "Device Operations",   color: "text-blue-400",   desc: "Manufacture · Deploy · Operate · Upgrade · Retire" },
+                { label: "Fleet Operations",    color: "text-amber-400",  desc: "Vehicles · Drivers · Trips · Maintenance · Compliance" },
+                { label: "Building Operations", color: "text-cyan-400",   desc: "Buildings · Rooms · Tenants · Energy · Maintenance" },
+                { label: "Asset Operations",    color: "text-orange-400", desc: "Asset · Location · Health · Configuration · Lifecycle" },
+                { label: "Customer Operations", color: "text-violet-400", desc: "Organizations · Partners · White Label · Users · Billing" },
               ].map(op => (
                 <Link key={op.label} href="/operations"
                   className="flex items-center gap-4 bg-white/2 border border-white/8 hover:border-white/18 hover:bg-white/4 rounded-xl px-4 py-3 transition group">

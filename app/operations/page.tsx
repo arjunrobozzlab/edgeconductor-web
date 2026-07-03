@@ -40,7 +40,7 @@ const operations: Operation[] = [
     number: "01",
     headline: "Manage your product lifecycle from factory floor to retirement",
     sub: "Every product you ship goes through the same lifecycle. Device Operations gives you one system to manage every stage — so nothing falls through the cracks between manufacture and the field.",
-    flow: ["Manufacture", "Provision", "Deploy", "Operate", "Update", "Maintain", "Retire"],
+    flow: ["Manufacture", "Deploy", "Operate", "Maintain", "Upgrade", "Retire"],
     outcomes: [
       {
         title: "Every unit tracked from day one",
@@ -69,8 +69,8 @@ const operations: Operation[] = [
     color: "amber",
     number: "02",
     headline: "Manage your entire transport operation from one view",
-    sub: "Fleet managers don't think in GPS pings. They think in vehicles, drivers, routes, and maintenance schedules. Fleet Operations is built around how your operations team actually works.",
-    entities: ["Vehicles", "Drivers", "Routes", "Geofences", "Maintenance", "Alerts", "Compliance"],
+    sub: "Fleet managers don't think in GPS pings. They think in vehicles, drivers, trips, and compliance. Fleet Operations is built around how your operations team actually works.",
+    entities: ["Vehicles", "Drivers", "Trips", "Maintenance", "Compliance"],
     outcomes: [
       {
         title: "Know where every vehicle is right now",
@@ -98,9 +98,9 @@ const operations: Operation[] = [
     label: "Building Operations",
     color: "cyan",
     number: "03",
-    headline: "Manage every building, floor, room, and tenant from one platform",
-    sub: "Facilities managers don't think in HVAC protocols. They think in buildings, floors, rooms, and tenants. Building Operations organizes your data the way your team actually manages properties.",
-    entities: ["Buildings", "Floors", "Rooms", "Tenants", "HVAC", "Energy", "Maintenance"],
+    headline: "Manage every building, room, and tenant from one platform",
+    sub: "Facilities managers don't think in sensor protocols. They think in buildings, rooms, tenants, and energy bills. Building Operations organizes your data the way your team actually manages properties.",
+    entities: ["Buildings", "Rooms", "Tenants", "Energy", "Maintenance"],
     outcomes: [
       {
         title: "See your entire property portfolio in one view",
@@ -160,8 +160,8 @@ const operations: Operation[] = [
     color: "violet",
     number: "05",
     headline: "Run your client business on this platform",
-    sub: "If you deploy to multiple clients, you're not just running IoT — you're running a business on top of IoT. Customer Operations gives you the tools to manage organizations, partners, permissions, and billing, all under your brand.",
-    entities: ["Organizations", "Partners", "White Label", "Permissions", "Support", "Billing"],
+    sub: "If you deploy to multiple clients, you're not just running IoT — you're running a business on top of IoT. Customer Operations gives you the tools to manage organizations, partners, users, permissions, and billing, all under your brand.",
+    entities: ["Organizations", "Partners", "White Label", "Users", "Permissions", "Support", "Billing"],
     outcomes: [
       {
         title: "Your org structure mirrors your business",
@@ -314,11 +314,11 @@ export default function OperationsPage() {
               </p>
               <div className="space-y-3">
                 {[
-                  { label: "Device Operations",   color: "text-blue-400",   sub: "Manufacture · Provision · Update · Retire" },
-                  { label: "Fleet Operations",    color: "text-amber-400",  sub: "Vehicles · Drivers · Routes · Maintenance" },
-                  { label: "Building Operations", color: "text-cyan-400",   sub: "Buildings · Floors · Rooms · Tenants" },
-                  { label: "Asset Operations",    color: "text-orange-400", sub: "Location · Health · Config · Lifecycle" },
-                  { label: "Customer Operations", color: "text-violet-400", sub: "Organizations · Partners · Billing" },
+                  { label: "Device Operations",   color: "text-blue-400",   sub: "Manufacture · Deploy · Operate · Upgrade · Retire" },
+                  { label: "Fleet Operations",    color: "text-amber-400",  sub: "Vehicles · Drivers · Trips · Maintenance · Compliance" },
+                  { label: "Building Operations", color: "text-cyan-400",   sub: "Buildings · Rooms · Tenants · Energy · Maintenance" },
+                  { label: "Asset Operations",    color: "text-orange-400", sub: "Asset · Location · Health · Configuration · Lifecycle" },
+                  { label: "Customer Operations", color: "text-violet-400", sub: "Organizations · Partners · White Label · Users · Billing" },
                 ].map(o => (
                   <div key={o.label} className="flex items-start gap-3">
                     <span className={`text-base mt-0.5 shrink-0 ${o.color}`}>✓</span>
@@ -350,19 +350,19 @@ export default function OperationsPage() {
               id: "fleet",
               label: "Fleet Operations",
               color: "amber",
-              entities: ["Vehicles", "Drivers", "Routes", "Geofences", "Maintenance", "Alerts", "Compliance"],
+              entities: ["Vehicles", "Drivers", "Trips", "Maintenance", "Compliance"],
             },
             {
               id: "building",
               label: "Building Operations",
               color: "cyan",
-              entities: ["Buildings", "Floors", "Rooms", "Tenants", "HVAC", "Energy", "Maintenance"],
+              entities: ["Buildings", "Rooms", "Tenants", "Energy", "Maintenance"],
             },
             {
               id: "device",
               label: "Device Operations",
               color: "blue",
-              entities: ["Manufacture", "Provision", "Deploy", "OTA", "Diagnostics", "Retire"],
+              entities: ["Manufacture", "Deploy", "Operate", "Maintain", "Upgrade", "Retire"],
             },
             {
               id: "asset",
@@ -374,7 +374,7 @@ export default function OperationsPage() {
               id: "customer",
               label: "Customer Operations",
               color: "violet",
-              entities: ["Organizations", "Partners", "White Label", "Permissions", "Support", "Billing"],
+              entities: ["Organizations", "Partners", "White Label", "Users", "Permissions", "Support", "Billing"],
             },
           ].map(card => {
             const c = colorMap[card.color];
