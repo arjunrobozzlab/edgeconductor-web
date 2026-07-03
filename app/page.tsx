@@ -4,9 +4,9 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
 export const metadata: Metadata = {
-  title: "EdgeConductor — Connected Asset Platform for Hardware Companies",
+  title: "EdgeConductor — Connected Product & Asset Operations Platform",
   description:
-    "Don't build IoT infrastructure. EdgeConductor gives hardware companies device registry, live telemetry, OTA updates, remote control, and white-label B2B dashboards — out of the box. Ship in weeks, not years.",
+    "Don't build the platform. EdgeConductor gives hardware companies device operations, fleet operations, building operations, anomaly detection, and white-label B2B dashboards — out of the box. Ship in weeks, not years.",
   alternates: { canonical: "https://edgeconductor.com" },
 };
 
@@ -172,7 +172,7 @@ export default function Home() {
           {/* Left — copy */}
           <div>
             <span className="inline-block text-xs font-semibold tracking-widest text-blue-400 uppercase mb-5 border border-blue-500/30 bg-blue-500/8 px-3 py-1.5 rounded-full">
-              Connected Asset Platform
+              Connected Product &amp; Asset Operations Platform
             </span>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.08] tracking-tight mb-6">
               Don&apos;t build{" "}

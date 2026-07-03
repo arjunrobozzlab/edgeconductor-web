@@ -44,7 +44,7 @@ export default function Footer() {
               <span className="font-bold text-white">EdgeConductor</span>
             </div>
             <p className="text-white/40 text-xs leading-relaxed">
-              The complete IoT stack for hardware teams. Device firmware to B2B cloud — all in one platform.
+              Connected product &amp; asset operations. Device registry, fleet, building, and partner operations — one platform.
             </p>
             <div className="flex gap-3 mt-5">
               <a href="https://github.com/EdgeConductor" target="_blank" rel="noopener noreferrer"

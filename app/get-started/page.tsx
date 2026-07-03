@@ -83,7 +83,7 @@ export default function GetStartedPage() {
         {/* Header */}
         <div className="text-center mb-12">
           <span className="text-xs font-semibold tracking-widest text-white/30 uppercase">Get Started</span>
-          <h1 className="text-4xl md:text-5xl font-bold mt-3 mb-4">Start building your IoT product</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mt-3 mb-4">Start running connected operations</h1>
           <p className="text-white/45 text-base max-w-lg mx-auto">
             Free forever for up to 5 devices. No credit card required.
           </p>

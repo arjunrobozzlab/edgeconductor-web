@@ -60,7 +60,7 @@ export default function ContactPage() {
       <section className="px-4 md:px-8 py-20 md:py-28 max-w-6xl mx-auto">
         <div className="text-center mb-14">
           <span className="text-xs font-semibold tracking-widest text-white/30 uppercase">Contact</span>
-          <h1 className="text-4xl md:text-5xl font-bold mt-3 mb-4">Let&apos;s talk IoT</h1>
+          <h1 className="text-4xl md:text-5xl font-bold mt-3 mb-4">Let&apos;s talk operations</h1>
           <p className="text-white/45 text-base max-w-lg mx-auto">
             Book a demo, ask about pricing, or tell us about your connected product.
             We respond within 24 hours.

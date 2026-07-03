@@ -5,7 +5,7 @@ import Footer from "../components/Footer";
 
 export const metadata: Metadata = {
   title: "Company — EdgeConductor",
-  description: "EdgeConductor is an IoT platform company building the complete stack for hardware product teams.",
+  description: "EdgeConductor is a connected product & asset operations platform built for hardware companies — fleet operations, building operations, and device lifecycle management.",
 };
 
 export default function CompanyPage() {
@@ -18,7 +18,7 @@ export default function CompanyPage() {
           <h1 className="text-4xl md:text-5xl font-bold mt-3 mb-6">About EdgeConductor</h1>
           <div className="space-y-4 text-white/55 text-base leading-relaxed max-w-2xl">
             <p>
-              EdgeConductor is an IoT platform built for hardware product companies — teams that design real physical devices and need a complete cloud backend to go with them.
+              EdgeConductor is a connected product &amp; asset operations platform built for hardware companies — teams that design real physical devices and need device lifecycle management, fleet operations, and B2B dashboards without building the cloud infrastructure themselves.
             </p>
             <p>
               We started from the frustration of stitching together five different services for every connected product: a device registry here, a dashboard tool there, MQTT broker somewhere else, OTA vendor on top, and multi-tenant auth holding it all together poorly. EdgeConductor is what we wished existed.

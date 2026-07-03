@@ -338,6 +338,69 @@ export default function OperationsPage() {
         </div>
       </section>
 
+      {/* ── Operation Cards — portfolio overview ─────────────────────────── */}
+      <section className="px-4 md:px-8 py-16 max-w-7xl mx-auto">
+        <div className="text-center mb-10">
+          <span className="text-xs font-semibold tracking-widest text-white/30 uppercase">Five operations. One platform.</span>
+          <h2 className="text-2xl font-bold mt-3">What EdgeConductor manages</h2>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          {[
+            {
+              id: "fleet",
+              label: "Fleet Operations",
+              color: "amber",
+              entities: ["Vehicles", "Drivers", "Routes", "Geofences", "Maintenance", "Alerts", "Compliance"],
+            },
+            {
+              id: "building",
+              label: "Building Operations",
+              color: "cyan",
+              entities: ["Buildings", "Floors", "Rooms", "Tenants", "HVAC", "Energy", "Maintenance"],
+            },
+            {
+              id: "device",
+              label: "Device Operations",
+              color: "blue",
+              entities: ["Manufacture", "Provision", "Deploy", "OTA", "Diagnostics", "Retire"],
+            },
+            {
+              id: "asset",
+              label: "Asset Operations",
+              color: "orange",
+              entities: ["Asset", "Location", "Health", "Configuration", "Lifecycle", "Optimization"],
+            },
+            {
+              id: "customer",
+              label: "Customer Operations",
+              color: "violet",
+              entities: ["Organizations", "Partners", "White Label", "Permissions", "Support", "Billing"],
+            },
+          ].map(card => {
+            const c = colorMap[card.color];
+            return (
+              <a key={card.id} href={`#${card.id}`}
+                className={`group bg-white/2 border ${c.border} hover:bg-white/4 hover:border-opacity-50 rounded-2xl p-5 transition flex flex-col`}>
+                <span className={`text-xs font-semibold uppercase tracking-wider border px-2.5 py-1 rounded-full w-fit mb-4 ${c.tag}`}>
+                  {card.label}
+                </span>
+                <ul className="space-y-1.5 flex-1">
+                  {card.entities.map(e => (
+                    <li key={e} className="flex items-center gap-2 text-sm text-white/45 group-hover:text-white/55 transition">
+                      <span className={`w-1 h-1 rounded-full shrink-0 ${colorMap[card.color].chainDot} opacity-50`} />
+                      {e}
+                    </li>
+                  ))}
+                </ul>
+                <span className={`text-xs mt-4 ${c.tag} opacity-60 group-hover:opacity-100 transition`}>
+                  Explore →
+                </span>
+              </a>
+            );
+          })}
+        </div>
+      </section>
+
       {/* ── Operations Sections ────────────────────────────────────────────── */}
       {operations.map((op) => {
         const c = colorMap[op.color];
