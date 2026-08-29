@@ -24,7 +24,7 @@ const plans = [
     sub: "per month",
     features: ["50 devices", "5 organizations", "Everything in Starter", "Rules engine & automation", "Multi-tenant B2B access", "90-day data history", "PDF/Excel reports", "Email + Telegram alerts", "Email support"],
     cta: "Start Pro",
-    href: "/contact",
+    href: "https://ec-platform-ten.vercel.app/register",
     highlight: true,
   },
   {
