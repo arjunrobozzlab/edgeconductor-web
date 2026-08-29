@@ -38,6 +38,10 @@ export default function Navbar() {
 
         {/* Desktop CTAs */}
         <div className="hidden md:flex items-center gap-2.5">
+          <a href="https://ec-platform-ten.vercel.app/login"
+            className="text-sm text-white/55 hover:text-white transition-colors">
+            Login
+          </a>
           <Link href="/demo"
             className="text-sm border border-white/20 text-white/65 px-4 py-2 rounded-full hover:text-white hover:border-white/40 transition">
             Try Demo
@@ -74,6 +78,11 @@ export default function Navbar() {
             ))}
           </div>
           <div className="pt-3 border-t border-white/10 flex flex-col gap-2">
+            <a href="https://ec-platform-ten.vercel.app/login"
+              className="text-sm text-white/60 hover:text-white text-center py-2 transition"
+              onClick={() => setOpen(false)}>
+              Login
+            </a>
             <Link href="/demo"
               className="text-sm border border-white/20 text-white/65 px-4 py-2.5 rounded-full text-center hover:text-white transition"
               onClick={() => setOpen(false)}>
