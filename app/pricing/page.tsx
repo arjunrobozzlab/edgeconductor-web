@@ -15,7 +15,7 @@ const plans = [
     sub: "No credit card required",
     features: ["5 devices", "1 organization", "Live telemetry", "OTA firmware updates", "QR device claiming", "7-day data history", "Community support"],
     cta: "Start for free",
-    href: "/get-started",
+    href: "https://ec-platform-ten.vercel.app/register",
     highlight: false,
   },
   {
@@ -102,6 +102,10 @@ export default function PricingPage() {
 
         <p className="text-center text-white/30 text-xs mt-10">
           All prices in INR. USD pricing available. Per-device pricing for large deployments — <Link href="/contact" className="underline hover:text-white/50">contact us</Link>.
+        </p>
+        <p className="text-center text-white/25 text-xs mt-3">
+          Already have an account?{" "}
+          <a href="https://ec-platform-ten.vercel.app/login" className="underline hover:text-white/50">Sign in</a>
         </p>
       </section>
       <Footer />
