@@ -16,6 +16,22 @@ const methodColor: Record<string, string> = {
   DELETE: "text-red-400 bg-red-500/8",
 };
 
+const webhookEndpoints = [
+  { method: "GET",    auth: true,  path: "/orgs/:id/webhooks",   desc: "List registered webhooks for an org",                       body: null },
+  { method: "POST",   auth: true,  path: "/orgs/:id/webhooks",   desc: "Register a webhook endpoint",                               body: '{"url","events":["telemetry","alert","ota","device_status"]}' },
+  { method: "PATCH",  auth: true,  path: "/webhooks/:id",        desc: "Update webhook — toggle active, change URL or events",       body: '{"active":false}' },
+  { method: "DELETE", auth: true,  path: "/webhooks/:id",        desc: "Delete a webhook permanently",                              body: null },
+  { method: "POST",   auth: true,  path: "/webhooks/:id/test",   desc: "Send a signed test payload to verify endpoint reachability", body: null },
+];
+
+const locationEndpoints = [
+  { method: "GET",    auth: true,  path: "/orgs/:id/locations",  desc: "List all locations (Site/Building/Floor/Room) for org",    body: null },
+  { method: "POST",   auth: true,  path: "/orgs/:id/locations",  desc: "Create a location node",                                   body: '{"name","type":"site|building|floor|room","parent_id?"}' },
+  { method: "PATCH",  auth: true,  path: "/locations/:id",       desc: "Rename or reparent a location",                            body: '{"name","parent_id"}' },
+  { method: "DELETE", auth: true,  path: "/locations/:id",       desc: "Delete location (cascades to children)",                   body: null },
+  { method: "PATCH",  auth: true,  path: "/devices/:serial/location", desc: "Assign a device to a location node",                  body: '{"location_id":"<uuid>"}' },
+];
+
 const endpoints = [
   { method: "POST",  auth: false, path: "/devices/register",               desc: "Register a new device",                    body: '{"serial_no","product_type","fw_version"}' },
   { method: "GET",   auth: true,  path: "/devices",                         desc: "List devices (filter: org_id, tenant_id)", body: null },
@@ -266,6 +282,69 @@ export default function DevelopersPage() {
         <LangSwitcher />
       </section>
 
+      {/* ── Quick Start ───────────────────────────────────────── */}
+      <section className="px-4 md:px-8 pb-20 max-w-6xl mx-auto">
+        <div className="flex items-center gap-3 mb-6">
+          <h2 className="text-2xl font-bold">Quick Start</h2>
+          <span className="text-xs text-green-400 bg-green-500/10 border border-green-500/25 px-2.5 py-1 rounded-full font-semibold">10 min</span>
+        </div>
+        <div className="grid md:grid-cols-4 gap-3 mb-8">
+          {[
+            { step: "1", title: "Create an org", desc: "Sign up → dashboard automatically creates your first org and API key." },
+            { step: "2", title: "Register a device", desc: "POST /devices/register with serial + type. Save the returned mqtt_password." },
+            { step: "3", title: "Connect via MQTT", desc: "Connect to services.edgeconductor.com:8883 TLS. Publish to devices/{serial}/telemetry." },
+            { step: "4", title: "See it live", desc: "Dashboard shows telemetry in under 5 seconds. Rules evaluate every 30s automatically." },
+          ].map(s => (
+            <div key={s.step} className="bg-white/2 border border-white/8 rounded-xl p-5">
+              <span className="text-3xl font-bold text-white/10 block mb-2">{s.step}</span>
+              <p className="text-sm font-semibold text-white/70 mb-1">{s.title}</p>
+              <p className="text-xs text-white/35 leading-relaxed">{s.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Code block */}
+        <div className="grid md:grid-cols-2 gap-4">
+          <div className="bg-black/50 border border-white/10 rounded-2xl overflow-hidden">
+            <div className="px-5 py-3 border-b border-white/8 flex items-center gap-2">
+              <span className="text-xs text-yellow-400 font-semibold">npm</span>
+              <span className="text-xs text-white/30">JavaScript — register + push telemetry</span>
+            </div>
+            <pre className="px-5 py-4 text-xs font-mono text-white/55 leading-6 overflow-x-auto">{`import { EdgeConductor } from 'ec-sdk';
+
+const ec = new EdgeConductor({ apiKey: 'ec_live_...' });
+
+// Register device once (idempotent)
+const device = await ec.devices.register({
+  serial_no: 'EC-FARM-001',
+  product_type: 'climate_sensor',
+});
+console.log(device.mqtt_password); // store in firmware flash
+
+// Push telemetry
+await ec.telemetry.push('EC-FARM-001', {
+  temp: 24.5, hum: 60, co2: 820,
+});`}</pre>
+          </div>
+          <div className="bg-black/50 border border-white/10 rounded-2xl overflow-hidden">
+            <div className="px-5 py-3 border-b border-white/8 flex items-center gap-2">
+              <span className="text-xs text-blue-400 font-semibold">curl</span>
+              <span className="text-xs text-white/30">REST — register + push telemetry</span>
+            </div>
+            <pre className="px-5 py-4 text-xs font-mono text-white/55 leading-6 overflow-x-auto">{`# Register device
+curl -X POST https://services.edgeconductor.com/registry/devices/register \\
+  -H "Content-Type: application/json" \\
+  -d '{"serial_no":"EC-FARM-001","product_type":"climate"}'
+
+# Push telemetry (with API key)
+curl -X POST .../devices/EC-FARM-001/telemetry \\
+  -H "Authorization: Bearer ec_live_..." \\
+  -H "Content-Type: application/json" \\
+  -d '{"temp":24.5,"hum":60,"co2":820}'`}</pre>
+          </div>
+        </div>
+      </section>
+
       {/* ── CLI ───────────────────────────────────────────────── */}
       <section className="px-4 md:px-8 pb-20 max-w-6xl mx-auto">
         <div className="flex items-center gap-3 mb-2">
@@ -395,6 +474,85 @@ export default function DevelopersPage() {
         </div>
       </section>
 
+      {/* ── Webhooks API ──────────────────────────────────────── */}
+      <section className="px-4 md:px-8 pb-20 max-w-6xl mx-auto">
+        <div className="flex items-center gap-3 mb-3">
+          <h2 className="text-2xl font-bold">Webhooks</h2>
+          <span className="text-xs text-blue-400 bg-blue-500/10 border border-blue-500/25 px-2.5 py-1 rounded-full font-semibold">New</span>
+        </div>
+        <p className="text-white/35 text-sm mb-6 max-w-2xl">
+          Register your server URL to receive real-time events. Every request carries an HMAC-SHA256 signature you can verify.
+        </p>
+
+        {/* Endpoint table */}
+        <div className="bg-white/2 border border-white/8 rounded-2xl overflow-hidden mb-6">
+          <div className="grid grid-cols-[80px_1fr_200px] md:grid-cols-[80px_260px_1fr] gap-4 px-5 py-2.5 border-b border-white/10 text-xs text-white/20 font-semibold uppercase tracking-wider">
+            <span>Method</span><span>Endpoint</span><span>Description</span>
+          </div>
+          {webhookEndpoints.map((ep, i) => (
+            <div key={`${ep.method}${ep.path}`}
+              className={`grid grid-cols-[80px_1fr] md:grid-cols-[80px_260px_1fr] gap-4 items-start px-5 py-3.5 hover:bg-white/2 transition ${i < webhookEndpoints.length - 1 ? "border-b border-white/6" : ""}`}>
+              <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded w-fit ${methodColor[ep.method] || "text-white/50"}`}>{ep.method}</span>
+              <span className="text-xs font-mono text-white/60">{ep.path}</span>
+              <div>
+                <p className="text-xs text-white/40">{ep.desc}</p>
+                {ep.body && <code className="text-xs text-white/20 font-mono mt-0.5 block">{ep.body}</code>}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Event payload */}
+        <div className="grid md:grid-cols-2 gap-4">
+          <div className="bg-white/2 border border-white/8 rounded-xl p-5">
+            <p className="text-xs font-semibold text-white/40 uppercase tracking-wider mb-3">Payload format</p>
+            <pre className="text-xs font-mono text-white/50 leading-relaxed">{`{
+  "event": "telemetry",       // or alert, ota, device_status
+  "org_id": "uuid",
+  "timestamp": "2026-09-03T10:00:00Z",
+  "data": { ... }             // event-specific payload
+}`}</pre>
+          </div>
+          <div className="bg-white/2 border border-white/8 rounded-xl p-5">
+            <p className="text-xs font-semibold text-white/40 uppercase tracking-wider mb-3">Signature verification (Node.js)</p>
+            <pre className="text-xs font-mono text-white/50 leading-relaxed">{`const sig = req.headers['x-ec-signature'];
+const expected = 'sha256=' +
+  crypto.createHmac('sha256', WEBHOOK_SECRET)
+        .update(rawBody)
+        .digest('hex');
+
+if (sig !== expected) return res.sendStatus(401);`}</pre>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Locations API ─────────────────────────────────────── */}
+      <section className="px-4 md:px-8 pb-20 max-w-6xl mx-auto">
+        <div className="flex items-center gap-3 mb-3">
+          <h2 className="text-2xl font-bold">Locations</h2>
+          <span className="text-xs text-blue-400 bg-blue-500/10 border border-blue-500/25 px-2.5 py-1 rounded-full font-semibold">New</span>
+        </div>
+        <p className="text-white/35 text-sm mb-6 max-w-2xl">
+          Organise devices in a physical hierarchy — Site → Building → Floor → Room. Assign any device to any node.
+        </p>
+        <div className="bg-white/2 border border-white/8 rounded-2xl overflow-hidden">
+          <div className="grid grid-cols-[80px_1fr_200px] md:grid-cols-[80px_280px_1fr] gap-4 px-5 py-2.5 border-b border-white/10 text-xs text-white/20 font-semibold uppercase tracking-wider">
+            <span>Method</span><span>Endpoint</span><span>Description</span>
+          </div>
+          {locationEndpoints.map((ep, i) => (
+            <div key={`${ep.method}${ep.path}`}
+              className={`grid grid-cols-[80px_1fr] md:grid-cols-[80px_280px_1fr] gap-4 items-start px-5 py-3.5 hover:bg-white/2 transition ${i < locationEndpoints.length - 1 ? "border-b border-white/6" : ""}`}>
+              <span className={`text-xs font-mono font-bold px-2 py-0.5 rounded w-fit ${methodColor[ep.method] || "text-white/50"}`}>{ep.method}</span>
+              <span className="text-xs font-mono text-white/60">{ep.path}</span>
+              <div>
+                <p className="text-xs text-white/40">{ep.desc}</p>
+                {ep.body && <code className="text-xs text-white/20 font-mono mt-0.5 block">{ep.body}</code>}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
       {/* ── MQTT ──────────────────────────────────────────────── */}
       <section className="px-4 md:px-8 pb-20 max-w-6xl mx-auto">
         <h2 className="text-2xl font-bold mb-3">MQTT Topics</h2>
@@ -491,9 +649,8 @@ export default function DevelopersPage() {
             <div className="bg-white/2 border border-white/8 rounded-xl px-5 py-4">
               <h3 className="text-sm font-semibold text-white/60 mb-2">Webhooks</h3>
               <p className="text-xs text-white/35 leading-relaxed">
-                Rules can fire a webhook on threshold breach or schedule.
-                POST to your endpoint with JSON payload.
-                HMAC signature verification coming in v0.2.
+                Register endpoints to receive <code className="text-white/50">telemetry</code>, <code className="text-white/50">alert</code>, <code className="text-white/50">ota</code>, and <code className="text-white/50">device_status</code> events.
+                Each request is signed with <code className="text-white/50">X-EC-Signature: sha256=&lt;hmac&gt;</code>.
               </p>
             </div>
           </div>
