@@ -40,16 +40,23 @@ export default function DemoPage() {
           {/* Credentials card */}
           <div className="inline-block bg-white/4 border border-white/12 rounded-2xl px-8 py-6 mb-8 text-left">
             <p className="text-xs text-white/30 uppercase tracking-wider font-semibold mb-4">Demo Credentials</p>
-            <div className="space-y-2 font-mono text-sm">
+            <div className="space-y-2 font-mono text-sm mb-4">
               <div className="flex items-center gap-3">
                 <span className="text-white/30 w-20">Email</span>
                 <span className="text-white/80 select-all">edgeconductordemo@gmail.com</span>
               </div>
               <div className="flex items-center gap-3">
                 <span className="text-white/30 w-20">Password</span>
-                <span className="text-white/80 select-all">edge@123demo</span>
+                <span className="text-white/30 tracking-widest">••••••••••••</span>
               </div>
             </div>
+            <p className="text-xs text-white/35 max-w-xs">
+              Password shared on request —{" "}
+              <Link href="/contact?type=demo" className="text-blue-400 hover:text-blue-300 underline underline-offset-2">
+                contact us
+              </Link>{" "}
+              or book a guided demo below.
+            </p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
