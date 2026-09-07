@@ -106,7 +106,7 @@ const stats = [
   { value: "10 min", label: "First device sending live telemetry" },
   { value: "6 weeks", label: "Typical time to first live deployment" },
   { value: "Zero", label: "Cloud infrastructure to build or maintain" },
-  { value: "10,000+", label: "Assets supported per deployment" },
+  { value: "10,000+", label: "Device capacity per Enterprise deployment" },
 ];
 
 const buildVsBuy = [
@@ -280,14 +280,14 @@ export default function Home() {
       <section className="border-y border-white/8 bg-white/[0.015] px-4 md:px-8 py-5">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center gap-4 sm:gap-8">
           <p className="text-white/25 text-xs font-semibold uppercase tracking-widest shrink-0">
-            Live deployments at
+            In production for
           </p>
           <div className="flex flex-wrap items-center gap-6">
-            {["City Schools Network", "Nordic Climate Group"].map(c => (
+            {["Smart Building HVAC", "GPS Fleet Tracking", "Industrial IoT"].map(c => (
               <span key={c} className="text-white/45 text-sm font-medium">{c}</span>
             ))}
             <span className="text-white/18 text-xs border border-white/8 px-3 py-1 rounded-full">
-              + your company next?
+              + your use case next?
             </span>
           </div>
         </div>

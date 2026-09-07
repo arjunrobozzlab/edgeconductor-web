@@ -34,7 +34,7 @@ const boards = [
       { label: "Connectivity", value: "WiFi 802.11 b/g/n" },
       { label: "Sensors", value: "BME280 + MH-Z19 CO₂" },
       { label: "Control", value: "Relay module (HVAC)" },
-      { label: "Protocol", value: "MQTT TLS (CloudAMQP)" },
+      { label: "Protocol", value: "MQTT TLS (port 8883)" },
       { label: "Telemetry rate", value: "Every 5s" },
     ],
     chips: ["ESP32", "BME280", "MH-Z19 CO₂", "Relay", "MQTT TLS"],
@@ -100,15 +100,58 @@ export default function HardwarePage() {
           ))}
         </div>
 
-        <div className="mt-10 bg-white/3 border border-white/10 rounded-2xl p-7 text-center">
+        <div className="mt-10 bg-white/3 border border-white/10 rounded-2xl p-7">
           <h3 className="font-bold mb-2">Works with your existing hardware</h3>
-          <p className="text-white/40 text-sm mb-5 max-w-lg mx-auto">
-            Any ESP32, ESP8266, or Raspberry Pi can connect to EdgeConductor via MQTT or HTTPS. Use our firmware libraries or implement the protocol yourself.
+          <p className="text-white/40 text-sm mb-6 max-w-2xl">
+            Any device that speaks MQTT over TLS or HTTPS can connect to EdgeConductor. Use our SDK and reference firmware, or implement the protocol yourself — the cloud doesn&apos;t care what hardware is on the other end.
           </p>
-          <Link href="/developers"
-            className="inline-flex items-center gap-2 border border-white/20 text-white/65 hover:text-white hover:border-white/40 text-sm font-medium px-5 py-2.5 rounded-full transition">
-            View Developer Docs →
-          </Link>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+            {[
+              {
+                category: "Microcontrollers",
+                color: "text-blue-400 border-blue-500/20 bg-blue-500/5",
+                items: ["ESP32 (WiFi + BLE)", "ESP8266 (WiFi)", "Arduino + WiFi Shield", "STM32 + ESP AT", "nRF9160 (cellular)"],
+                note: "MQTT TLS via PlatformIO / Arduino SDK",
+              },
+              {
+                category: "Linux / SBCs",
+                color: "text-cyan-400 border-cyan-500/20 bg-cyan-500/5",
+                items: ["Raspberry Pi (any model)", "Orange Pi", "Jetson Nano / Orin", "BeagleBone", "x86 industrial PCs"],
+                note: "Python SDK (pip install edgeconductor) or REST API",
+              },
+              {
+                category: "Cellular / Industrial",
+                color: "text-green-400 border-green-500/20 bg-green-500/5",
+                items: ["A7672S / SIM7600 (4G LTE)", "SIM800 / SIM900 (2G)", "Quectel EC21 / EC25", "RAK WisBlock", "Modbus / BACnet via gateway"],
+                note: "HTTPS telemetry over cellular — no WiFi required",
+              },
+            ].map(g => (
+              <div key={g.category} className={`border rounded-xl p-4 ${g.color}`}>
+                <p className={`text-xs font-bold uppercase tracking-wider mb-3 ${g.color.split(' ')[0]}`}>{g.category}</p>
+                <ul className="space-y-1.5 mb-3">
+                  {g.items.map(item => (
+                    <li key={item} className="flex items-center gap-2 text-xs text-white/55">
+                      <span className={`shrink-0 ${g.color.split(' ')[0]}`}>→</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-[10px] text-white/28 italic">{g.note}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Link href="/developers"
+              className="inline-flex items-center gap-2 border border-white/20 text-white/65 hover:text-white hover:border-white/40 text-sm font-medium px-5 py-2.5 rounded-full transition">
+              View Developer Docs →
+            </Link>
+            <Link href="/contact"
+              className="inline-flex items-center gap-2 border border-white/20 text-white/65 hover:text-white hover:border-white/40 text-sm font-medium px-5 py-2.5 rounded-full transition">
+              Custom hardware integration? Talk to us →
+            </Link>
+          </div>
         </div>
       </section>
       <Footer />

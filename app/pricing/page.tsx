@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import PricingCalculator from "./PricingCalculator";
 
 export const metadata: Metadata = {
   title: "Pricing — EdgeConductor",
@@ -99,6 +100,8 @@ export default function PricingPage() {
             </div>
           ))}
         </div>
+
+        <PricingCalculator />
 
         <p className="text-center text-white/30 text-xs mt-10">
           All prices in INR. USD pricing available. Per-device pricing for large deployments — <Link href="/contact" className="underline hover:text-white/50">contact us</Link>.

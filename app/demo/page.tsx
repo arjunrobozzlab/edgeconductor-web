@@ -43,11 +43,11 @@ export default function DemoPage() {
             <div className="space-y-2 font-mono text-sm">
               <div className="flex items-center gap-3">
                 <span className="text-white/30 w-20">Email</span>
-                <span className="text-white/80 select-all">demo@edgeconductor.com</span>
+                <span className="text-white/80 select-all">edgeconductordemo@gmail.com</span>
               </div>
               <div className="flex items-center gap-3">
                 <span className="text-white/30 w-20">Password</span>
-                <span className="text-white/80 select-all">EdgeDemo2026!</span>
+                <span className="text-white/80 select-all">edge@123demo</span>
               </div>
             </div>
           </div>
