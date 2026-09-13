@@ -558,7 +558,7 @@ print(key["key"])   # shown once — store securely`}</pre>
               Login to the dashboard → Org Settings → API Keys → Generate Key.
               The key is shown only once — store it securely.
             </p>
-            <Link href="https://edgeconductor.com/dashboard" target="_blank"
+            <Link href="https://ec-platform-ten.vercel.app" target="_blank"
               className="text-sm text-blue-400 hover:text-blue-300 transition">
               Open Dashboard →
             </Link>
