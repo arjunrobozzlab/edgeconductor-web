@@ -345,6 +345,168 @@ curl -X POST .../devices/EC-FARM-001/telemetry \\
         </div>
       </section>
 
+      {/* ── Python SDK ────────────────────────────────────────── */}
+      <section className="px-4 md:px-8 pb-20 max-w-6xl mx-auto">
+        <div className="flex items-center gap-3 mb-2">
+          <h2 className="text-2xl font-bold">Python SDK</h2>
+          <span className="text-xs text-blue-400 bg-blue-500/10 border border-blue-500/25 px-2.5 py-1 rounded-full font-semibold font-mono">v0.2.0</span>
+        </div>
+        <p className="text-white/35 text-sm mb-7 max-w-2xl">
+          Full-featured Python client for device management, telemetry, rules, and fleet operations.
+          Works on any Python 3.8+ environment — Raspberry Pi, servers, scripts, notebooks.
+        </p>
+
+        {/* Install */}
+        <div className="grid sm:grid-cols-2 gap-4 mb-7">
+          <div className="bg-black/50 border border-white/10 rounded-xl px-5 py-4">
+            <p className="text-xs text-white/20 uppercase tracking-wider mb-3">Install</p>
+            <pre className="text-sm font-mono text-blue-400">pip install edgeconductor</pre>
+          </div>
+          <div className="bg-black/50 border border-white/10 rounded-xl px-5 py-4">
+            <p className="text-xs text-white/20 uppercase tracking-wider mb-3">Initialize</p>
+            <pre className="text-sm font-mono"><span className="text-white/60">{'from edgeconductor import Client\nec = Client(api_key="ec_live_xxxx")'}</span></pre>
+          </div>
+        </div>
+
+        {/* Use-case examples */}
+        <div className="grid md:grid-cols-2 gap-4">
+          <div className="bg-white/2 border border-white/8 rounded-2xl overflow-hidden">
+            <div className="px-5 py-3 border-b border-white/8 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-blue-400 shrink-0" />
+              <span className="text-xs font-semibold text-white/50">Device management</span>
+            </div>
+            <pre className="px-5 py-4 text-xs font-mono text-white/50 leading-6 overflow-x-auto">{`from edgeconductor import Client
+
+ec = Client(api_key="ec_live_xxxx")
+
+# Register once — safe to call repeatedly
+device = ec.devices.register(
+    serial_no="EC-FARM-001",
+    product_type="climate_sensor",
+)
+print(device["mqtt_password"])  # save to firmware
+
+# List all devices in org
+devices = ec.devices.list(org_id="<org>")
+for d in devices:
+    print(d["serial_no"], d["status"])
+
+# Push config to device via MQTT
+ec.devices.push_config("EC-FARM-001", {
+    "relay": True, "setpoint": 22
+})`}</pre>
+          </div>
+
+          <div className="bg-white/2 border border-white/8 rounded-2xl overflow-hidden">
+            <div className="px-5 py-3 border-b border-white/8 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-green-400 shrink-0" />
+              <span className="text-xs font-semibold text-white/50">Telemetry — push + stream</span>
+            </div>
+            <pre className="px-5 py-4 text-xs font-mono text-white/50 leading-6 overflow-x-auto">{`from edgeconductor import Client
+
+ec = Client(api_key="ec_live_xxxx")
+
+# Push telemetry from a script / test
+ec.telemetry.push("EC-FARM-001",
+    temp=24.5, hum=60, co2=820, bat=4.1,
+)
+
+# Last 24 hours of data
+rows = ec.telemetry.history(
+    "EC-FARM-001", hours=24
+)
+for r in rows:
+    print(r["timestamp"], r["temp"])
+
+# Stream live — callback fires on change
+handle = ec.telemetry.stream(
+    "EC-FARM-001",
+    callback=lambda d: print(d),
+    interval_ms=5000,
+)
+# ... later:
+handle.stop()`}</pre>
+          </div>
+
+          <div className="bg-white/2 border border-white/8 rounded-2xl overflow-hidden">
+            <div className="px-5 py-3 border-b border-white/8 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-purple-400 shrink-0" />
+              <span className="text-xs font-semibold text-white/50">Rules + automation</span>
+            </div>
+            <pre className="px-5 py-4 text-xs font-mono text-white/50 leading-6 overflow-x-auto">{`from edgeconductor import Client
+
+ec = Client(api_key="ec_live_xxxx")
+
+# Alert when CO₂ > 1000 ppm
+rule = ec.rules.threshold(
+    org_id="<org>",
+    name="CO2 High Alert",
+    field="co2",
+    op=">",
+    value=1000,
+    action={"key": "relay", "value": True},
+    webhook_url="https://hooks.example.com/alert",
+)
+
+# Schedule — turn relay off at 22:00 on weekdays
+ec.rules.schedule(
+    org_id="<org>",
+    name="Night Off",
+    time="22:00",
+    days=["mon","tue","wed","thu","fri"],
+    action={"key": "relay", "value": False},
+)
+
+# Toggle without deleting
+ec.rules.disable(rule["id"])`}</pre>
+          </div>
+
+          <div className="bg-white/2 border border-white/8 rounded-2xl overflow-hidden">
+            <div className="px-5 py-3 border-b border-white/8 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-yellow-400 shrink-0" />
+              <span className="text-xs font-semibold text-white/50">OTA + fleet ops</span>
+            </div>
+            <pre className="px-5 py-4 text-xs font-mono text-white/50 leading-6 overflow-x-auto">{`from edgeconductor import Client
+
+ec = Client(api_key="ec_live_xxxx")
+
+# List firmware releases
+releases = ec.firmware.list()
+latest = releases[0]["id"]
+
+# Push to a single device
+ec.firmware.push("EC-FARM-001", latest)
+
+# Audit log — who did what
+events = ec.audit.list(org_id="<org>")
+for e in events:
+    print(e["action"], e["created_at"])
+
+# API key management
+key = ec.api_keys.generate(
+    org_id="<org>",
+    name="CI pipeline",
+)
+print(key["key"])   # shown once — store securely`}</pre>
+          </div>
+        </div>
+
+        {/* PyPI badge */}
+        <div className="mt-5 flex items-center gap-3">
+          <a href="https://pypi.org/project/edgeconductor/" target="_blank" rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl border border-white/10 bg-white/3 hover:bg-white/6 hover:border-white/20 transition text-sm">
+            <span className="text-blue-400 font-semibold text-xs">PyPI</span>
+            <span className="text-white/50 font-mono">edgeconductor 0.2.0</span>
+            <span className="text-white/20 text-xs">↗</span>
+          </a>
+          <a href="https://github.com/edgeconductor-creator/edgeconductor-examples/tree/main/python" target="_blank" rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl border border-white/10 bg-white/3 hover:bg-white/6 hover:border-white/20 transition text-sm">
+            <svg className="w-4 h-4 text-white/40" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
+            <span className="text-white/40 text-xs">Python examples →</span>
+          </a>
+        </div>
+      </section>
+
       {/* ── CLI ───────────────────────────────────────────────── */}
       <section className="px-4 md:px-8 pb-20 max-w-6xl mx-auto">
         <div className="flex items-center gap-3 mb-2">
@@ -396,7 +558,7 @@ curl -X POST .../devices/EC-FARM-001/telemetry \\
               Login to the dashboard → Org Settings → API Keys → Generate Key.
               The key is shown only once — store it securely.
             </p>
-            <Link href="https://ec-platform-ten.vercel.app" target="_blank"
+            <Link href="https://edgeconductor.com/dashboard" target="_blank"
               className="text-sm text-blue-400 hover:text-blue-300 transition">
               Open Dashboard →
             </Link>

@@ -2,7 +2,7 @@
 import { useState } from "react";
 
 const INSTALL: Record<string, string> = {
-  js:     "npm install @edgeconductor/sdk",
+  js:     "npm install ec-sdk",
   python: "pip install edgeconductor",
   curl:   "# No install needed — just HTTP",
 };
@@ -62,7 +62,7 @@ ec.rules.threshold(
     action={"key": "relay", "value": True},
 )`,
 
-  curl: `BASE="https://ec-registry.onrender.com"
+  curl: `BASE="https://services.edgeconductor.com/registry"
 KEY="ec_live_xxxx"
 
 # 1. Register device
