@@ -259,10 +259,16 @@ export default function DevelopersPage() {
               <span className="text-white/60">edgeconductor-examples</span>
               <span className="text-white/20 text-xs">↗</span>
             </a>
-            <a href="https://www.npmjs.com/package/ec-sdk" target="_blank" rel="noopener noreferrer"
+            <a href="https://www.npmjs.com/package/@edgeconductor/sdk" target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-2 px-4 py-2 rounded-xl border border-white/10 bg-white/3 hover:bg-white/6 hover:border-white/20 transition text-sm">
               <span className="text-yellow-400 font-semibold text-xs">npm</span>
-              <span className="text-white/50 font-mono">ec-sdk</span>
+              <span className="text-white/50 font-mono">@edgeconductor/sdk</span>
+              <span className="text-white/20 text-xs">↗</span>
+            </a>
+            <a href="https://www.npmjs.com/package/@edgeconductor/ec-react" target="_blank" rel="noopener noreferrer"
+              className="flex items-center gap-2 px-4 py-2 rounded-xl border border-white/10 bg-white/3 hover:bg-white/6 hover:border-white/20 transition text-sm">
+              <span className="text-indigo-400 font-semibold text-xs">npm</span>
+              <span className="text-white/50 font-mono">@edgeconductor/ec-react</span>
               <span className="text-white/20 text-xs">↗</span>
             </a>
             <a href="https://pypi.org/project/edgeconductor/" target="_blank" rel="noopener noreferrer"
@@ -310,7 +316,7 @@ export default function DevelopersPage() {
               <span className="text-xs text-yellow-400 font-semibold">npm</span>
               <span className="text-xs text-white/30">JavaScript — register + push telemetry</span>
             </div>
-            <pre className="px-5 py-4 text-xs font-mono text-white/55 leading-6 overflow-x-auto">{`import { EdgeConductor } from 'ec-sdk';
+            <pre className="px-5 py-4 text-xs font-mono text-white/55 leading-6 overflow-x-auto">{`import { EdgeConductor } from '@edgeconductor/sdk';
 
 const ec = new EdgeConductor({ apiKey: 'ec_live_...' });
 
@@ -503,6 +509,123 @@ print(key["key"])   # shown once — store securely`}</pre>
             className="flex items-center gap-2 px-4 py-2 rounded-xl border border-white/10 bg-white/3 hover:bg-white/6 hover:border-white/20 transition text-sm">
             <svg className="w-4 h-4 text-white/40" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
             <span className="text-white/40 text-xs">Python examples →</span>
+          </a>
+        </div>
+      </section>
+
+      {/* ── React SDK ────────────────────────────────────────── */}
+      <section className="px-4 md:px-8 pb-20 max-w-6xl mx-auto">
+        <div className="flex items-center gap-3 mb-2">
+          <h2 className="text-2xl font-bold">React SDK</h2>
+          <span className="text-xs text-indigo-400 bg-indigo-500/10 border border-indigo-500/25 px-2.5 py-1 rounded-full font-semibold font-mono">v0.1.0</span>
+        </div>
+        <p className="text-white/35 text-sm mb-7 max-w-2xl">
+          Drop-in React components for live device data, telemetry charts, and relay controls.
+          Build a custom IoT dashboard in minutes — just an API key and a device serial.
+        </p>
+
+        <div className="grid sm:grid-cols-2 gap-4 mb-7">
+          <div className="bg-black/50 border border-white/10 rounded-xl px-5 py-4">
+            <p className="text-xs text-white/20 uppercase tracking-wider mb-3">Install</p>
+            <pre className="text-sm font-mono text-indigo-400">npm install @edgeconductor/ec-react</pre>
+          </div>
+          <div className="bg-black/50 border border-white/10 rounded-xl px-5 py-4">
+            <p className="text-xs text-white/20 uppercase tracking-wider mb-3">Wrap once</p>
+            <pre className="text-sm font-mono"><span className="text-white/60">{'<ECProvider apiKey="ec_live_xxxx">\n  {/* all EC components go here */}\n</ECProvider>'}</span></pre>
+          </div>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-4">
+          <div className="bg-white/2 border border-white/8 rounded-2xl overflow-hidden">
+            <div className="px-5 py-3 border-b border-white/8 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-indigo-400 shrink-0" />
+              <span className="text-xs font-semibold text-white/50">Live tiles + chart</span>
+            </div>
+            <pre className="px-5 py-4 text-xs font-mono text-white/50 leading-6 overflow-x-auto">{`import {
+  ECProvider, ECLiveValue, ECTelemetryChart
+} from '@edgeconductor/ec-react';
+
+export default function Dashboard() {
+  return (
+    <ECProvider apiKey="ec_live_xxxx">
+
+      {/* Big-number live metric, auto-refreshes every 5s */}
+      <ECLiveValue serial="MY-DEVICE-001" field="temp" />
+      <ECLiveValue serial="MY-DEVICE-001" field="co2" />
+      <ECLiveValue serial="MY-DEVICE-001" field="hum" />
+
+      {/* SVG sparkline — no chart library needed */}
+      <ECTelemetryChart
+        serial="MY-DEVICE-001"
+        field="temp"
+        hours={24}
+        color="#6366f1"
+        label="Temperature (24h)"
+      />
+
+    </ECProvider>
+  );
+}`}</pre>
+          </div>
+
+          <div className="bg-white/2 border border-white/8 rounded-2xl overflow-hidden">
+            <div className="px-5 py-3 border-b border-white/8 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-green-400 shrink-0" />
+              <span className="text-xs font-semibold text-white/50">Device card + relay control</span>
+            </div>
+            <pre className="px-5 py-4 text-xs font-mono text-white/50 leading-6 overflow-x-auto">{`import {
+  ECProvider, ECDeviceCard, ECRelayToggle
+} from '@edgeconductor/ec-react';
+
+export default function Controls() {
+  return (
+    <ECProvider apiKey="ec_live_xxxx">
+
+      {/* Status card: online/offline, fw version, last seen */}
+      <ECDeviceCard serial="MY-DEVICE-001" />
+
+      {/* Relay toggle — optimistic UI, pushes via MQTT shadow */}
+      <ECRelayToggle
+        serial="MY-DEVICE-001"
+        field="relay"
+        label="HVAC"
+        onColor="#22c55e"
+      />
+
+    </ECProvider>
+  );
+}`}</pre>
+          </div>
+
+          <div className="bg-white/2 border border-white/8 rounded-2xl overflow-hidden md:col-span-2">
+            <div className="px-5 py-3 border-b border-white/8 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-yellow-400 shrink-0" />
+              <span className="text-xs font-semibold text-white/50">Raw hooks — build your own UI</span>
+            </div>
+            <pre className="px-5 py-4 text-xs font-mono text-white/50 leading-6 overflow-x-auto">{`import { useDevice, useTelemetry, useShadow } from '@edgeconductor/ec-react';
+
+function MyWidget({ serial }) {
+  const { device, loading }   = useDevice(serial);
+  const { data, latest }      = useTelemetry(serial, { hours: 6, intervalMs: 5000 });
+  const { pushDesired }       = useShadow(serial);
+
+  return (
+    <div>
+      <p>Status: {device?.status}</p>
+      <p>Temp: {latest?.temp}°C — {data.length} points</p>
+      <button onClick={() => pushDesired({ relay: true })}>Turn ON</button>
+    </div>
+  );
+}`}</pre>
+          </div>
+        </div>
+
+        <div className="mt-5 flex items-center gap-3">
+          <a href="https://www.npmjs.com/package/@edgeconductor/ec-react" target="_blank" rel="noopener noreferrer"
+            className="flex items-center gap-2 px-4 py-2 rounded-xl border border-white/10 bg-white/3 hover:bg-white/6 hover:border-white/20 transition text-sm">
+            <span className="text-indigo-400 font-semibold text-xs">npm</span>
+            <span className="text-white/50 font-mono">@edgeconductor/ec-react 0.1.0</span>
+            <span className="text-white/20 text-xs">↗</span>
           </a>
         </div>
       </section>

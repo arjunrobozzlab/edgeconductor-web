@@ -2,8 +2,9 @@
 import { useState } from "react";
 
 const INSTALL: Record<string, string> = {
-  js:     "npm install ec-sdk",
+  js:     "npm install @edgeconductor/sdk",
   python: "pip install edgeconductor",
+  react:  "npm install @edgeconductor/ec-react",
   curl:   "# No install needed — just HTTP",
 };
 
@@ -62,6 +63,30 @@ ec.rules.threshold(
     action={"key": "relay", "value": True},
 )`,
 
+  react: `import { ECProvider, ECDeviceCard, ECTelemetryChart, ECRelayToggle, ECLiveValue } from '@edgeconductor/ec-react';
+
+// Wrap your app with ECProvider — only your API key needed
+export default function Dashboard() {
+  return (
+    <ECProvider apiKey="ec_live_xxxx">
+
+      {/* Live metric tiles */}
+      <ECLiveValue serial="MY-DEVICE-001" field="temp" label="Temperature" />
+      <ECLiveValue serial="MY-DEVICE-001" field="co2"  label="CO2" />
+
+      {/* Auto-refreshing sparkline chart */}
+      <ECTelemetryChart serial="MY-DEVICE-001" field="temp" hours={24} />
+
+      {/* Device status card */}
+      <ECDeviceCard serial="MY-DEVICE-001" />
+
+      {/* Relay toggle — pushes to device via MQTT shadow */}
+      <ECRelayToggle serial="MY-DEVICE-001" label="HVAC" />
+
+    </ECProvider>
+  );
+}`,
+
   curl: `BASE="https://services.edgeconductor.com/registry"
 KEY="ec_live_xxxx"
 
@@ -84,6 +109,7 @@ curl $BASE/devices/MY-DEVICE-001 \\
 const TABS = [
   { id: "js",     label: "JavaScript", badge: "Node.js",      color: "#facc15" },
   { id: "python", label: "Python",     badge: "zero deps",    color: "#60a5fa" },
+  { id: "react",  label: "React",      badge: "components",   color: "#818cf8" },
   { id: "curl",   label: "cURL",       badge: "REST API",     color: "#4ade80" },
 ];
 
