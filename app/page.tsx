@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import LiveSimulator from "./components/LiveSimulator";
+import PoCTrigger from "./components/PoCTrigger";
 
 export const metadata: Metadata = {
   title: "EdgeConductor — Connected Product & Asset Operations Platform",
@@ -191,23 +193,29 @@ export default function Home() {
               and B2B dashboards — out of the box. First device live in 10 minutes.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3 mb-6">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3 mb-5">
               <Link href="/contact"
                 className="inline-flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold px-6 py-3.5 rounded-full transition">
                 Book a Demo →
               </Link>
+              <PoCTrigger />
               <Link href="/demo"
-                className="inline-flex items-center justify-center gap-2 border border-white/20 text-white/70 hover:text-white hover:border-white/40 text-sm font-medium px-6 py-3.5 rounded-full transition">
+                className="inline-flex items-center justify-center gap-2 border border-white/15 text-white/55 hover:text-white hover:border-white/35 text-sm font-medium px-6 py-3.5 rounded-full transition">
                 Try Live Demo
-              </Link>
-              <Link href="/get-started"
-                className="inline-flex items-center justify-center gap-2 text-white/45 hover:text-white text-sm font-medium px-4 py-3.5 transition">
-                Get Started Free →
               </Link>
             </div>
 
-            <div className="flex flex-wrap gap-x-5 gap-y-1.5 text-xs text-white/30">
-              <span>✓ Free tier available</span>
+            {/* Hardware support badge */}
+            <div className="flex flex-wrap gap-2 mb-5">
+              {["ESP32", "STM32", "Raspberry Pi", "Cellular (Quectel/SIMCom)", "Any MQTT Device"].map(hw => (
+                <span key={hw} className="text-xs text-white/40 bg-white/[0.04] border border-white/10 px-3 py-1 rounded-full">
+                  {hw}
+                </span>
+              ))}
+            </div>
+
+            <div className="flex flex-wrap gap-x-5 gap-y-1.5 text-xs text-white/28">
+              <span>✓ Free tier — 5 devices</span>
               <span>✓ No credit card required</span>
               <span>✓ Live in 10 minutes</span>
             </div>
@@ -433,6 +441,24 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </section>
+
+      {/* ── LIVE SIMULATOR ── */}
+      <section className="px-4 md:px-8 py-20 md:py-24 max-w-5xl mx-auto">
+        <div className="text-center mb-10">
+          <span className="text-xs font-semibold tracking-widest text-green-400 uppercase border border-green-500/25 bg-green-500/8 px-3 py-1.5 rounded-full">Live Demo</span>
+          <h2 className="text-3xl md:text-4xl font-bold mt-5 mb-4">
+            See it in action — real device, real data
+          </h2>
+          <p className="text-white/40 text-sm md:text-base max-w-xl mx-auto">
+            Toggle the relay, change temperature, watch the cloud shadow update in real time.
+            This is a live ESP32 device on EdgeConductor — not a mockup.
+          </p>
+        </div>
+        <LiveSimulator />
+        <p className="text-center text-xs text-white/20 mt-4">
+          Device: DEMO-CLIMATE-01 · MQTT broker: services.edgeconductor.com:8883 · TLS encrypted
+        </p>
       </section>
 
       {/* ── CAPABILITIES ── */}
@@ -841,6 +867,78 @@ export default function Home() {
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── DUAL TIER ── */}
+      <section className="px-4 md:px-8 py-20 md:py-24 max-w-5xl mx-auto">
+        <div className="text-center mb-10">
+          <span className="text-xs font-semibold tracking-widest text-white/30 uppercase">How to Get Started</span>
+          <h2 className="text-3xl md:text-4xl font-bold mt-3 mb-4">Two ways to deploy EdgeConductor</h2>
+          <p className="text-white/40 text-sm max-w-xl mx-auto">
+            Self-serve for developers moving fast. Turnkey for OEMs and integrators who need it done right.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-5">
+          {/* Tier 1 — Self Serve */}
+          <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-7 flex flex-col hover:border-white/20 transition">
+            <span className="text-xs font-semibold uppercase tracking-wider text-white/35 mb-5">Developer &amp; Self-Serve</span>
+            <h3 className="text-xl font-bold mb-2">Build it yourself</h3>
+            <p className="text-white/38 text-sm leading-relaxed mb-6">
+              Start free, register your first device in 10 minutes, and build on top of our REST API, JS SDK, Python SDK, and CLI. Full control, no hand-holding.
+            </p>
+            <ul className="space-y-2.5 mb-8 flex-1">
+              {[
+                "Free tier — 5 devices, 1 org",
+                "Instant API key, no approval needed",
+                "JS SDK (npm), Python SDK (pip), REST, MQTT",
+                "CLI for factory provisioning &amp; OTA",
+                "Drag-drop dashboard builder",
+                "Community support",
+              ].map(f => (
+                <li key={f} className="flex items-start gap-2.5 text-sm text-white/50">
+                  <span className="text-white/25 shrink-0 mt-0.5">→</span>
+                  <span dangerouslySetInnerHTML={{ __html: f }} />
+                </li>
+              ))}
+            </ul>
+            <Link href="/get-started"
+              className="inline-flex items-center justify-center border border-white/20 text-white/60 hover:text-white hover:border-white/40 text-sm font-medium px-5 py-3 rounded-xl transition">
+              Start Free — 5 Devices →
+            </Link>
+          </div>
+
+          {/* Tier 2 — Turnkey */}
+          <div className="bg-gradient-to-br from-blue-500/10 to-cyan-500/5 border border-blue-500/30 rounded-2xl p-7 flex flex-col relative">
+            <div className="absolute top-5 right-5">
+              <span className="text-[10px] font-bold text-blue-300 bg-blue-500/15 border border-blue-500/25 px-2.5 py-1 rounded-full uppercase tracking-wider">Recommended</span>
+            </div>
+            <span className="text-xs font-semibold uppercase tracking-wider text-blue-400 mb-5">Turnkey Implementation &amp; White-Label</span>
+            <h3 className="text-xl font-bold mb-2">We set it up with you</h3>
+            <p className="text-white/45 text-sm leading-relaxed mb-6">
+              For OEMs and system integrators shipping branded IoT solutions. We adapt the firmware, configure the platform, and hand you a production-ready white-label portal.
+            </p>
+            <ul className="space-y-2.5 mb-8 flex-1">
+              {[
+                "Custom portal under your domain (portal.yourbrand.com)",
+                "Firmware integration support — we adapt to your hardware",
+                "RBAC &amp; multi-tenant client orgs, configured",
+                "White-label branding — your logo, your colors",
+                "Production SLA + dedicated support",
+                "Onboarding call + architecture fit review",
+              ].map(f => (
+                <li key={f} className="flex items-start gap-2.5 text-sm text-white/60">
+                  <span className="text-blue-400 shrink-0 mt-0.5">→</span>
+                  <span dangerouslySetInnerHTML={{ __html: f }} />
+                </li>
+              ))}
+            </ul>
+            <Link href="/contact"
+              className="inline-flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold px-5 py-3 rounded-xl transition">
+              Book Architecture Fit Review →
+            </Link>
           </div>
         </div>
       </section>
