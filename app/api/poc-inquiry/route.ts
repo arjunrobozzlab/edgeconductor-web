@@ -24,7 +24,7 @@ export async function POST(request: Request) {
     </table>
   `;
 
-  await Promise.all([
+  const [adminResult, userResult] = await Promise.all([
     // Admin notification
     resend.emails.send({
       from: FROM,
@@ -53,5 +53,13 @@ export async function POST(request: Request) {
     }),
   ]);
 
-  return NextResponse.json({ success: true });
+  if (adminResult.error) console.error("[poc-inquiry] admin email error:", adminResult.error);
+  if (userResult.error)  console.error("[poc-inquiry] user email error:", userResult.error);
+
+  return NextResponse.json({
+    success: true,
+    adminSent: !adminResult.error,
+    userSent:  !userResult.error,
+    userError: userResult.error ?? null,
+  });
 }
