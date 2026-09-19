@@ -31,6 +31,7 @@ export default function PoCModal({ open, onClose }: Props) {
   const [email, setEmail]       = useState("");
   const [company, setCompany]   = useState("");
   const [done, setDone]         = useState(false);
+  const [submitting, setSubmitting] = useState(false);
 
   if (!open) return null;
 
@@ -136,7 +137,19 @@ export default function PoCModal({ open, onClose }: Props) {
                 </div>
                 <div style={{ display: "flex", gap: 8 }}>
                   {btn("← Back", () => setStep(3), false, "ghost")}
-                  {btn("Get Architecture Brief →", () => setDone(true), !email || !company)}
+                  {btn(submitting ? "Sending…" : "Get Architecture Brief →", async () => {
+                    setSubmitting(true);
+                    try {
+                      await fetch("/api/poc-inquiry", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({ email, company, hardware, protocols, useCase, fleet }),
+                      });
+                    } finally {
+                      setSubmitting(false);
+                      setDone(true);
+                    }
+                  }, !email || !company || submitting)}
                 </div>
               </>
             )}
