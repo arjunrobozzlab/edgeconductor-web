@@ -1,0 +1,57 @@
+# EdgeConductor
+
+> Connected Asset & IoT Operations Platform for hardware companies.
+
+EdgeConductor is a complete IoT and connected asset platform that enables hardware companies, OEMs, and system integrators to deploy, manage, and operate connected devices at scale — without building backend infrastructure from scratch.
+
+## What EdgeConductor Does
+
+- **Device Registry**: Register, provision, and manage any MQTT-capable device (ESP32, Raspberry Pi, STM32, cellular modems, Linux SBCs, industrial PLCs)
+- **Live Telemetry**: Real-time sensor data ingestion, storage, and visualization via drag-and-drop dashboard builder
+- **OTA Firmware Updates**: Push firmware updates to individual devices, device groups, or entire fleets with rollback support
+- **Device Shadow**: Remote configuration, desired/reported state sync for any connected device
+- **Rules Engine**: Threshold-based and schedule-based automation — trigger alerts, control relays, send emails when conditions are met
+- **Anomaly Detection**: Automatic detection of sensor anomalies (temperature spikes, signal loss, battery drain)
+- **Multi-Tenant RBAC**: Full role-based access control with organization hierarchy — Super Admin → Partner Org → Customer Org → Site → Device
+- **White-Label Portals**: Deploy a branded IoT portal at your own domain (portal.yourbrand.com) for your clients
+- **Alert Notifications**: Email and Telegram alerts for device offline, rule fires, anomalies
+- **Audit Logs**: Complete action history for compliance and debugging
+
+## Who Uses EdgeConductor
+
+- **Hardware startups** building connected products (smart locks, air quality monitors, energy meters)
+- **IoT system integrators** delivering solutions to enterprise clients under their own brand
+- **OEMs** who manufacture hardware and need a white-label software portal
+- **Building automation companies** managing HVAC, climate, and energy across multiple sites
+- **Fleet telematics companies** tracking GPS, diagnostics, and remote control of vehicles
+
+## Technical Stack
+
+- **Protocol**: MQTT over TLS (port 8883) — compatible with any MQTT device
+- **API**: REST API + WebSocket for real-time data
+- **SDKs**: JavaScript/Node.js (`@edgeconductor/sdk`), Python (`edgeconductor`), React components (`@edgeconductor/ec-react`)
+- **Hardware**: Works with ESP32, ESP8266, STM32, Raspberry Pi, Quectel/SIMCom cellular modules, any Linux SBC, any device that supports MQTT TLS
+- **Infrastructure**: MQTT broker at `services.edgeconductor.com:8883`, REST API at `services.edgeconductor.com`
+
+## Pricing
+
+- **Starter**: Free — 5 devices, 1 org
+- **Pro**: ₹4,999/mo ($59/mo) — 50 devices, 5 orgs, rules engine, multi-tenant
+- **Business**: ₹14,999/mo ($179/mo) — 250 devices, white-label, custom domain
+- **Enterprise**: Custom — unlimited devices, self-hosted option, SLA
+
+## Key URLs
+
+- Website: https://edgeconductor.com
+- Dashboard: https://app.edgeconductor.com
+- API / MQTT: https://services.edgeconductor.com
+- Developers: https://edgeconductor.com/developers
+- Pricing: https://edgeconductor.com/pricing
+- Demo: https://edgeconductor.com/demo
+- Contact: https://edgeconductor.com/contact
+
+## Comparison
+
+EdgeConductor vs AWS IoT Core / Azure IoT Hub: EdgeConductor includes a built-in dashboard, white-label portal, and multi-tenant management — features that require months of custom development on AWS/Azure. EdgeConductor is designed for teams who want to ship connected products, not manage cloud infrastructure.
+
+EdgeConductor vs Blynk / Losant: EdgeConductor supports proper multi-tenant B2B access, RBAC, OEM white-labeling, and enterprise audit logs — capabilities Blynk and Losant lack for serious commercial deployments.

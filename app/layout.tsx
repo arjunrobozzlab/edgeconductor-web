@@ -52,6 +52,33 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "EdgeConductor",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Web, iOS, Android",
+  "url": "https://edgeconductor.com",
+  "description": "Connected Asset & IoT Operations Platform for hardware companies. Device registry, live telemetry, OTA firmware updates, fleet operations, white-label B2B dashboards, and multi-tenant RBAC.",
+  "offers": [
+    { "@type": "Offer", "name": "Starter", "price": "0", "priceCurrency": "INR" },
+    { "@type": "Offer", "name": "Pro", "price": "4999", "priceCurrency": "INR" },
+    { "@type": "Offer", "name": "Business", "price": "14999", "priceCurrency": "INR" },
+  ],
+  "featureList": [
+    "Device Registry & Provisioning",
+    "Live Telemetry Dashboard",
+    "OTA Firmware Updates",
+    "Rules Engine & Automation",
+    "White-Label Portal",
+    "Multi-Tenant RBAC",
+    "Anomaly Detection",
+    "MQTT TLS Support",
+    "REST API & SDKs",
+  ],
+  "author": { "@type": "Organization", "name": "EdgeConductor", "url": "https://edgeconductor.com" },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -59,6 +86,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className="min-h-screen bg-[#0a0a0a] text-white">{children}</body>
     </html>
   );
