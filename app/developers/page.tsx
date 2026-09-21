@@ -1,11 +1,11 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import LangSwitcher from "./LangSwitcher";
 
 export const metadata: Metadata = {
-  title: "Developers — EdgeConductor",
+  title: "Developers â€” EdgeConductor",
   description: "Official JS + Python SDKs, REST API reference, MQTT topics, ESP32 libraries, and ec CLI for the EdgeConductor IoT platform.",
 };
 
@@ -19,7 +19,7 @@ const methodColor: Record<string, string> = {
 const webhookEndpoints = [
   { method: "GET",    auth: true,  path: "/orgs/:id/webhooks",   desc: "List registered webhooks for an org",                       body: null },
   { method: "POST",   auth: true,  path: "/orgs/:id/webhooks",   desc: "Register a webhook endpoint",                               body: '{"url","events":["telemetry","alert","ota","device_status"]}' },
-  { method: "PATCH",  auth: true,  path: "/webhooks/:id",        desc: "Update webhook — toggle active, change URL or events",       body: '{"active":false}' },
+  { method: "PATCH",  auth: true,  path: "/webhooks/:id",        desc: "Update webhook â€” toggle active, change URL or events",       body: '{"active":false}' },
   { method: "DELETE", auth: true,  path: "/webhooks/:id",        desc: "Delete a webhook permanently",                              body: null },
   { method: "POST",   auth: true,  path: "/webhooks/:id/test",   desc: "Send a signed test payload to verify endpoint reachability", body: null },
 ];
@@ -58,11 +58,11 @@ const sdkMethods = [
     group: "devices",
     color: "blue",
     methods: [
-      { name: "devices.register({ serial_no, product_type, fw_version? })", ret: "Promise<Device>",    desc: "Register a new device. Safe to call repeatedly — idempotent." },
+      { name: "devices.register({ serial_no, product_type, fw_version? })", ret: "Promise<Device>",    desc: "Register a new device. Safe to call repeatedly â€” idempotent." },
       { name: "devices.list({ orgId?, tenantId? })",                         ret: "Promise<Device[]>",  desc: "List devices. Filter by org or tenant." },
       { name: "devices.get(serial)",                                          ret: "Promise<Device>",    desc: "Full device object including shadow_reported and shadow_desired." },
-      { name: "devices.getShadow(serial)",                                    ret: "Promise<object>",    desc: "Shorthand for get() — returns only shadow_reported (latest sensor values)." },
-      { name: "devices.pushConfig(serial, config)",                           ret: "Promise<object>",    desc: "Update desired state → delivered to device via MQTT." },
+      { name: "devices.getShadow(serial)",                                    ret: "Promise<object>",    desc: "Shorthand for get() â€” returns only shadow_reported (latest sensor values)." },
+      { name: "devices.pushConfig(serial, config)",                           ret: "Promise<object>",    desc: "Update desired state â†’ delivered to device via MQTT." },
       { name: "devices.reboot(serial)",                                       ret: "Promise<object>",    desc: "Send reboot command to device via MQTT." },
       { name: "devices.assign(serial, { orgId?, roomId? })",                  ret: "Promise<object>",    desc: "Assign device to an org and/or room." },
     ],
@@ -71,10 +71,10 @@ const sdkMethods = [
     group: "telemetry",
     color: "green",
     methods: [
-      { name: "telemetry.push(serial, payload)",              ret: "Promise<{ok}>",    desc: "Push telemetry. Keys: temp, hum, co2, bat, signal, lat, lng, speed — any numeric field accepted." },
+      { name: "telemetry.push(serial, payload)",              ret: "Promise<{ok}>",    desc: "Push telemetry. Keys: temp, hum, co2, bat, signal, lat, lng, speed â€” any numeric field accepted." },
       { name: "telemetry.history(serial, { hours, limit })",  ret: "Promise<[]>",      desc: "Historical records oldest-first. hours: 1 | 6 | 24 | 168." },
       { name: "telemetry.recent(serial, limit?)",             ret: "Promise<[]>",      desc: "Last N records newest-first. Default limit: 20." },
-      { name: "telemetry.stream(serial, callback, { intervalMs })", ret: "{ stop() }", desc: "Live stream — polls every intervalMs, calls callback only when payload changes. Returns stop handle." },
+      { name: "telemetry.stream(serial, callback, { intervalMs })", ret: "{ stop() }", desc: "Live stream â€” polls every intervalMs, calls callback only when payload changes. Returns stop handle." },
     ],
   },
   {
@@ -109,7 +109,7 @@ const sdkMethods = [
     group: "notifications",
     color: "blue",
     methods: [
-      { name: "notifications.list(orgId)",            ret: "Promise<Notification[]>", desc: "In-app notifications for an org — device offline, anomalies, firmware updates." },
+      { name: "notifications.list(orgId)",            ret: "Promise<Notification[]>", desc: "In-app notifications for an org â€” device offline, anomalies, firmware updates." },
       { name: "notifications.markRead(id)",           ret: "Promise<Notification>",   desc: "Mark a single notification as read." },
       { name: "notifications.markAllRead(orgId)",     ret: "Promise<object>",         desc: "Mark all notifications as read for the org." },
     ],
@@ -134,8 +134,8 @@ const sdkMethods = [
     group: "apiKeys",
     color: "yellow",
     methods: [
-      { name: "apiKeys.generate(orgId, name)", ret: "Promise<{ key }>",    desc: "Generate a new API key. Raw key returned once — store it securely." },
-      { name: "apiKeys.list(orgId)",           ret: "Promise<Key[]>",      desc: "List API keys (prefix + metadata — raw key never returned after creation)." },
+      { name: "apiKeys.generate(orgId, name)", ret: "Promise<{ key }>",    desc: "Generate a new API key. Raw key returned once â€” store it securely." },
+      { name: "apiKeys.list(orgId)",           ret: "Promise<Key[]>",      desc: "List API keys (prefix + metadata â€” raw key never returned after creation)." },
       { name: "apiKeys.revoke(keyId)",         ret: "Promise<object>",     desc: "Revoke a key permanently. Any SDK requests using it will return 401." },
     ],
   },
@@ -156,7 +156,7 @@ const errors = [
   { code: "404", title: "Not Found",     desc: "Device or resource does not exist." },
   { code: "409", title: "Conflict",      desc: "Device serial already registered." },
   { code: "429", title: "Rate Limited",  desc: "Too many requests. Back off and retry." },
-  { code: "500", title: "Server Error",  desc: "Internal error — contact support if persistent." },
+  { code: "500", title: "Server Error",  desc: "Internal error â€” contact support if persistent." },
 ];
 
 const cliGroups = [
@@ -166,7 +166,7 @@ const cliGroups = [
     colorClass: "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
     desc: "Authentication",
     commands:
-`ec login          # save API key + registry URL → ~/.ec/config.json
+`ec login          # save API key + registry URL â†’ ~/.ec/config.json
 ec whoami         # show current login
 ec logout         # remove saved credentials`,
   },
@@ -202,7 +202,7 @@ ec telemetry get EC-TRACK-001 --hours 2   # last 2 hours`,
     desc: "Firmware updates",
     commands:
 `ec ota upload ./firmware.bin --version 2.1.4 --type tracker
-# → uploads binary, caches to ~/.ec/last_upload.json
+# â†’ uploads binary, caches to ~/.ec/last_upload.json
 
 ec ota push --serial EC-TRACK-001         # push to one device
 ec ota push --type tracker                # push to all trackers
@@ -217,9 +217,9 @@ ec ota job 12                             # status + progress of job #12`,
     desc: "Factory provisioning",
     commands:
 `ec manufacture 50 --prefix EC-TRACK --type tracker
-# → registers EC-TRACK-00001 to EC-TRACK-00050
-# → manufacture_output/manufacture_EC-TRACK_<ts>.csv
-# → manufacture_output/qr_EC-TRACK_<ts>/EC-TRACK-00001.png  (per device)
+# â†’ registers EC-TRACK-00001 to EC-TRACK-00050
+# â†’ manufacture_output/manufacture_EC-TRACK_<ts>.csv
+# â†’ manufacture_output/qr_EC-TRACK_<ts>/EC-TRACK-00001.png  (per device)
 
 ec manufacture 10 --prefix EC-TRACK --type tracker --start 100   # continue batch
 ec manufacture 20 --prefix EC-CLIM --type climate --claim-url https://portal.co/claim`,
@@ -240,7 +240,7 @@ export default function DevelopersPage() {
     <main className="min-h-screen bg-[#0a0a0a] text-white">
       <Navbar />
 
-      {/* ── Hero ──────────────────────────────────────────────── */}
+      {/* â”€â”€ Hero â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="px-4 md:px-8 py-20 md:py-28 max-w-6xl mx-auto">
         <div className="mb-12">
           <span className="text-xs font-semibold tracking-widest text-white/30 uppercase">Developers</span>
@@ -250,32 +250,32 @@ export default function DevelopersPage() {
           </h1>
           <p className="text-white/45 text-base max-w-2xl mb-8">
             Official SDKs for JS and Python, a REST API, MQTT topics, and ESP32 libraries.
-            Everything you need — no vendor lock-in, no bloat.
+            Everything you need â€” no vendor lock-in, no bloat.
           </p>
           <div className="flex flex-wrap gap-3">
             <a href="https://github.com/edgeconductor-creator/edgeconductor-examples" target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-2 px-4 py-2 rounded-xl border border-white/15 bg-white/4 hover:bg-white/7 hover:border-white/25 transition text-sm">
               <svg className="w-4 h-4 text-white/60" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
               <span className="text-white/60">edgeconductor-examples</span>
-              <span className="text-white/20 text-xs">↗</span>
+              <span className="text-white/20 text-xs">â†—</span>
             </a>
             <a href="https://www.npmjs.com/package/@edgeconductor/sdk" target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-2 px-4 py-2 rounded-xl border border-white/10 bg-white/3 hover:bg-white/6 hover:border-white/20 transition text-sm">
               <span className="text-yellow-400 font-semibold text-xs">npm</span>
               <span className="text-white/50 font-mono">@edgeconductor/sdk</span>
-              <span className="text-white/20 text-xs">↗</span>
+              <span className="text-white/20 text-xs">â†—</span>
             </a>
             <a href="https://www.npmjs.com/package/@edgeconductor/ec-react" target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-2 px-4 py-2 rounded-xl border border-white/10 bg-white/3 hover:bg-white/6 hover:border-white/20 transition text-sm">
               <span className="text-indigo-400 font-semibold text-xs">npm</span>
               <span className="text-white/50 font-mono">@edgeconductor/ec-react</span>
-              <span className="text-white/20 text-xs">↗</span>
+              <span className="text-white/20 text-xs">â†—</span>
             </a>
             <a href="https://pypi.org/project/edgeconductor/" target="_blank" rel="noopener noreferrer"
               className="flex items-center gap-2 px-4 py-2 rounded-xl border border-white/10 bg-white/3 hover:bg-white/6 hover:border-white/20 transition text-sm">
               <span className="text-blue-400 font-semibold text-xs">PyPI</span>
               <span className="text-white/50 font-mono">edgeconductor</span>
-              <span className="text-white/20 text-xs">↗</span>
+              <span className="text-white/20 text-xs">â†—</span>
             </a>
             <div className="flex items-center gap-2 px-4 py-2 rounded-xl border border-emerald-500/20 bg-emerald-500/5 text-sm">
               <span className="text-emerald-400 font-semibold text-xs">CLI</span>
@@ -288,7 +288,7 @@ export default function DevelopersPage() {
         <LangSwitcher />
       </section>
 
-      {/* ── Quick Start ───────────────────────────────────────── */}
+      {/* â”€â”€ Quick Start â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="px-4 md:px-8 pb-20 max-w-6xl mx-auto">
         <div className="flex items-center gap-3 mb-6">
           <h2 className="text-2xl font-bold">Quick Start</h2>
@@ -296,7 +296,7 @@ export default function DevelopersPage() {
         </div>
         <div className="grid md:grid-cols-4 gap-3 mb-8">
           {[
-            { step: "1", title: "Create an org", desc: "Sign up → dashboard automatically creates your first org and API key." },
+            { step: "1", title: "Create an org", desc: "Sign up â†’ dashboard automatically creates your first org and API key." },
             { step: "2", title: "Register a device", desc: "POST /devices/register with serial + type. Save the returned mqtt_password." },
             { step: "3", title: "Connect via MQTT", desc: "Connect to services.edgeconductor.com:8883 TLS. Publish to devices/{serial}/telemetry." },
             { step: "4", title: "See it live", desc: "Dashboard shows telemetry in under 5 seconds. Rules evaluate every 30s automatically." },
@@ -314,7 +314,7 @@ export default function DevelopersPage() {
           <div className="bg-black/50 border border-white/10 rounded-2xl overflow-hidden">
             <div className="px-5 py-3 border-b border-white/8 flex items-center gap-2">
               <span className="text-xs text-yellow-400 font-semibold">npm</span>
-              <span className="text-xs text-white/30">JavaScript — register + push telemetry</span>
+              <span className="text-xs text-white/30">JavaScript â€” register + push telemetry</span>
             </div>
             <pre className="px-5 py-4 text-xs font-mono text-white/55 leading-6 overflow-x-auto">{`import { EdgeConductor } from '@edgeconductor/sdk';
 
@@ -335,7 +335,7 @@ await ec.telemetry.push('EC-FARM-001', {
           <div className="bg-black/50 border border-white/10 rounded-2xl overflow-hidden">
             <div className="px-5 py-3 border-b border-white/8 flex items-center gap-2">
               <span className="text-xs text-blue-400 font-semibold">curl</span>
-              <span className="text-xs text-white/30">REST — register + push telemetry</span>
+              <span className="text-xs text-white/30">REST â€” register + push telemetry</span>
             </div>
             <pre className="px-5 py-4 text-xs font-mono text-white/55 leading-6 overflow-x-auto">{`# Register device
 curl -X POST https://services.edgeconductor.com/registry/devices/register \\
@@ -351,7 +351,7 @@ curl -X POST .../devices/EC-FARM-001/telemetry \\
         </div>
       </section>
 
-      {/* ── Python SDK ────────────────────────────────────────── */}
+      {/* â”€â”€ Python SDK â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="px-4 md:px-8 pb-20 max-w-6xl mx-auto">
         <div className="flex items-center gap-3 mb-2">
           <h2 className="text-2xl font-bold">Python SDK</h2>
@@ -359,7 +359,7 @@ curl -X POST .../devices/EC-FARM-001/telemetry \\
         </div>
         <p className="text-white/35 text-sm mb-7 max-w-2xl">
           Full-featured Python client for device management, telemetry, rules, and fleet operations.
-          Works on any Python 3.8+ environment — Raspberry Pi, servers, scripts, notebooks.
+          Works on any Python 3.8+ environment â€” Raspberry Pi, servers, scripts, notebooks.
         </p>
 
         {/* Install */}
@@ -385,7 +385,7 @@ curl -X POST .../devices/EC-FARM-001/telemetry \\
 
 ec = Client(api_key="ec_live_xxxx")
 
-# Register once — safe to call repeatedly
+# Register once â€” safe to call repeatedly
 device = ec.devices.register(
     serial_no="EC-FARM-001",
     product_type="climate_sensor",
@@ -406,7 +406,7 @@ ec.devices.push_config("EC-FARM-001", {
           <div className="bg-white/2 border border-white/8 rounded-2xl overflow-hidden">
             <div className="px-5 py-3 border-b border-white/8 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-green-400 shrink-0" />
-              <span className="text-xs font-semibold text-white/50">Telemetry — push + stream</span>
+              <span className="text-xs font-semibold text-white/50">Telemetry â€” push + stream</span>
             </div>
             <pre className="px-5 py-4 text-xs font-mono text-white/50 leading-6 overflow-x-auto">{`from edgeconductor import Client
 
@@ -424,7 +424,7 @@ rows = ec.telemetry.history(
 for r in rows:
     print(r["timestamp"], r["temp"])
 
-# Stream live — callback fires on change
+# Stream live â€” callback fires on change
 handle = ec.telemetry.stream(
     "EC-FARM-001",
     callback=lambda d: print(d),
@@ -443,7 +443,7 @@ handle.stop()`}</pre>
 
 ec = Client(api_key="ec_live_xxxx")
 
-# Alert when CO₂ > 1000 ppm
+# Alert when COâ‚‚ > 1000 ppm
 rule = ec.rules.threshold(
     org_id="<org>",
     name="CO2 High Alert",
@@ -454,7 +454,7 @@ rule = ec.rules.threshold(
     webhook_url="https://hooks.example.com/alert",
 )
 
-# Schedule — turn relay off at 22:00 on weekdays
+# Schedule â€” turn relay off at 22:00 on weekdays
 ec.rules.schedule(
     org_id="<org>",
     name="Night Off",
@@ -483,7 +483,7 @@ latest = releases[0]["id"]
 # Push to a single device
 ec.firmware.push("EC-FARM-001", latest)
 
-# Audit log — who did what
+# Audit log â€” who did what
 events = ec.audit.list(org_id="<org>")
 for e in events:
     print(e["action"], e["created_at"])
@@ -493,7 +493,7 @@ key = ec.api_keys.generate(
     org_id="<org>",
     name="CI pipeline",
 )
-print(key["key"])   # shown once — store securely`}</pre>
+print(key["key"])   # shown once â€” store securely`}</pre>
           </div>
         </div>
 
@@ -503,17 +503,17 @@ print(key["key"])   # shown once — store securely`}</pre>
             className="flex items-center gap-2 px-4 py-2 rounded-xl border border-white/10 bg-white/3 hover:bg-white/6 hover:border-white/20 transition text-sm">
             <span className="text-blue-400 font-semibold text-xs">PyPI</span>
             <span className="text-white/50 font-mono">edgeconductor 0.2.0</span>
-            <span className="text-white/20 text-xs">↗</span>
+            <span className="text-white/20 text-xs">â†—</span>
           </a>
           <a href="https://github.com/edgeconductor-creator/edgeconductor-examples/tree/main/python" target="_blank" rel="noopener noreferrer"
             className="flex items-center gap-2 px-4 py-2 rounded-xl border border-white/10 bg-white/3 hover:bg-white/6 hover:border-white/20 transition text-sm">
             <svg className="w-4 h-4 text-white/40" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12"/></svg>
-            <span className="text-white/40 text-xs">Python examples →</span>
+            <span className="text-white/40 text-xs">Python examples â†’</span>
           </a>
         </div>
       </section>
 
-      {/* ── React SDK ────────────────────────────────────────── */}
+      {/* â”€â”€ React SDK â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="px-4 md:px-8 pb-20 max-w-6xl mx-auto">
         <div className="flex items-center gap-3 mb-2">
           <h2 className="text-2xl font-bold">React SDK</h2>
@@ -521,7 +521,7 @@ print(key["key"])   # shown once — store securely`}</pre>
         </div>
         <p className="text-white/35 text-sm mb-7 max-w-2xl">
           Drop-in React components for live device data, telemetry charts, and relay controls.
-          Build a custom IoT dashboard in minutes — just an API key and a device serial.
+          Build a custom IoT dashboard in minutes â€” just an API key and a device serial.
         </p>
 
         <div className="grid sm:grid-cols-2 gap-4 mb-7">
@@ -554,7 +554,7 @@ export default function Dashboard() {
       <ECLiveValue serial="MY-DEVICE-001" field="co2" />
       <ECLiveValue serial="MY-DEVICE-001" field="hum" />
 
-      {/* SVG sparkline — no chart library needed */}
+      {/* SVG sparkline â€” no chart library needed */}
       <ECTelemetryChart
         serial="MY-DEVICE-001"
         field="temp"
@@ -584,7 +584,7 @@ export default function Controls() {
       {/* Status card: online/offline, fw version, last seen */}
       <ECDeviceCard serial="MY-DEVICE-001" />
 
-      {/* Relay toggle — optimistic UI, pushes via MQTT shadow */}
+      {/* Relay toggle â€” optimistic UI, pushes via MQTT shadow */}
       <ECRelayToggle
         serial="MY-DEVICE-001"
         field="relay"
@@ -600,7 +600,7 @@ export default function Controls() {
           <div className="bg-white/2 border border-white/8 rounded-2xl overflow-hidden md:col-span-2">
             <div className="px-5 py-3 border-b border-white/8 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-yellow-400 shrink-0" />
-              <span className="text-xs font-semibold text-white/50">Raw hooks — build your own UI</span>
+              <span className="text-xs font-semibold text-white/50">Raw hooks â€” build your own UI</span>
             </div>
             <pre className="px-5 py-4 text-xs font-mono text-white/50 leading-6 overflow-x-auto">{`import { useDevice, useTelemetry, useShadow } from '@edgeconductor/ec-react';
 
@@ -612,7 +612,7 @@ function MyWidget({ serial }) {
   return (
     <div>
       <p>Status: {device?.status}</p>
-      <p>Temp: {latest?.temp}°C — {data.length} points</p>
+      <p>Temp: {latest?.temp}Â°C â€” {data.length} points</p>
       <button onClick={() => pushDesired({ relay: true })}>Turn ON</button>
     </div>
   );
@@ -625,19 +625,19 @@ function MyWidget({ serial }) {
             className="flex items-center gap-2 px-4 py-2 rounded-xl border border-white/10 bg-white/3 hover:bg-white/6 hover:border-white/20 transition text-sm">
             <span className="text-indigo-400 font-semibold text-xs">npm</span>
             <span className="text-white/50 font-mono">@edgeconductor/ec-react 0.1.0</span>
-            <span className="text-white/20 text-xs">↗</span>
+            <span className="text-white/20 text-xs">â†—</span>
           </a>
         </div>
       </section>
 
-      {/* ── CLI ───────────────────────────────────────────────── */}
+      {/* â”€â”€ CLI â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="px-4 md:px-8 pb-20 max-w-6xl mx-auto">
         <div className="flex items-center gap-3 mb-2">
-          <h2 className="text-2xl font-bold">CLI — <code className="font-mono text-white/35 text-xl">ec</code></h2>
+          <h2 className="text-2xl font-bold">CLI â€” <code className="font-mono text-white/35 text-xl">ec</code></h2>
           <span className="text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/25 px-2.5 py-1 rounded-full font-semibold">v0.1.0</span>
         </div>
         <p className="text-white/35 text-sm mb-7 max-w-2xl">
-          Manage devices, push OTA firmware, stream live telemetry, and provision factory batches — all from the terminal.
+          Manage devices, push OTA firmware, stream live telemetry, and provision factory batches â€” all from the terminal.
           Designed for CI/CD pipelines, factory floors, and engineers who prefer the command line.
         </p>
 
@@ -669,7 +669,7 @@ function MyWidget({ serial }) {
         </div>
       </section>
 
-      {/* ── Authentication ─────────────────────────────────────── */}
+      {/* â”€â”€ Authentication â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="px-4 md:px-8 pb-20 max-w-6xl mx-auto">
         <div className="flex items-center gap-3 mb-6">
           <h2 className="text-2xl font-bold">Authentication</h2>
@@ -678,12 +678,12 @@ function MyWidget({ serial }) {
           <div className="bg-white/3 border border-white/10 rounded-2xl p-6">
             <h3 className="font-semibold mb-2 text-white/80">Get an API Key</h3>
             <p className="text-white/40 text-sm mb-4">
-              Login to the dashboard → Org Settings → API Keys → Generate Key.
-              The key is shown only once — store it securely.
+              Login to the dashboard â†’ Org Settings â†’ API Keys â†’ Generate Key.
+              The key is shown only once â€” store it securely.
             </p>
-            <Link href="https://ec-platform-ten.vercel.app" target="_blank"
+            <Link href="https://app.edgeconductor.com" target="_blank"
               className="text-sm text-blue-400 hover:text-blue-300 transition">
-              Open Dashboard →
+              Open Dashboard â†’
             </Link>
           </div>
           <div className="bg-white/3 border border-white/10 rounded-2xl p-6">
@@ -691,13 +691,13 @@ function MyWidget({ serial }) {
             <pre className="text-xs font-mono text-white/50 bg-black/40 rounded-lg p-3 mb-3">{`Authorization: Bearer ec_live_xxxx`}</pre>
             <p className="text-white/35 text-xs">
               All authenticated endpoints require this header.
-              Keys are scoped to your org — never expose them client-side.
+              Keys are scoped to your org â€” never expose them client-side.
             </p>
           </div>
         </div>
       </section>
 
-      {/* ── SDK Reference ─────────────────────────────────────── */}
+      {/* â”€â”€ SDK Reference â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="px-4 md:px-8 pb-20 max-w-6xl mx-auto">
         <div className="flex items-center gap-3 mb-7">
           <h2 className="text-2xl font-bold">SDK Reference</h2>
@@ -716,7 +716,7 @@ function MyWidget({ serial }) {
                   <div key={m.name} className="px-5 py-4 hover:bg-white/2 transition">
                     <div className="flex flex-wrap items-start gap-3 mb-1.5">
                       <code className="text-xs font-mono text-white/70 leading-relaxed">{m.name}</code>
-                      <span className="text-xs font-mono text-white/25 shrink-0">→ {m.ret}</span>
+                      <span className="text-xs font-mono text-white/25 shrink-0">â†’ {m.ret}</span>
                     </div>
                     <p className="text-xs text-white/35 leading-relaxed">{m.desc}</p>
                   </div>
@@ -727,7 +727,7 @@ function MyWidget({ serial }) {
         </div>
       </section>
 
-      {/* ── REST API ──────────────────────────────────────────── */}
+      {/* â”€â”€ REST API â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="px-4 md:px-8 pb-20 max-w-6xl mx-auto">
         <div className="flex items-center gap-3 mb-3">
           <h2 className="text-2xl font-bold">REST API Reference</h2>
@@ -752,14 +752,14 @@ function MyWidget({ serial }) {
                 )}
               </div>
               <span className={`hidden md:block text-xs font-mono ${ep.auth ? "text-yellow-400/60" : "text-white/20"}`}>
-                {ep.auth ? "Bearer" : "—"}
+                {ep.auth ? "Bearer" : "â€”"}
               </span>
             </div>
           ))}
         </div>
       </section>
 
-      {/* ── Webhooks API ──────────────────────────────────────── */}
+      {/* â”€â”€ Webhooks API â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="px-4 md:px-8 pb-20 max-w-6xl mx-auto">
         <div className="flex items-center gap-3 mb-3">
           <h2 className="text-2xl font-bold">Webhooks</h2>
@@ -811,14 +811,14 @@ if (sig !== expected) return res.sendStatus(401);`}</pre>
         </div>
       </section>
 
-      {/* ── Locations API ─────────────────────────────────────── */}
+      {/* â”€â”€ Locations API â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="px-4 md:px-8 pb-20 max-w-6xl mx-auto">
         <div className="flex items-center gap-3 mb-3">
           <h2 className="text-2xl font-bold">Locations</h2>
           <span className="text-xs text-blue-400 bg-blue-500/10 border border-blue-500/25 px-2.5 py-1 rounded-full font-semibold">New</span>
         </div>
         <p className="text-white/35 text-sm mb-6 max-w-2xl">
-          Organise devices in a physical hierarchy — Site → Building → Floor → Room. Assign any device to any node.
+          Organise devices in a physical hierarchy â€” Site â†’ Building â†’ Floor â†’ Room. Assign any device to any node.
         </p>
         <div className="bg-white/2 border border-white/8 rounded-2xl overflow-hidden">
           <div className="grid grid-cols-[80px_1fr_200px] md:grid-cols-[80px_280px_1fr] gap-4 px-5 py-2.5 border-b border-white/10 text-xs text-white/20 font-semibold uppercase tracking-wider">
@@ -838,18 +838,18 @@ if (sig !== expected) return res.sendStatus(401);`}</pre>
         </div>
       </section>
 
-      {/* ── MQTT ──────────────────────────────────────────────── */}
+      {/* â”€â”€ MQTT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="px-4 md:px-8 pb-20 max-w-6xl mx-auto">
         <h2 className="text-2xl font-bold mb-3">MQTT Topics</h2>
         <p className="text-white/35 text-sm font-mono mb-6">
-          Broker: services.edgeconductor.com:8883 (TLS) · Protocol: MQTT 3.1.1
+          Broker: services.edgeconductor.com:8883 (TLS) Â· Protocol: MQTT 3.1.1
         </p>
         <div className="grid md:grid-cols-2 gap-4 mb-5">
           {[
-            { dir: "PUB", color: "blue",   topic: "devices/{serial}/telemetry",       desc: "Device → Cloud. Publish sensor readings. Triggers rule evaluation.", ex: '{"temp":24.5,"hum":60,"co2":850,"bat":4.1}' },
-            { dir: "SUB", color: "yellow", topic: "devices/{serial}/shadow/desired",  desc: "Cloud → Device. Receive config updates and remote commands.",        ex: '{"relay":true,"setpoint":22}' },
-            { dir: "PUB", color: "blue",   topic: "devices/{serial}/shadow/reported", desc: "Device → Cloud. Report current state after applying desired.",        ex: '{"relay":true,"temp":22.1}' },
-            { dir: "SUB", color: "green",  topic: "devices/{serial}/ota",             desc: "Cloud → Device. Receive OTA firmware payload and version.",           ex: '{"url":"...","version":"1.2.0"}' },
+            { dir: "PUB", color: "blue",   topic: "devices/{serial}/telemetry",       desc: "Device â†’ Cloud. Publish sensor readings. Triggers rule evaluation.", ex: '{"temp":24.5,"hum":60,"co2":850,"bat":4.1}' },
+            { dir: "SUB", color: "yellow", topic: "devices/{serial}/shadow/desired",  desc: "Cloud â†’ Device. Receive config updates and remote commands.",        ex: '{"relay":true,"setpoint":22}' },
+            { dir: "PUB", color: "blue",   topic: "devices/{serial}/shadow/reported", desc: "Device â†’ Cloud. Report current state after applying desired.",        ex: '{"relay":true,"temp":22.1}' },
+            { dir: "SUB", color: "green",  topic: "devices/{serial}/ota",             desc: "Cloud â†’ Device. Receive OTA firmware payload and version.",           ex: '{"url":"...","version":"1.2.0"}' },
           ].map(t => (
             <div key={t.topic} className="bg-white/2 border border-white/8 rounded-xl p-5">
               <div className="flex items-center gap-2 mb-2">
@@ -867,13 +867,13 @@ if (sig !== expected) return res.sendStatus(401);`}</pre>
         </div>
         <div className="bg-blue-500/6 border border-blue-500/15 rounded-xl px-5 py-4">
           <p className="text-white/40 text-sm">
-            <span className="text-blue-400 font-semibold">MQTT credentials</span> — Username: your device serial, Password: device secret (returned on register).
+            <span className="text-blue-400 font-semibold">MQTT credentials</span> â€” Username: your device serial, Password: device secret (returned on register).
             TLS required on port 8883. QoS 1 recommended.
           </p>
         </div>
       </section>
 
-      {/* ── ESP32 SDK ─────────────────────────────────────────── */}
+      {/* â”€â”€ ESP32 SDK â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="px-4 md:px-8 pb-20 max-w-6xl mx-auto">
         <h2 className="text-2xl font-bold mb-2">ESP32 Libraries</h2>
         <p className="text-white/35 text-sm mb-6">PlatformIO libraries for EdgeConductor hardware. Add to <code className="font-mono text-white/45">platformio.ini</code>.</p>
@@ -881,7 +881,7 @@ if (sig !== expected) return res.sendStatus(401);`}</pre>
           {[
             { lib: "ECConn",    desc: "WiFi + GSM connectivity",           detail: "WifiConn + GsmConn auto-failover" },
             { lib: "ECMqtt",    desc: "MQTT client with OTA",              detail: "PubSubClient wrapper, handles reconnect" },
-            { lib: "ECClimate", desc: "BME280 + MH-Z19 sensors",          detail: "Temp, humidity, CO₂ readings" },
+            { lib: "ECClimate", desc: "BME280 + MH-Z19 sensors",          detail: "Temp, humidity, COâ‚‚ readings" },
             { lib: "ECHvac",    desc: "Relay + HVAC control",             detail: "Relay state synced via shadow" },
             { lib: "ECGPS",     desc: "NMEA GPS parsing",                  detail: "GP-02 module, lat/lng/speed" },
             { lib: "ECDiag",    desc: "Device diagnostics",               detail: "Battery, signal, heap, reboot reason" },
@@ -897,7 +897,7 @@ if (sig !== expected) return res.sendStatus(401);`}</pre>
         </div>
       </section>
 
-      {/* ── Errors + Rate Limits ──────────────────────────────── */}
+      {/* â”€â”€ Errors + Rate Limits â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="px-4 md:px-8 pb-20 max-w-6xl mx-auto">
         <div className="grid md:grid-cols-2 gap-8">
           <div>
@@ -942,7 +942,7 @@ if (sig !== expected) return res.sendStatus(401);`}</pre>
         </div>
       </section>
 
-      {/* ── Support CTA ───────────────────────────────────────── */}
+      {/* â”€â”€ Support CTA â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
       <section className="px-4 md:px-8 pb-24 max-w-6xl mx-auto">
         <div className="bg-gradient-to-br from-blue-500/10 to-cyan-500/6 border border-blue-500/20 rounded-2xl p-8 md:p-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>

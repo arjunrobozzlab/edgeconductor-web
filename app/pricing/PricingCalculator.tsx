@@ -1,11 +1,11 @@
-'use client'
+﻿'use client'
 import { useState } from 'react'
 import Link from 'next/link'
 
 const plans = [
-  { name: 'Starter',    maxDevices: 5,   price: 0,     priceLabel: 'Free',     href: 'https://ec-platform-ten.vercel.app/register' },
-  { name: 'Pro',        maxDevices: 50,  price: 4999,  priceLabel: '₹4,999',   href: 'https://ec-platform-ten.vercel.app/register' },
-  { name: 'Business',   maxDevices: 250, price: 14999, priceLabel: '₹14,999',  href: '/contact' },
+  { name: 'Starter',    maxDevices: 5,   price: 0,     priceLabel: 'Free',     href: 'https://app.edgeconductor.com/register' },
+  { name: 'Pro',        maxDevices: 50,  price: 4999,  priceLabel: 'â‚¹4,999',   href: 'https://app.edgeconductor.com/register' },
+  { name: 'Business',   maxDevices: 250, price: 14999, priceLabel: 'â‚¹14,999',  href: '/contact' },
   { name: 'Enterprise', maxDevices: Infinity, price: null, priceLabel: 'Custom', href: '/contact' },
 ]
 
@@ -89,7 +89,7 @@ export default function PricingCalculator() {
       <div className="border-t border-white/8 pt-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div>
           <p className="text-white/45 text-sm">
-            {count} device{count !== 1 ? 's' : ''} →{' '}
+            {count} device{count !== 1 ? 's' : ''} â†’{' '}
             <span className="text-white font-semibold">{plan.name} plan</span>
             {plan.price != null
               ? <>, <span className="text-blue-400">{plan.priceLabel}/month</span></>
@@ -98,13 +98,13 @@ export default function PricingCalculator() {
           </p>
           {perDevice != null && (
             <p className="text-white/28 text-xs mt-1">
-              ≈ ₹{perDevice.toLocaleString('en-IN')} per device per month ·
-              vs ₹50,000+ / device if you build the infrastructure yourself
+              â‰ˆ â‚¹{perDevice.toLocaleString('en-IN')} per device per month Â·
+              vs â‚¹50,000+ / device if you build the infrastructure yourself
             </p>
           )}
           {plan.price === null && (
             <p className="text-white/28 text-xs mt-1">
-              Custom pricing for large deployments — talk to us about per-device rates
+              Custom pricing for large deployments â€” talk to us about per-device rates
             </p>
           )}
         </div>
@@ -114,7 +114,7 @@ export default function PricingCalculator() {
               ? 'bg-blue-500 hover:bg-blue-600 text-white'
               : 'border border-white/20 text-white/65 hover:text-white hover:border-white/40'
           }`}>
-          {plan.price === 0 ? 'Start free →' : plan.price === null ? 'Talk to Sales →' : `Get ${plan.name} →`}
+          {plan.price === 0 ? 'Start free â†’' : plan.price === null ? 'Talk to Sales â†’' : `Get ${plan.name} â†’`}
         </Link>
       </div>
     </div>

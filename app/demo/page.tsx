@@ -1,22 +1,22 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
 export const metadata: Metadata = {
-  title: "Live Demo — EdgeConductor",
-  description: "Try the EdgeConductor platform live — see real device telemetry, HVAC control, OTA updates, and diagnostics. No signup required.",
+  title: "Live Demo â€” EdgeConductor",
+  description: "Try the EdgeConductor platform live â€” see real device telemetry, HVAC control, OTA updates, and diagnostics. No signup required.",
 };
 
-const DASHBOARD_URL = "https://ec-platform-ten.vercel.app";
+const DASHBOARD_URL = "https://app.edgeconductor.com";
 
 const features = [
-  { title: "Live Telemetry",    desc: "Real-time temperature, humidity, CO₂, battery, and GPS data from 4 simulated devices.", icon: "◈" },
-  { title: "HVAC Control",     desc: "Toggle relay ON/OFF from the dashboard. Command flows through MQTT in real time.",         icon: "⚡" },
-  { title: "OTA Firmware Push",desc: "Push a firmware version to a device. See pending → received → applied flow.",              icon: "↑" },
-  { title: "Diagnostics Panel",desc: "View uptime, heap memory, reboot reason, signal strength per device.",                     icon: "◎" },
-  { title: "Rules Engine",     desc: "IF CO₂ > 1000 → relay ON. Rules auto-evaluate every 30s, no manual trigger needed.",     icon: "✦" },
-  { title: "Webhooks",         desc: "Register your endpoint and receive signed payloads for telemetry, alerts, OTA events.",    icon: "↗" },
+  { title: "Live Telemetry",    desc: "Real-time temperature, humidity, COâ‚‚, battery, and GPS data from 4 simulated devices.", icon: "â—ˆ" },
+  { title: "HVAC Control",     desc: "Toggle relay ON/OFF from the dashboard. Command flows through MQTT in real time.",         icon: "âš¡" },
+  { title: "OTA Firmware Push",desc: "Push a firmware version to a device. See pending â†’ received â†’ applied flow.",              icon: "â†‘" },
+  { title: "Diagnostics Panel",desc: "View uptime, heap memory, reboot reason, signal strength per device.",                     icon: "â—Ž" },
+  { title: "Rules Engine",     desc: "IF COâ‚‚ > 1000 â†’ relay ON. Rules auto-evaluate every 30s, no manual trigger needed.",     icon: "âœ¦" },
+  { title: "Webhooks",         desc: "Register your endpoint and receive signed payloads for telemetry, alerts, OTA events.",    icon: "â†—" },
 ];
 
 export default function DemoPage() {
@@ -33,7 +33,7 @@ export default function DemoPage() {
           </div>
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Try the platform live</h1>
           <p className="text-white/45 text-base max-w-xl mx-auto mb-8">
-            Log in with the demo account — 4 devices are already registered and sending telemetry every 30 seconds.
+            Log in with the demo account â€” 4 devices are already registered and sending telemetry every 30 seconds.
             No signup, no credit card.
           </p>
 
@@ -47,11 +47,11 @@ export default function DemoPage() {
               </div>
               <div className="flex items-center gap-3">
                 <span className="text-white/30 w-20">Password</span>
-                <span className="text-white/30 tracking-widest">••••••••••••</span>
+                <span className="text-white/30 tracking-widest">â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢</span>
               </div>
             </div>
             <p className="text-xs text-white/35 max-w-xs">
-              Password shared on request —{" "}
+              Password shared on request â€”{" "}
               <Link href="/contact?type=demo" className="text-blue-400 hover:text-blue-300 underline underline-offset-2">
                 contact us
               </Link>{" "}
@@ -62,7 +62,7 @@ export default function DemoPage() {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <a href={DASHBOARD_URL} target="_blank" rel="noopener noreferrer"
               className="inline-flex items-center justify-center gap-2 bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold px-8 py-3.5 rounded-full transition">
-              Open Dashboard →
+              Open Dashboard â†’
             </a>
             <Link href="/contact?type=demo"
               className="inline-flex items-center justify-center gap-2 border border-white/20 text-white/65 hover:text-white hover:border-white/40 text-sm font-medium px-6 py-3.5 rounded-full transition">
@@ -87,16 +87,16 @@ export default function DemoPage() {
           <p className="text-xs font-semibold uppercase tracking-wider text-white/30 mb-4">Devices in demo org</p>
           <div className="grid sm:grid-cols-2 gap-3">
             {[
-              { serial: "DEMO-CLIMATE-01", type: "Climate Sensor", desc: "Temperature · Humidity · CO₂ · Relay" },
-              { serial: "DEMO-CLIMATE-02", type: "Climate Sensor", desc: "Second zone — higher CO₂, relay active" },
-              { serial: "DEMO-TRACKER-01", type: "GPS Tracker",    desc: "Route loop · Speed · Battery" },
-              { serial: "DEMO-ENERGY-01",  type: "Energy Meter",   desc: "Voltage · Current · Power · kWh" },
+              { serial: "DEMO-CLIMATE-01", type: "Climate Sensor", desc: "Temperature Â· Humidity Â· COâ‚‚ Â· Relay" },
+              { serial: "DEMO-CLIMATE-02", type: "Climate Sensor", desc: "Second zone â€” higher COâ‚‚, relay active" },
+              { serial: "DEMO-TRACKER-01", type: "GPS Tracker",    desc: "Route loop Â· Speed Â· Battery" },
+              { serial: "DEMO-ENERGY-01",  type: "Energy Meter",   desc: "Voltage Â· Current Â· Power Â· kWh" },
             ].map(d => (
               <div key={d.serial} className="bg-white/3 border border-white/8 rounded-xl px-4 py-3 flex items-start gap-3">
                 <span className="w-2 h-2 rounded-full bg-green-400 mt-1.5 shrink-0 animate-pulse" />
                 <div>
                   <p className="text-xs font-mono text-white/70">{d.serial}</p>
-                  <p className="text-xs text-white/40 mt-0.5">{d.type} · {d.desc}</p>
+                  <p className="text-xs text-white/40 mt-0.5">{d.type} Â· {d.desc}</p>
                 </div>
               </div>
             ))}
@@ -104,7 +104,7 @@ export default function DemoPage() {
         </div>
 
         <div className="text-center">
-          <p className="text-white/25 text-xs">Demo data is shared — anyone can log in and explore. Changes reset periodically.</p>
+          <p className="text-white/25 text-xs">Demo data is shared â€” anyone can log in and explore. Changes reset periodically.</p>
         </div>
 
       </section>

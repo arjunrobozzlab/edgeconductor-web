@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from "next/server";
+﻿import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 import nodemailer from "nodemailer";
 
-const PLATFORM = "https://ec-platform-ten.vercel.app";
+const PLATFORM = "https://app.edgeconductor.com";
 const AUTH_CB  = `${PLATFORM}/auth/callback?next=/org`;
 
 const DEMO_ORGS: Record<string, { id: string; name: string }> = {
@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
     await sendEmails(name, email, company);
   } catch (e: any) {
     console.error("Email error:", e.message);
-    // Don't fail signup if email fails — just log
+    // Don't fail signup if email fails â€” just log
   }
 
   return NextResponse.json({ success: true });
@@ -81,11 +81,11 @@ async function sendEmails(name: string, email: string, company?: string) {
     auth: { user: process.env.GMAIL_USER, pass: process.env.GMAIL_APP_PASSWORD },
   });
 
-  // Welcome email to user — simple format (same as working /api/inquire)
+  // Welcome email to user â€” simple format (same as working /api/inquire)
   await transporter.sendMail({
     from: process.env.GMAIL_USER,
     to: email,
-    subject: "Welcome to EdgeConductor — Your account is ready",
+    subject: "Welcome to EdgeConductor â€” Your account is ready",
     html: `
       <div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;color:#111;padding:32px">
         <h2 style="color:#3b82f6;margin:0 0 4px">EdgeConductor</h2>
@@ -101,13 +101,13 @@ async function sendEmails(name: string, email: string, company?: string) {
           <p style="margin:0 0 12px;font-weight:600">After confirming, open your dashboard:</p>
           <a href="${PLATFORM}/portal"
             style="display:inline-block;background:#3b82f6;color:#fff;padding:10px 24px;border-radius:6px;text-decoration:none;font-weight:600">
-            Open Dashboard →
+            Open Dashboard â†’
           </a>
         </div>
 
         <p style="color:#555;font-size:14px"><strong>Your Starter plan includes:</strong></p>
         <ul style="color:#555;font-size:14px;line-height:1.8;padding-left:20px">
-          <li>5 devices · 1 organization</li>
+          <li>5 devices Â· 1 organization</li>
           <li>Live telemetry &amp; historical charts</li>
           <li>OTA firmware updates</li>
           <li>QR device claiming</li>
@@ -115,23 +115,23 @@ async function sendEmails(name: string, email: string, company?: string) {
         </ul>
 
         <p style="color:#888;font-size:12px;margin-top:24px;border-top:1px solid #eee;padding-top:16px">
-          EdgeConductor · edgeconductor.com · ${email}
+          EdgeConductor Â· edgeconductor.com Â· ${email}
         </p>
       </div>
     `,
   });
 
-  // Admin notification → always goes to edgeconductor@gmail.com
+  // Admin notification â†’ always goes to edgeconductor@gmail.com
   await transporter.sendMail({
     from: process.env.GMAIL_USER,
     to: "edgeconductor@gmail.com",
-    subject: `🚀 New Signup: ${name}${company ? ` — ${company}` : ""}`,
+    subject: `ðŸš€ New Signup: ${name}${company ? ` â€” ${company}` : ""}`,
     html: `
       <h3>New EdgeConductor Signup</h3>
       <table style="border-collapse:collapse">
         <tr><td style="padding:6px 12px;color:#666">Name</td><td style="padding:6px 12px"><strong>${name}</strong></td></tr>
         <tr><td style="padding:6px 12px;color:#666">Email</td><td style="padding:6px 12px"><a href="mailto:${email}">${email}</a></td></tr>
-        <tr><td style="padding:6px 12px;color:#666">Company</td><td style="padding:6px 12px">${company || "—"}</td></tr>
+        <tr><td style="padding:6px 12px;color:#666">Company</td><td style="padding:6px 12px">${company || "â€”"}</td></tr>
         <tr><td style="padding:6px 12px;color:#666">Plan</td><td style="padding:6px 12px">Starter (Free)</td></tr>
         <tr><td style="padding:6px 12px;color:#666">Time</td><td style="padding:6px 12px">${new Date().toLocaleString()}</td></tr>
       </table>

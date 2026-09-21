@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 import { useState } from 'react'
 import Link from 'next/link'
 
@@ -38,7 +38,7 @@ export default function Navbar() {
 
         {/* Desktop CTAs */}
         <div className="hidden md:flex items-center gap-2.5">
-          <a href="https://ec-platform-ten.vercel.app/login"
+          <a href="https://app.edgeconductor.com/login"
             className="text-sm text-white/55 hover:text-white transition-colors">
             Login
           </a>
@@ -78,7 +78,7 @@ export default function Navbar() {
             ))}
           </div>
           <div className="pt-3 border-t border-white/10 flex flex-col gap-2">
-            <a href="https://ec-platform-ten.vercel.app/login"
+            <a href="https://app.edgeconductor.com/login"
               className="text-sm text-white/60 hover:text-white text-center py-2 transition"
               onClick={() => setOpen(false)}>
               Login
