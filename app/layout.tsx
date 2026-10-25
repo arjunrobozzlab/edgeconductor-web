@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     template: "%s | EdgeConductor",
   },
   description:
-    "IoT & connected asset operations platform for hardware companies. Device registry, live telemetry, OTA firmware, rules engine, and white-label B2B dashboards — one platform.",
+    "Connected asset & IoT operations platform for hardware companies. Device registry, OTA firmware, live telemetry, rules engine, and white-label B2B dashboards.",
   keywords: [
     "connected asset operations platform", "device management platform", "OTA firmware updates",
     "fleet operations platform", "building operations platform", "asset operations",
