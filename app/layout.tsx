@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     siteName: "EdgeConductor",
     title: "EdgeConductor — Connected Product & Asset Operations Platform",
     description:
-      "Device registry, live telemetry, OTA firmware, rules engine, and white-label B2B portals for hardware companies. Fleet ops, building ops, anomaly detection — one platform.",
+      "Device registry, OTA firmware, live telemetry, rules engine, and white-label B2B portals for hardware companies. Fleet ops, building ops, anomaly detection.",
     images: [
       {
         url: "https://edgeconductor.com/opengraph-image.png",
