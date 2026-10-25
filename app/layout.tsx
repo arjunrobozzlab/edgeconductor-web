@@ -38,12 +38,21 @@ export const metadata: Metadata = {
     title: "EdgeConductor — Connected Product & Asset Operations Platform",
     description:
       "Run fleet operations, building operations, and asset operations on one platform. Device registry, OTA, telemetry, anomaly detection, and white-label B2B dashboards.",
+    images: [
+      {
+        url: "https://edgeconductor.com/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "EdgeConductor — Connected Asset & IoT Operations Platform",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "EdgeConductor — Connected Product & Asset Operations Platform",
     description:
       "The complete connected product & asset operations platform. From device firmware to fleet and building operations.",
+    images: ["https://edgeconductor.com/opengraph-image.png"],
   },
   robots: {
     index: true,
