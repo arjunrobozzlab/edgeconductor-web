@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     template: "%s | EdgeConductor",
   },
   description:
-    "The connected product & asset operations platform for hardware companies. Device registry, live telemetry, OTA firmware, fleet operations, building operations, anomaly detection, and partner portal — one platform.",
+    "IoT & connected asset operations platform for hardware companies. Device registry, live telemetry, OTA firmware, rules engine, and white-label B2B dashboards — one platform.",
   keywords: [
     "connected asset operations platform", "device management platform", "OTA firmware updates",
     "fleet operations platform", "building operations platform", "asset operations",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     siteName: "EdgeConductor",
     title: "EdgeConductor — Connected Product & Asset Operations Platform",
     description:
-      "Run fleet operations, building operations, and asset operations on one platform. Device registry, OTA, telemetry, anomaly detection, and white-label B2B dashboards.",
+      "Device registry, live telemetry, OTA firmware, rules engine, and white-label B2B portals for hardware companies. Fleet ops, building ops, anomaly detection — one platform.",
     images: [
       {
         url: "https://edgeconductor.com/opengraph-image.png",
